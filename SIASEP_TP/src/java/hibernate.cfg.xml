@@ -57,6 +57,7 @@ Contributor(s):
     <mapping resource="com/pojos/MultiRole.hbm.xml"/>
     <mapping resource="com/pojos/TipoPerAlumno.hbm.xml"/>
     <mapping resource="com/pojos/EstadoCivil.hbm.xml"/>
+    <mapping resource="com/pojos/Sysdiagrams.hbm.xml"/>
     <mapping resource="com/pojos/Distrito.hbm.xml"/>
     <mapping resource="com/pojos/Discapacidad.hbm.xml"/>
     <mapping resource="com/pojos/AlumnoHasAsignacion.hbm.xml"/>
