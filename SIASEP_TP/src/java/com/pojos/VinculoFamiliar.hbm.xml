@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2019 6:21:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.VinculoFamiliar" table="vinculo_familiar" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
+        <composite-id name="id" class="com.pojos.VinculoFamiliarId">
+            <key-property name="fkidPerAlumno" type="int">
+                <column name="fkid_per_alumno" />
+            </key-property>
+            <key-property name="fkidPerApoderado" type="int">
+                <column name="fkid_per_apoderado" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="perAlumno" class="com.pojos.PerAlumno" update="false" insert="false" fetch="select">
+            <column name="fkid_per_alumno" not-null="true" />
+        </many-to-one>
+        <many-to-one name="perApoderado" class="com.pojos.PerApoderado" update="false" insert="false" fetch="select">
+            <column name="fkid_per_apoderado" not-null="true" />
+        </many-to-one>
+        <property name="flgOfiApoderado" type="boolean">
+            <column name="flg_ofi_apoderado" not-null="true" />
+        </property>
+        <property name="fecInicio" type="date">
+            <column name="fec_inicio" length="10" />
+        </property>
+        <property name="fecFin" type="date">
+            <column name="fec_fin" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

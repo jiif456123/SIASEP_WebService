@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 19, 2019 6:21:10 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.EstadoAula" table="estado_aula" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
+        <id name="idEstadoAula" type="int">
+            <column name="id_estado_aula" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomEstadoAula" type="string">
+            <column name="nom_estado_aula" length="150" />
+        </property>
+        <set name="aulas" table="aula" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkid_estado_aula" not-null="true" />
+            </key>
+            <one-to-many class="com.pojos.Aula" />
+        </set>
+    </class>
+</hibernate-mapping>
