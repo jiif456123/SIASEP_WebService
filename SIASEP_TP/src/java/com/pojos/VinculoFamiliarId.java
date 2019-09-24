@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Sep 20, 2019 1:20:47 PM by Hibernate Tools 4.3.1
+// Generated Sep 22, 2019 11:27:50 PM by Hibernate Tools 4.3.1
 
 
 
@@ -10,14 +10,14 @@ public class VinculoFamiliarId  implements java.io.Serializable {
 
 
      private int fkidPerAlumno;
-     private int fkidPerApoderado;
+     private int fkidPerFamiliar;
 
     public VinculoFamiliarId() {
     }
 
-    public VinculoFamiliarId(int fkidPerAlumno, int fkidPerApoderado) {
+    public VinculoFamiliarId(int fkidPerAlumno, int fkidPerFamiliar) {
        this.fkidPerAlumno = fkidPerAlumno;
-       this.fkidPerApoderado = fkidPerApoderado;
+       this.fkidPerFamiliar = fkidPerFamiliar;
     }
    
     public int getFkidPerAlumno() {
@@ -27,12 +27,12 @@ public class VinculoFamiliarId  implements java.io.Serializable {
     public void setFkidPerAlumno(int fkidPerAlumno) {
         this.fkidPerAlumno = fkidPerAlumno;
     }
-    public int getFkidPerApoderado() {
-        return this.fkidPerApoderado;
+    public int getFkidPerFamiliar() {
+        return this.fkidPerFamiliar;
     }
     
-    public void setFkidPerApoderado(int fkidPerApoderado) {
-        this.fkidPerApoderado = fkidPerApoderado;
+    public void setFkidPerFamiliar(int fkidPerFamiliar) {
+        this.fkidPerFamiliar = fkidPerFamiliar;
     }
 
 
@@ -43,14 +43,14 @@ public class VinculoFamiliarId  implements java.io.Serializable {
 		 VinculoFamiliarId castOther = ( VinculoFamiliarId ) other; 
          
 		 return (this.getFkidPerAlumno()==castOther.getFkidPerAlumno())
- && (this.getFkidPerApoderado()==castOther.getFkidPerApoderado());
+ && (this.getFkidPerFamiliar()==castOther.getFkidPerFamiliar());
    }
    
    public int hashCode() {
          int result = 17;
          
          result = 37 * result + this.getFkidPerAlumno();
-         result = 37 * result + this.getFkidPerApoderado();
+         result = 37 * result + this.getFkidPerFamiliar();
          return result;
    }   
 

@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Sep 20, 2019 1:20:47 PM by Hibernate Tools 4.3.1
+// Generated Sep 22, 2019 11:27:50 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ public class VinculoFamiliar  implements java.io.Serializable {
 
      private VinculoFamiliarId id;
      private PerAlumno perAlumno;
-     private PerApoderado perApoderado;
+     private PerFamiliar perFamiliar;
      private boolean flgOfiApoderado;
      private Date fecInicio;
      private Date fecFin;
@@ -21,16 +21,16 @@ public class VinculoFamiliar  implements java.io.Serializable {
     }
 
 	
-    public VinculoFamiliar(VinculoFamiliarId id, PerAlumno perAlumno, PerApoderado perApoderado, boolean flgOfiApoderado) {
+    public VinculoFamiliar(VinculoFamiliarId id, PerAlumno perAlumno, PerFamiliar perFamiliar, boolean flgOfiApoderado) {
         this.id = id;
         this.perAlumno = perAlumno;
-        this.perApoderado = perApoderado;
+        this.perFamiliar = perFamiliar;
         this.flgOfiApoderado = flgOfiApoderado;
     }
-    public VinculoFamiliar(VinculoFamiliarId id, PerAlumno perAlumno, PerApoderado perApoderado, boolean flgOfiApoderado, Date fecInicio, Date fecFin) {
+    public VinculoFamiliar(VinculoFamiliarId id, PerAlumno perAlumno, PerFamiliar perFamiliar, boolean flgOfiApoderado, Date fecInicio, Date fecFin) {
        this.id = id;
        this.perAlumno = perAlumno;
-       this.perApoderado = perApoderado;
+       this.perFamiliar = perFamiliar;
        this.flgOfiApoderado = flgOfiApoderado;
        this.fecInicio = fecInicio;
        this.fecFin = fecFin;
@@ -50,12 +50,12 @@ public class VinculoFamiliar  implements java.io.Serializable {
     public void setPerAlumno(PerAlumno perAlumno) {
         this.perAlumno = perAlumno;
     }
-    public PerApoderado getPerApoderado() {
-        return this.perApoderado;
+    public PerFamiliar getPerFamiliar() {
+        return this.perFamiliar;
     }
     
-    public void setPerApoderado(PerApoderado perApoderado) {
-        this.perApoderado = perApoderado;
+    public void setPerFamiliar(PerFamiliar perFamiliar) {
+        this.perFamiliar = perFamiliar;
     }
     public boolean isFlgOfiApoderado() {
         return this.flgOfiApoderado;

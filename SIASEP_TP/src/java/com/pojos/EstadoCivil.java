@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Sep 20, 2019 1:20:47 PM by Hibernate Tools 4.3.1
+// Generated Sep 22, 2019 11:27:50 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class EstadoCivil  implements java.io.Serializable {
 
      private int idEstadoCivil;
      private String nomEstadoCivil;
-     private Set<PerApoderado> perApoderados = new HashSet<PerApoderado>(0);
+     private Set<PerFamiliar> perFamiliars = new HashSet<PerFamiliar>(0);
 
     public EstadoCivil() {
     }
@@ -22,10 +22,10 @@ public class EstadoCivil  implements java.io.Serializable {
     public EstadoCivil(int idEstadoCivil) {
         this.idEstadoCivil = idEstadoCivil;
     }
-    public EstadoCivil(int idEstadoCivil, String nomEstadoCivil, Set<PerApoderado> perApoderados) {
+    public EstadoCivil(int idEstadoCivil, String nomEstadoCivil, Set<PerFamiliar> perFamiliars) {
        this.idEstadoCivil = idEstadoCivil;
        this.nomEstadoCivil = nomEstadoCivil;
-       this.perApoderados = perApoderados;
+       this.perFamiliars = perFamiliars;
     }
    
     public int getIdEstadoCivil() {
@@ -42,12 +42,12 @@ public class EstadoCivil  implements java.io.Serializable {
     public void setNomEstadoCivil(String nomEstadoCivil) {
         this.nomEstadoCivil = nomEstadoCivil;
     }
-    public Set<PerApoderado> getPerApoderados() {
-        return this.perApoderados;
+    public Set<PerFamiliar> getPerFamiliars() {
+        return this.perFamiliars;
     }
     
-    public void setPerApoderados(Set<PerApoderado> perApoderados) {
-        this.perApoderados = perApoderados;
+    public void setPerFamiliars(Set<PerFamiliar> perFamiliars) {
+        this.perFamiliars = perFamiliars;
     }
 
 

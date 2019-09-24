@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Sep 20, 2019 1:20:47 PM by Hibernate Tools 4.3.1
+// Generated Sep 22, 2019 11:27:50 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -26,8 +26,8 @@ public class Persona  implements java.io.Serializable {
      private String telefonoCelular;
      private String direccion;
      private String correo;
-     private Set<PerApoderado> perApoderados = new HashSet<PerApoderado>(0);
      private Set<PerAlumno> perAlumnos = new HashSet<PerAlumno>(0);
+     private Set<PerFamiliar> perFamiliars = new HashSet<PerFamiliar>(0);
      private Set<Usuario> usuarios = new HashSet<Usuario>(0);
 
     public Persona() {
@@ -47,7 +47,7 @@ public class Persona  implements java.io.Serializable {
         this.sexo = sexo;
         this.direccion = direccion;
     }
-    public Persona(int idPersona, Distrito distrito, TipoDocumento tipoDocumento, String primerNombre, String apellidoMaterno, String apellidoPaterno, String numeroDocumento, Date fecNacimiento, String lugarNacimiento, char sexo, String telefonoCasa, String telefonoCelular, String direccion, String correo, Set<PerApoderado> perApoderados, Set<PerAlumno> perAlumnos, Set<Usuario> usuarios) {
+    public Persona(int idPersona, Distrito distrito, TipoDocumento tipoDocumento, String primerNombre, String apellidoMaterno, String apellidoPaterno, String numeroDocumento, Date fecNacimiento, String lugarNacimiento, char sexo, String telefonoCasa, String telefonoCelular, String direccion, String correo, Set<PerAlumno> perAlumnos, Set<PerFamiliar> perFamiliars, Set<Usuario> usuarios) {
        this.idPersona = idPersona;
        this.distrito = distrito;
        this.tipoDocumento = tipoDocumento;
@@ -62,8 +62,8 @@ public class Persona  implements java.io.Serializable {
        this.telefonoCelular = telefonoCelular;
        this.direccion = direccion;
        this.correo = correo;
-       this.perApoderados = perApoderados;
        this.perAlumnos = perAlumnos;
+       this.perFamiliars = perFamiliars;
        this.usuarios = usuarios;
     }
    
@@ -165,19 +165,19 @@ public class Persona  implements java.io.Serializable {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-    public Set<PerApoderado> getPerApoderados() {
-        return this.perApoderados;
-    }
-    
-    public void setPerApoderados(Set<PerApoderado> perApoderados) {
-        this.perApoderados = perApoderados;
-    }
     public Set<PerAlumno> getPerAlumnos() {
         return this.perAlumnos;
     }
     
     public void setPerAlumnos(Set<PerAlumno> perAlumnos) {
         this.perAlumnos = perAlumnos;
+    }
+    public Set<PerFamiliar> getPerFamiliars() {
+        return this.perFamiliars;
+    }
+    
+    public void setPerFamiliars(Set<PerFamiliar> perFamiliars) {
+        this.perFamiliars = perFamiliars;
     }
     public Set<Usuario> getUsuarios() {
         return this.usuarios;

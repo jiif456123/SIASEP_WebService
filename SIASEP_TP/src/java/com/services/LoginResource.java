@@ -1,40 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.services;
 
+import com.google.gson.Gson;
+import com.DTO.LoginDTO;
+import com.helper.LoginHelper;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 
-/**
- * REST Web Service
- *
- * @author User
- */
 @Path("login")
 public class LoginResource {
 
+    LoginHelper loginHelper;
+    
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of LoginResource
-     */
     public LoginResource() {
+        loginHelper = new LoginHelper();
     }
 
-    /**
-     * Retrieves representation of an instance of com.services.LoginResource
-     * @return an instance of java.lang.String
-     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
@@ -50,4 +40,22 @@ public class LoginResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
+    
+    @POST
+    @Path("loginUsuario")
+    @Produces("application/json")
+    public String loginUsuario(String data) {
+        System.out.println("--->" +data);
+        Gson gson = new Gson();
+        LoginDTO loginDTO = gson.fromJson(data, LoginDTO.class);
+        LoginDTO respuesta = new LoginDTO();
+        try {
+            respuesta = loginHelper.iniciarSession(loginDTO);
+            System.out.println(".-.-.-> "+respuesta);
+        }catch(Exception e){
+            System.out.println("loginUsuario controlado aqui.."+e.getMessage());
+        }
+        return gson.toJson(respuesta);
+    }
+    
 }

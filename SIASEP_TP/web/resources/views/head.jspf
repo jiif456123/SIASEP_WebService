@@ -1,0 +1,26 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<html>
+    <head>
+        <link rel="icon" href="img/favicon-16x16.png" type="image/png" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SIASEP</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Bootstrap core CSS -->
+        <link href="/SIASEP_TP/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Material Design Bootstrap -->
+        <link href="/SIASEP_TP/css/mdb.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Your custom styles (optional) -->
+        <link href="/SIASEP_TP/css/style.min.css" rel="stylesheet" type="text/css"/>
+        
+        <!--Otros imports-->
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lobster" />
+        <link href="/SIASEP_TP/css/classic.css" rel="stylesheet" type="text/css"/>
+        <link href="/SIASEP_TP/css/classic.date.css" rel="stylesheet" type="text/css"/>
+        <link href="/SIASEP_TP/css/classic.time.css" rel="stylesheet" type="text/css"/>
+        <link href="/SIASEP_TP/css/fontawesome-stars.css" rel="stylesheet" type="text/css"/>
+        <link href="/SIASEP_TP/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
