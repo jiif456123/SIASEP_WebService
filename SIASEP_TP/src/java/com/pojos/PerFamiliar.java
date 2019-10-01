@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Sep 22, 2019 11:27:50 PM by Hibernate Tools 4.3.1
+// Generated Sep 28, 2019 5:52:23 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,37 +13,38 @@ public class PerFamiliar  implements java.io.Serializable {
 
      private int idPerFamiliar;
      private EstadoCivil estadoCivil;
+     private GradoInstruccion gradoInstruccion;
      private Persona persona;
      private TipoFamiliar tipoFamiliar;
      private boolean flgCopiaDniApo;
-     private String gradoInstruccion;
-     private String ocupacion;
-     private String centroLabores;
+     private String dscrpOcupacion;
      private String telefonoEmergencia;
+     private Set<CentroLabores> centroLaboreses = new HashSet<CentroLabores>(0);
      private Set<VinculoFamiliar> vinculoFamiliars = new HashSet<VinculoFamiliar>(0);
 
     public PerFamiliar() {
     }
 
 	
-    public PerFamiliar(int idPerFamiliar, EstadoCivil estadoCivil, Persona persona, TipoFamiliar tipoFamiliar, boolean flgCopiaDniApo, String telefonoEmergencia) {
+    public PerFamiliar(int idPerFamiliar, EstadoCivil estadoCivil, GradoInstruccion gradoInstruccion, Persona persona, TipoFamiliar tipoFamiliar, boolean flgCopiaDniApo, String telefonoEmergencia) {
         this.idPerFamiliar = idPerFamiliar;
         this.estadoCivil = estadoCivil;
+        this.gradoInstruccion = gradoInstruccion;
         this.persona = persona;
         this.tipoFamiliar = tipoFamiliar;
         this.flgCopiaDniApo = flgCopiaDniApo;
         this.telefonoEmergencia = telefonoEmergencia;
     }
-    public PerFamiliar(int idPerFamiliar, EstadoCivil estadoCivil, Persona persona, TipoFamiliar tipoFamiliar, boolean flgCopiaDniApo, String gradoInstruccion, String ocupacion, String centroLabores, String telefonoEmergencia, Set<VinculoFamiliar> vinculoFamiliars) {
+    public PerFamiliar(int idPerFamiliar, EstadoCivil estadoCivil, GradoInstruccion gradoInstruccion, Persona persona, TipoFamiliar tipoFamiliar, boolean flgCopiaDniApo, String dscrpOcupacion, String telefonoEmergencia, Set<CentroLabores> centroLaboreses, Set<VinculoFamiliar> vinculoFamiliars) {
        this.idPerFamiliar = idPerFamiliar;
        this.estadoCivil = estadoCivil;
+       this.gradoInstruccion = gradoInstruccion;
        this.persona = persona;
        this.tipoFamiliar = tipoFamiliar;
        this.flgCopiaDniApo = flgCopiaDniApo;
-       this.gradoInstruccion = gradoInstruccion;
-       this.ocupacion = ocupacion;
-       this.centroLabores = centroLabores;
+       this.dscrpOcupacion = dscrpOcupacion;
        this.telefonoEmergencia = telefonoEmergencia;
+       this.centroLaboreses = centroLaboreses;
        this.vinculoFamiliars = vinculoFamiliars;
     }
    
@@ -60,6 +61,13 @@ public class PerFamiliar  implements java.io.Serializable {
     
     public void setEstadoCivil(EstadoCivil estadoCivil) {
         this.estadoCivil = estadoCivil;
+    }
+    public GradoInstruccion getGradoInstruccion() {
+        return this.gradoInstruccion;
+    }
+    
+    public void setGradoInstruccion(GradoInstruccion gradoInstruccion) {
+        this.gradoInstruccion = gradoInstruccion;
     }
     public Persona getPersona() {
         return this.persona;
@@ -82,26 +90,12 @@ public class PerFamiliar  implements java.io.Serializable {
     public void setFlgCopiaDniApo(boolean flgCopiaDniApo) {
         this.flgCopiaDniApo = flgCopiaDniApo;
     }
-    public String getGradoInstruccion() {
-        return this.gradoInstruccion;
+    public String getDscrpOcupacion() {
+        return this.dscrpOcupacion;
     }
     
-    public void setGradoInstruccion(String gradoInstruccion) {
-        this.gradoInstruccion = gradoInstruccion;
-    }
-    public String getOcupacion() {
-        return this.ocupacion;
-    }
-    
-    public void setOcupacion(String ocupacion) {
-        this.ocupacion = ocupacion;
-    }
-    public String getCentroLabores() {
-        return this.centroLabores;
-    }
-    
-    public void setCentroLabores(String centroLabores) {
-        this.centroLabores = centroLabores;
+    public void setDscrpOcupacion(String dscrpOcupacion) {
+        this.dscrpOcupacion = dscrpOcupacion;
     }
     public String getTelefonoEmergencia() {
         return this.telefonoEmergencia;
@@ -109,6 +103,13 @@ public class PerFamiliar  implements java.io.Serializable {
     
     public void setTelefonoEmergencia(String telefonoEmergencia) {
         this.telefonoEmergencia = telefonoEmergencia;
+    }
+    public Set<CentroLabores> getCentroLaboreses() {
+        return this.centroLaboreses;
+    }
+    
+    public void setCentroLaboreses(Set<CentroLabores> centroLaboreses) {
+        this.centroLaboreses = centroLaboreses;
     }
     public Set<VinculoFamiliar> getVinculoFamiliars() {
         return this.vinculoFamiliars;

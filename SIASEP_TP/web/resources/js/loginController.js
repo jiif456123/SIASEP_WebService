@@ -20,13 +20,7 @@ app.controller("loginCtrl", function($scope, $http, $window) {
                     sessionStorage.setItem('nombreUsuario', response.data.primer_nombre);
                     sessionStorage.setItem('apellidoUsuario', response.data.apellido_paterno);
                     sessionStorage.setItem('tipoUsuario', response.data.nom_tipo_usuario);
-                    $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva.jsp';
-                }
-                if(sessionStorage.getItem("fkidTipoUsuario") === "2") {
-                    sessionStorage.setItem('nombreUsuario', response.data.primer_nombre);
-                    sessionStorage.setItem('apellidoUsuario', response.data.apellido_paterno);
-                    sessionStorage.setItem('tipoUsuario', response.data.nom_tipo_usuario);
-                    $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva.jsp';
+                    $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva_matricula.jsp';
                 }
                 if(sessionStorage.getItem("fkidTipoUsuario") === "3") {
                     sessionStorage.setItem('nombreUsuario', response.data.primer_nombre);

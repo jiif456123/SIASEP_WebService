@@ -45,7 +45,7 @@
                     <span>General</span>
                 </li>
                 <li><a id="pill_administrar_matricula" class="active" data-toggle="pill" href="#" ng-click="navegaAdminMatricula()">
-                        <i class="fa fa-book"></i><span>Administrar Matricula</span></a>
+                        <i class="fa fa-book"></i><span>Matricular Alumno</span></a>
                 </li>
                 <li><a id="pill_generar_horario" data-toggle="pill" href="#Generar_horario">
                         <i class="fa fa-book"></i><span>Generar Horario</span></a>

@@ -7,37 +7,91 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
     var sesionTipoUsuario = sessionStorage.getItem('fkidTipoUsuario');
 
     //NAVEGA DESDE EL MODULO O EL NAVBAR LLENDO A "MATRICULAR ALUMNO"
-    $scope.navegaAdminMatricula = function() {
-       $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva.jsp';
+    $scope.navegaDirectivaAlumno = function() {
+       $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva_Alumnos.jsp';
        $scope.getInfoUsuario();
     };
+    $scope.navegaAdminMatricula = function() {
+       $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva_matricula.jsp';
+       $scope.getInfoUsuario();
+    };
+    
 
     //CONTROLA LOS DEMAS METODOS GET Y CARGA DE DATOS
     $scope.getInfoUsuario = function() {
         $scope.nombre = sessionStorage.getItem('nombreUsuario');
         $scope.apellido = sessionStorage.getItem('apellidoUsuario');
         $scope.tipousuario = sesionNombreTipo;
-        $scope.getListaAlumnosNuevos();
+        $scope.getListaPeriodos();
+        $scope.getListaMatHabilitado();
+        $scope.getListaMatDeshabilitado();
+        $scope.getListaHistorialMatr();
+        
         $scope.getListaAlumnosAntiguos();
         $scope.getListaAlumnosRepetidos();
-        $scope.getListaAlumnosIntercambio();
     };
     
-    $scope.getListaAlumnosNuevos = function() {
+    $scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    };
+    
+    
+    $scope.getListaPeriodos = function() {
+        $scope.selectedPeriodoIdHabilitado = 4; //ES EL AÑO ACTUAL SEGUN LA BASE DE DATOS
+        $scope.selectedPeriodoIdDeshabilitado = 4; //ES EL AÑO ACTUAL SEGUN LA BASE DE DATOS
         $http({
             method: 'GET',
-            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listaAlumnosNuevos',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listaPeriodoSelect',
             data: { }
         }).then(function successCallback(response) {
-            $scope.listaAlumnosNuevos = response.data;
+            $scope.listaPeriodos = response.data;
         }, function errorCallback(response) {
-            alert("ERROR getListaAlumnosNuevos");
+            alert("ERROR getListaAlumnosAntiguos");
         });
     };
+
+    $scope.getListaMatHabilitado = function() {
+        var idPeriodo = $scope.selectedPeriodoIdHabilitado;
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/refrescaListaMatHabilitado',
+            data: { fkid_periodo_anual : idPeriodo }
+        }).then(function successCallback(response) {
+            $scope.listaMatHabilitado = response.data;
+        }, function errorCallback(response) {
+            alert("ERROR getListaAlumnosAntiguos");
+        });
+    };
+    $scope.getListaMatDeshabilitado = function() {
+        var idPeriodo = $scope.selectedPeriodoIdDeshabilitado;
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/refrescaListaMatDeshabilitado',
+            data: { fkid_periodo_anual : idPeriodo }
+        }).then(function successCallback(response) {
+            $scope.listaMatDeshabilitado = response.data;
+        }, function errorCallback(response) {
+            alert("ERROR getListaAlumnosAntiguos");
+        });
+    };
+    $scope.getListaHistorialMatr = function() {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/getListaHistorialMatricula',
+            data: { }
+        }).then(function successCallback(response) {
+            $scope.listaHistorialMatricula = response.data;
+        }, function errorCallback(response) {
+            alert("ERROR getListaAlumnosAntiguos");
+        });
+    };
+    
+    
     $scope.getListaAlumnosAntiguos = function() {
         $http({
             method: 'GET',
-            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listaAlumnosAntiguos',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/getListaAlumnosAntiguos',
             data: { }
         }).then(function successCallback(response) {
             $scope.listaAlumnosAntiguos = response.data;
@@ -45,21 +99,10 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
             alert("ERROR getListaAlumnosAntiguos");
         });
     };
-    $scope.getListaAlumnosIntercambio = function() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listaAlumnosIntercambio',
-            data: { }
-        }).then(function successCallback(response) {
-            $scope.listaAlumnosIntercambio = response.data;
-        }, function errorCallback(response) {
-            alert("ERROR getListaAlumnosIntercambio");
-        });
-    };
     $scope.getListaAlumnosRepetidos = function() {
         $http({
             method: 'GET',
-            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listaAlumnosRepetido',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/getListaAlumnosRepetido',
             data: { }
         }).then(function successCallback(response) {
             $scope.listaAlumnosRepetidos = response.data;
@@ -69,7 +112,7 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
     };
     
     $scope.controlFormAlumno = function() {
-        $window.location.href = '/SIASEP_TP/resources/views/direc_formAlumno.jsp';
+        $window.location.href = '/SIASEP_TP/resources/views/forms/direc_formAlumno.jsp';
 //        $http({
 //            method: 'POST',
 //            url: 'http://localhost:8084/SIASEP_TP/webresources/login/loginUsuario',

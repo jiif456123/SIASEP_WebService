@@ -4,13 +4,21 @@ import java.util.Date;
 
 public class ListaMatriculaDTO {
 
+    Integer id_matricula;
+    String codigo_matricula;
+    Date fec_realizada;
+    Date fec_modificacion;
+    Integer fkid_per_alumno;
+    Integer fkid_per_trabajador;
+    Integer fkid_estado_matricula;
+    Integer fkid_periodo_anual;
+    
     Integer id_persona;
     String primer_nombre;
     String apellido_materno;
     String apellido_paterno;
     String numero_documento;
     Date fec_nacimiento;
-    String lugar_nacimiento;
     char sexo;
     String telefono_casa;
     String telefono_celular;
@@ -21,26 +29,98 @@ public class ListaMatriculaDTO {
     
     Integer id_per_alumno;
     Integer codigo_alumno;
-    String grupo_sanguineo;
     String nombre_ie_anterior;
+    String ref_nivel;
+    char ref_grado_anterior;
+    char ref_seccion;
+    double ref_ponderado_anterior;
+    boolean flg_tercio_superior;
+    String grupo_sanguineo;
     String lengua_materna;
     String segunda_lengua;
     Integer nro_hermanos;
-    double ref_ponderado_anterior;
-    char ref_grado_anterior;
-    char ref_seccion_anterior;
-    Integer flg_tercio_superior;
-    Integer flg_copia_dni;
-    Integer flg_vive_con_padres;
+    boolean flg_copia_dni;
+    boolean flg_vive_con_padres;
+    boolean flg_foto_alumno;
     Integer fkid_persona;
-    Integer fkid_estado_alumno;
-    Integer fkid_tipo_per_alumno;
+    Integer fkid_tipo_alumno;
     
-    Integer id_distrito;
-    String nom_distrito;
+    Integer id_per_trabajador;
+    Integer codigo_trabajador;
     
-    Integer id_estado_alumno;
-    String nom_estado_alumno;
+    Integer id_estado_matricula;
+    String nom_estado_matricula;
+    
+    Integer id_periodo_anual;
+    Date fec_inicio_anual;
+    Date fec_fin_anual;
+    
+    String nombre_trabajador;
+    String nombre_alumno;
+
+    public Integer getId_matricula() {
+        return id_matricula;
+    }
+
+    public void setId_matricula(Integer id_matricula) {
+        this.id_matricula = id_matricula;
+    }
+
+    public String getCodigo_matricula() {
+        return codigo_matricula;
+    }
+
+    public void setCodigo_matricula(String codigo_matricula) {
+        this.codigo_matricula = codigo_matricula;
+    }
+
+    public Date getFec_realizada() {
+        return fec_realizada;
+    }
+
+    public void setFec_realizada(Date fec_realizada) {
+        this.fec_realizada = fec_realizada;
+    }
+
+    public Date getFec_modificacion() {
+        return fec_modificacion;
+    }
+
+    public void setFec_modificacion(Date fec_modificacion) {
+        this.fec_modificacion = fec_modificacion;
+    }
+
+    public Integer getFkid_per_alumno() {
+        return fkid_per_alumno;
+    }
+
+    public void setFkid_per_alumno(Integer fkid_per_alumno) {
+        this.fkid_per_alumno = fkid_per_alumno;
+    }
+
+    public Integer getFkid_per_trabajador() {
+        return fkid_per_trabajador;
+    }
+
+    public void setFkid_per_trabajador(Integer fkid_per_trabajador) {
+        this.fkid_per_trabajador = fkid_per_trabajador;
+    }
+
+    public Integer getFkid_estado_matricula() {
+        return fkid_estado_matricula;
+    }
+
+    public void setFkid_estado_matricula(Integer fkid_estado_matricula) {
+        this.fkid_estado_matricula = fkid_estado_matricula;
+    }
+
+    public Integer getFkid_periodo_anual() {
+        return fkid_periodo_anual;
+    }
+
+    public void setFkid_periodo_anual(Integer fkid_periodo_anual) {
+        this.fkid_periodo_anual = fkid_periodo_anual;
+    }
 
     public Integer getId_persona() {
         return id_persona;
@@ -88,14 +168,6 @@ public class ListaMatriculaDTO {
 
     public void setFec_nacimiento(Date fec_nacimiento) {
         this.fec_nacimiento = fec_nacimiento;
-    }
-
-    public String getLugar_nacimiento() {
-        return lugar_nacimiento;
-    }
-
-    public void setLugar_nacimiento(String lugar_nacimiento) {
-        this.lugar_nacimiento = lugar_nacimiento;
     }
 
     public char getSexo() {
@@ -170,20 +242,60 @@ public class ListaMatriculaDTO {
         this.codigo_alumno = codigo_alumno;
     }
 
-    public String getGrupo_sanguineo() {
-        return grupo_sanguineo;
-    }
-
-    public void setGrupo_sanguineo(String grupo_sanguineo) {
-        this.grupo_sanguineo = grupo_sanguineo;
-    }
-
     public String getNombre_ie_anterior() {
         return nombre_ie_anterior;
     }
 
     public void setNombre_ie_anterior(String nombre_ie_anterior) {
         this.nombre_ie_anterior = nombre_ie_anterior;
+    }
+
+    public String getRef_nivel() {
+        return ref_nivel;
+    }
+
+    public void setRef_nivel(String ref_nivel) {
+        this.ref_nivel = ref_nivel;
+    }
+
+    public char getRef_grado_anterior() {
+        return ref_grado_anterior;
+    }
+
+    public void setRef_grado_anterior(char ref_grado_anterior) {
+        this.ref_grado_anterior = ref_grado_anterior;
+    }
+
+    public char getRef_seccion() {
+        return ref_seccion;
+    }
+
+    public void setRef_seccion(char ref_seccion) {
+        this.ref_seccion = ref_seccion;
+    }
+
+    public double getRef_ponderado_anterior() {
+        return ref_ponderado_anterior;
+    }
+
+    public void setRef_ponderado_anterior(double ref_ponderado_anterior) {
+        this.ref_ponderado_anterior = ref_ponderado_anterior;
+    }
+
+    public boolean isFlg_tercio_superior() {
+        return flg_tercio_superior;
+    }
+
+    public void setFlg_tercio_superior(boolean flg_tercio_superior) {
+        this.flg_tercio_superior = flg_tercio_superior;
+    }
+
+    public String getGrupo_sanguineo() {
+        return grupo_sanguineo;
+    }
+
+    public void setGrupo_sanguineo(String grupo_sanguineo) {
+        this.grupo_sanguineo = grupo_sanguineo;
     }
 
     public String getLengua_materna() {
@@ -210,52 +322,28 @@ public class ListaMatriculaDTO {
         this.nro_hermanos = nro_hermanos;
     }
 
-    public double getRef_ponderado_anterior() {
-        return ref_ponderado_anterior;
-    }
-
-    public void setRef_ponderado_anterior(double ref_ponderado_anterior) {
-        this.ref_ponderado_anterior = ref_ponderado_anterior;
-    }
-
-    public char getRef_grado_anterior() {
-        return ref_grado_anterior;
-    }
-
-    public void setRef_grado_anterior(char ref_grado_anterior) {
-        this.ref_grado_anterior = ref_grado_anterior;
-    }
-
-    public char getRef_seccion_anterior() {
-        return ref_seccion_anterior;
-    }
-
-    public void setRef_seccion_anterior(char ref_seccion_anterior) {
-        this.ref_seccion_anterior = ref_seccion_anterior;
-    }
-
-    public Integer getFlg_tercio_superior() {
-        return flg_tercio_superior;
-    }
-
-    public void setFlg_tercio_superior(Integer flg_tercio_superior) {
-        this.flg_tercio_superior = flg_tercio_superior;
-    }
-
-    public Integer getFlg_copia_dni() {
+    public boolean isFlg_copia_dni() {
         return flg_copia_dni;
     }
 
-    public void setFlg_copia_dni(Integer flg_copia_dni) {
+    public void setFlg_copia_dni(boolean flg_copia_dni) {
         this.flg_copia_dni = flg_copia_dni;
     }
 
-    public Integer getFlg_vive_con_padres() {
+    public boolean isFlg_vive_con_padres() {
         return flg_vive_con_padres;
     }
 
-    public void setFlg_vive_con_padres(Integer flg_vive_con_padres) {
+    public void setFlg_vive_con_padres(boolean flg_vive_con_padres) {
         this.flg_vive_con_padres = flg_vive_con_padres;
+    }
+
+    public boolean isFlg_foto_alumno() {
+        return flg_foto_alumno;
+    }
+
+    public void setFlg_foto_alumno(boolean flg_foto_alumno) {
+        this.flg_foto_alumno = flg_foto_alumno;
     }
 
     public Integer getFkid_persona() {
@@ -266,57 +354,89 @@ public class ListaMatriculaDTO {
         this.fkid_persona = fkid_persona;
     }
 
-    public Integer getFkid_estado_alumno() {
-        return fkid_estado_alumno;
+    public Integer getFkid_tipo_alumno() {
+        return fkid_tipo_alumno;
     }
 
-    public void setFkid_estado_alumno(Integer fkid_estado_alumno) {
-        this.fkid_estado_alumno = fkid_estado_alumno;
+    public void setFkid_tipo_alumno(Integer fkid_tipo_alumno) {
+        this.fkid_tipo_alumno = fkid_tipo_alumno;
     }
 
-    public Integer getFkid_tipo_per_alumno() {
-        return fkid_tipo_per_alumno;
+    public Integer getId_per_trabajador() {
+        return id_per_trabajador;
     }
 
-    public void setFkid_tipo_per_alumno(Integer fkid_tipo_per_alumno) {
-        this.fkid_tipo_per_alumno = fkid_tipo_per_alumno;
+    public void setId_per_trabajador(Integer id_per_trabajador) {
+        this.id_per_trabajador = id_per_trabajador;
     }
 
-    public Integer getId_distrito() {
-        return id_distrito;
+    public Integer getCodigo_trabajador() {
+        return codigo_trabajador;
     }
 
-    public void setId_distrito(Integer id_distrito) {
-        this.id_distrito = id_distrito;
+    public void setCodigo_trabajador(Integer codigo_trabajador) {
+        this.codigo_trabajador = codigo_trabajador;
     }
 
-    public String getNom_distrito() {
-        return nom_distrito;
+    public Integer getId_estado_matricula() {
+        return id_estado_matricula;
     }
 
-    public void setNom_distrito(String nom_distrito) {
-        this.nom_distrito = nom_distrito;
+    public void setId_estado_matricula(Integer id_estado_matricula) {
+        this.id_estado_matricula = id_estado_matricula;
     }
 
-    public Integer getId_estado_alumno() {
-        return id_estado_alumno;
+    public String getNom_estado_matricula() {
+        return nom_estado_matricula;
     }
 
-    public void setId_estado_alumno(Integer id_estado_alumno) {
-        this.id_estado_alumno = id_estado_alumno;
+    public void setNom_estado_matricula(String nom_estado_matricula) {
+        this.nom_estado_matricula = nom_estado_matricula;
     }
 
-    public String getNom_estado_alumno() {
-        return nom_estado_alumno;
+    public Integer getId_periodo_anual() {
+        return id_periodo_anual;
     }
 
-    public void setNom_estado_alumno(String nom_estado_alumno) {
-        this.nom_estado_alumno = nom_estado_alumno;
+    public void setId_periodo_anual(Integer id_periodo_anual) {
+        this.id_periodo_anual = id_periodo_anual;
+    }
+
+    public Date getFec_inicio_anual() {
+        return fec_inicio_anual;
+    }
+
+    public void setFec_inicio_anual(Date fec_inicio_anual) {
+        this.fec_inicio_anual = fec_inicio_anual;
+    }
+
+    public Date getFec_fin_anual() {
+        return fec_fin_anual;
+    }
+
+    public void setFec_fin_anual(Date fec_fin_anual) {
+        this.fec_fin_anual = fec_fin_anual;
+    }
+
+    public String getNombre_trabajador() {
+        return nombre_trabajador;
+    }
+
+    public void setNombre_trabajador(String nombre_trabajador) {
+        this.nombre_trabajador = nombre_trabajador;
+    }
+
+    public String getNombre_alumno() {
+        return nombre_alumno;
+    }
+
+    public void setNombre_alumno(String nombre_alumno) {
+        this.nombre_alumno = nombre_alumno;
     }
 
     @Override
     public String toString() {
-        return "ListaMatriculaDTO{" + "id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", lugar_nacimiento=" + lugar_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", grupo_sanguineo=" + grupo_sanguineo + ", nombre_ie_anterior=" + nombre_ie_anterior + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion_anterior=" + ref_seccion_anterior + ", flg_tercio_superior=" + flg_tercio_superior + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", fkid_persona=" + fkid_persona + ", fkid_estado_alumno=" + fkid_estado_alumno + ", fkid_tipo_per_alumno=" + fkid_tipo_per_alumno + ", id_distrito=" + id_distrito + ", nom_distrito=" + nom_distrito + ", id_estado_alumno=" + id_estado_alumno + ", nom_estado_alumno=" + nom_estado_alumno + '}';
+        return "ListaMatriculaDTO{" + "id_matricula=" + id_matricula + ", codigo_matricula=" + codigo_matricula + ", fec_realizada=" + fec_realizada + ", fec_modificacion=" + fec_modificacion + ", fkid_per_alumno=" + fkid_per_alumno + ", fkid_per_trabajador=" + fkid_per_trabajador + ", fkid_estado_matricula=" + fkid_estado_matricula + ", fkid_periodo_anual=" + fkid_periodo_anual + ", id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", nombre_ie_anterior=" + nombre_ie_anterior + ", ref_nivel=" + ref_nivel + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion=" + ref_seccion + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", flg_tercio_superior=" + flg_tercio_superior + ", grupo_sanguineo=" + grupo_sanguineo + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", flg_foto_alumno=" + flg_foto_alumno + ", fkid_persona=" + fkid_persona + ", fkid_tipo_alumno=" + fkid_tipo_alumno + ", id_per_trabajador=" + id_per_trabajador + ", codigo_trabajador=" + codigo_trabajador + ", id_estado_matricula=" + id_estado_matricula + ", nom_estado_matricula=" + nom_estado_matricula + ", id_periodo_anual=" + id_periodo_anual + ", fec_inicio_anual=" + fec_inicio_anual + ", fec_fin_anual=" + fec_fin_anual + ", nombre_trabajador=" + nombre_trabajador + ", nombre_alumno=" + nombre_alumno + '}';
     }
     
     

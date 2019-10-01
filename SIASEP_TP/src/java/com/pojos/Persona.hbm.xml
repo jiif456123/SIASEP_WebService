@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 22, 2019 11:27:52 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 28, 2019 5:52:24 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.pojos.Persona" table="persona" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
         <id name="idPersona" type="int">
@@ -10,6 +10,9 @@
         </id>
         <many-to-one name="distrito" class="com.pojos.Distrito" fetch="select">
             <column name="fkid_distrito" not-null="true" />
+        </many-to-one>
+        <many-to-one name="lugarNacimiento" class="com.pojos.LugarNacimiento" fetch="select">
+            <column name="fkid_lugar_nacimiento" not-null="true" />
         </many-to-one>
         <many-to-one name="tipoDocumento" class="com.pojos.TipoDocumento" fetch="select">
             <column name="fkid_tipo_documento" not-null="true" />
@@ -29,9 +32,6 @@
         <property name="fecNacimiento" type="date">
             <column name="fec_nacimiento" length="10" not-null="true" />
         </property>
-        <property name="lugarNacimiento" type="string">
-            <column name="lugar_nacimiento" length="150" not-null="true" />
-        </property>
         <property name="sexo" type="char">
             <column name="sexo" length="1" not-null="true" />
         </property>
@@ -47,23 +47,29 @@
         <property name="correo" type="string">
             <column name="correo" />
         </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkid_persona" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="com.pojos.Usuario" />
+        </set>
         <set name="perAlumnos" table="per_alumno" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="fkid_persona" not-null="true" unique="true" />
             </key>
             <one-to-many class="com.pojos.PerAlumno" />
         </set>
+        <set name="perTrabajadors" table="per_trabajador" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkid_persona" not-null="true" unique="true" />
+            </key>
+            <one-to-many class="com.pojos.PerTrabajador" />
+        </set>
         <set name="perFamiliars" table="per_familiar" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="fkid_persona" not-null="true" unique="true" />
             </key>
             <one-to-many class="com.pojos.PerFamiliar" />
-        </set>
-        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="fkid_persona" not-null="true" unique="true" />
-            </key>
-            <one-to-many class="com.pojos.Usuario" />
         </set>
     </class>
 </hibernate-mapping>

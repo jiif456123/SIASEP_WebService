@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 22, 2019 11:27:52 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 28, 2019 5:52:24 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.pojos.EstadoAlumno" table="estado_alumno" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
-        <id name="idEstadoAlumno" type="int">
-            <column name="id_estado_alumno" />
+    <class name="com.pojos.TipoAlumno" table="tipo_alumno" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
+        <id name="idTipoAlumno" type="int">
+            <column name="id_tipo_alumno" />
             <generator class="assigned" />
         </id>
-        <property name="nomEstadoAlumno" type="string">
-            <column name="nom_estado_alumno" length="150" />
+        <property name="nomTipoAlumno" type="string">
+            <column name="nom_tipo_alumno" length="150" />
         </property>
         <set name="perAlumnos" table="per_alumno" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="fkid_estado_alumno" not-null="true" />
+                <column name="fkid_tipo_alumno" not-null="true" />
             </key>
             <one-to-many class="com.pojos.PerAlumno" />
         </set>
