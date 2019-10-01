@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Sep 22, 2019 11:27:50 PM by Hibernate Tools 4.3.1
+// Generated Sep 28, 2019 5:52:23 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -14,26 +14,27 @@ public class VinculoFamiliar  implements java.io.Serializable {
      private PerAlumno perAlumno;
      private PerFamiliar perFamiliar;
      private boolean flgOfiApoderado;
-     private Date fecInicio;
-     private Date fecFin;
+     private Date fecInicioVinculo;
+     private Date fecFinVinculo;
 
     public VinculoFamiliar() {
     }
 
 	
-    public VinculoFamiliar(VinculoFamiliarId id, PerAlumno perAlumno, PerFamiliar perFamiliar, boolean flgOfiApoderado) {
+    public VinculoFamiliar(VinculoFamiliarId id, PerAlumno perAlumno, PerFamiliar perFamiliar, boolean flgOfiApoderado, Date fecInicioVinculo) {
         this.id = id;
         this.perAlumno = perAlumno;
         this.perFamiliar = perFamiliar;
         this.flgOfiApoderado = flgOfiApoderado;
+        this.fecInicioVinculo = fecInicioVinculo;
     }
-    public VinculoFamiliar(VinculoFamiliarId id, PerAlumno perAlumno, PerFamiliar perFamiliar, boolean flgOfiApoderado, Date fecInicio, Date fecFin) {
+    public VinculoFamiliar(VinculoFamiliarId id, PerAlumno perAlumno, PerFamiliar perFamiliar, boolean flgOfiApoderado, Date fecInicioVinculo, Date fecFinVinculo) {
        this.id = id;
        this.perAlumno = perAlumno;
        this.perFamiliar = perFamiliar;
        this.flgOfiApoderado = flgOfiApoderado;
-       this.fecInicio = fecInicio;
-       this.fecFin = fecFin;
+       this.fecInicioVinculo = fecInicioVinculo;
+       this.fecFinVinculo = fecFinVinculo;
     }
    
     public VinculoFamiliarId getId() {
@@ -64,19 +65,19 @@ public class VinculoFamiliar  implements java.io.Serializable {
     public void setFlgOfiApoderado(boolean flgOfiApoderado) {
         this.flgOfiApoderado = flgOfiApoderado;
     }
-    public Date getFecInicio() {
-        return this.fecInicio;
+    public Date getFecInicioVinculo() {
+        return this.fecInicioVinculo;
     }
     
-    public void setFecInicio(Date fecInicio) {
-        this.fecInicio = fecInicio;
+    public void setFecInicioVinculo(Date fecInicioVinculo) {
+        this.fecInicioVinculo = fecInicioVinculo;
     }
-    public Date getFecFin() {
-        return this.fecFin;
+    public Date getFecFinVinculo() {
+        return this.fecFinVinculo;
     }
     
-    public void setFecFin(Date fecFin) {
-        this.fecFin = fecFin;
+    public void setFecFinVinculo(Date fecFinVinculo) {
+        this.fecFinVinculo = fecFinVinculo;
     }
 
 

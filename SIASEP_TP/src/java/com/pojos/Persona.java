@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Sep 22, 2019 11:27:50 PM by Hibernate Tools 4.3.1
+// Generated Sep 28, 2019 5:52:23 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -14,57 +14,59 @@ public class Persona  implements java.io.Serializable {
 
      private int idPersona;
      private Distrito distrito;
+     private LugarNacimiento lugarNacimiento;
      private TipoDocumento tipoDocumento;
      private String primerNombre;
      private String apellidoMaterno;
      private String apellidoPaterno;
      private String numeroDocumento;
      private Date fecNacimiento;
-     private String lugarNacimiento;
      private char sexo;
      private String telefonoCasa;
      private String telefonoCelular;
      private String direccion;
      private String correo;
-     private Set<PerAlumno> perAlumnos = new HashSet<PerAlumno>(0);
-     private Set<PerFamiliar> perFamiliars = new HashSet<PerFamiliar>(0);
      private Set<Usuario> usuarios = new HashSet<Usuario>(0);
+     private Set<PerAlumno> perAlumnos = new HashSet<PerAlumno>(0);
+     private Set<PerTrabajador> perTrabajadors = new HashSet<PerTrabajador>(0);
+     private Set<PerFamiliar> perFamiliars = new HashSet<PerFamiliar>(0);
 
     public Persona() {
     }
 
 	
-    public Persona(int idPersona, Distrito distrito, TipoDocumento tipoDocumento, String primerNombre, String apellidoMaterno, String apellidoPaterno, String numeroDocumento, Date fecNacimiento, String lugarNacimiento, char sexo, String direccion) {
+    public Persona(int idPersona, Distrito distrito, LugarNacimiento lugarNacimiento, TipoDocumento tipoDocumento, String primerNombre, String apellidoMaterno, String apellidoPaterno, String numeroDocumento, Date fecNacimiento, char sexo, String direccion) {
         this.idPersona = idPersona;
         this.distrito = distrito;
+        this.lugarNacimiento = lugarNacimiento;
         this.tipoDocumento = tipoDocumento;
         this.primerNombre = primerNombre;
         this.apellidoMaterno = apellidoMaterno;
         this.apellidoPaterno = apellidoPaterno;
         this.numeroDocumento = numeroDocumento;
         this.fecNacimiento = fecNacimiento;
-        this.lugarNacimiento = lugarNacimiento;
         this.sexo = sexo;
         this.direccion = direccion;
     }
-    public Persona(int idPersona, Distrito distrito, TipoDocumento tipoDocumento, String primerNombre, String apellidoMaterno, String apellidoPaterno, String numeroDocumento, Date fecNacimiento, String lugarNacimiento, char sexo, String telefonoCasa, String telefonoCelular, String direccion, String correo, Set<PerAlumno> perAlumnos, Set<PerFamiliar> perFamiliars, Set<Usuario> usuarios) {
+    public Persona(int idPersona, Distrito distrito, LugarNacimiento lugarNacimiento, TipoDocumento tipoDocumento, String primerNombre, String apellidoMaterno, String apellidoPaterno, String numeroDocumento, Date fecNacimiento, char sexo, String telefonoCasa, String telefonoCelular, String direccion, String correo, Set<Usuario> usuarios, Set<PerAlumno> perAlumnos, Set<PerTrabajador> perTrabajadors, Set<PerFamiliar> perFamiliars) {
        this.idPersona = idPersona;
        this.distrito = distrito;
+       this.lugarNacimiento = lugarNacimiento;
        this.tipoDocumento = tipoDocumento;
        this.primerNombre = primerNombre;
        this.apellidoMaterno = apellidoMaterno;
        this.apellidoPaterno = apellidoPaterno;
        this.numeroDocumento = numeroDocumento;
        this.fecNacimiento = fecNacimiento;
-       this.lugarNacimiento = lugarNacimiento;
        this.sexo = sexo;
        this.telefonoCasa = telefonoCasa;
        this.telefonoCelular = telefonoCelular;
        this.direccion = direccion;
        this.correo = correo;
-       this.perAlumnos = perAlumnos;
-       this.perFamiliars = perFamiliars;
        this.usuarios = usuarios;
+       this.perAlumnos = perAlumnos;
+       this.perTrabajadors = perTrabajadors;
+       this.perFamiliars = perFamiliars;
     }
    
     public int getIdPersona() {
@@ -80,6 +82,13 @@ public class Persona  implements java.io.Serializable {
     
     public void setDistrito(Distrito distrito) {
         this.distrito = distrito;
+    }
+    public LugarNacimiento getLugarNacimiento() {
+        return this.lugarNacimiento;
+    }
+    
+    public void setLugarNacimiento(LugarNacimiento lugarNacimiento) {
+        this.lugarNacimiento = lugarNacimiento;
     }
     public TipoDocumento getTipoDocumento() {
         return this.tipoDocumento;
@@ -123,13 +132,6 @@ public class Persona  implements java.io.Serializable {
     public void setFecNacimiento(Date fecNacimiento) {
         this.fecNacimiento = fecNacimiento;
     }
-    public String getLugarNacimiento() {
-        return this.lugarNacimiento;
-    }
-    
-    public void setLugarNacimiento(String lugarNacimiento) {
-        this.lugarNacimiento = lugarNacimiento;
-    }
     public char getSexo() {
         return this.sexo;
     }
@@ -165,6 +167,13 @@ public class Persona  implements java.io.Serializable {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+    public Set<Usuario> getUsuarios() {
+        return this.usuarios;
+    }
+    
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
     public Set<PerAlumno> getPerAlumnos() {
         return this.perAlumnos;
     }
@@ -172,19 +181,19 @@ public class Persona  implements java.io.Serializable {
     public void setPerAlumnos(Set<PerAlumno> perAlumnos) {
         this.perAlumnos = perAlumnos;
     }
+    public Set<PerTrabajador> getPerTrabajadors() {
+        return this.perTrabajadors;
+    }
+    
+    public void setPerTrabajadors(Set<PerTrabajador> perTrabajadors) {
+        this.perTrabajadors = perTrabajadors;
+    }
     public Set<PerFamiliar> getPerFamiliars() {
         return this.perFamiliars;
     }
     
     public void setPerFamiliars(Set<PerFamiliar> perFamiliars) {
         this.perFamiliars = perFamiliars;
-    }
-    public Set<Usuario> getUsuarios() {
-        return this.usuarios;
-    }
-    
-    public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
     }
 
 

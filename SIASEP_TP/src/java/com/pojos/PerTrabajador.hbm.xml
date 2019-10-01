@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 28, 2019 5:52:24 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.PerTrabajador" table="per_trabajador" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
+        <id name="idPerTrabajador" type="int">
+            <column name="id_per_trabajador" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="persona" class="com.pojos.Persona" fetch="select">
+            <column name="fkid_persona" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="codigoTrabajador" type="int">
+            <column name="codigo_trabajador" not-null="true" unique="true" />
+        </property>
+        <set name="matriculas" table="matricula" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkid_per_trabajador" not-null="true" />
+            </key>
+            <one-to-many class="com.pojos.Matricula" />
+        </set>
+    </class>
+</hibernate-mapping>

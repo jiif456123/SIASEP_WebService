@@ -480,7 +480,20 @@
     .chiller-theme .sidebar-footer>a:last-child {
         border-right: none;
     }
-
+    .has-search .form-control {
+        padding-left: 2.375rem;
+    }
+    .has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
 </style>
 </head>
 <body ng-app="myAdmin" ng-controller="directivaCtrl" class="fixed-sn">
@@ -535,176 +548,81 @@
         </header>
 
         <main class="page-content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="Administrar_matricula" role="tabpanel" aria-labelledby="pill_administrar_matricula">
                         
-                        <div class="row pt-5" style="padding-bottom: 22px;">
-                            <div class="col-lg-5" style="text-align: left;">
-                                <h2><strong>ADMINISTRAR MATRICULA</strong></h2>
-                                <h5>Módulo para registro de alumnos durante ciclo escolar</h5>
-                            </div>
-                            <div class="col-lg-1">&nbsp;</div>
-                            <div class="col-lg-6" style="text-align: right;">
-                                <!--<div class="card">
-                                    <div class="card-body">
-                                    </div>
-                                </div>-->
+                        <div class="row pt-4" style="padding-bottom: 22px;">
+                            <div class="col-lg-12" style="text-align: left;">
+                                <h4>PASO #01: <span style="font-weight: lighter;">Seleccione al alumno en aquella lista verificando su información</span></h4>
+                                <label style="margin-top: 5px;">Se recomienda verificar minuciosamente los datos para corroborar la información presente del estudiante</label>
                             </div>
                         </div>
                         
-                        <div class="row" style="padding-bottom: 22px;">
-                            <div class="col-lg-6" style="text-align: left;">
-                                <button class="btn btn-success" ng-click="controlFormAlumno()"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Crear Matricula</button>
-                            </div>
-                            <div class="col-lg-6" style="text-align: right;">
-                                <button class="btn btn-warning"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Reportes Estadisticos</button>
-                            </div>
-                        </div>
-
                         <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab_Nuevos1" data-toggle="tab" href="#tab_Nuevos" role="tab" aria-controls="home-md"
-                                   aria-selected="true">Nuevos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab_Antiguos1" data-toggle="tab" href="#tab_Antiguos" role="tab" aria-controls="profile-md"
+                                <a class="nav-link active" id="tab_Antiguos1" data-toggle="tab" href="#tab_Antiguos" role="tab" aria-controls="profile-md"
                                    aria-selected="false">Antiguos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="tab_Repetidos1" data-toggle="tab" href="#tab_Repetidos" role="tab" aria-controls="contact-md"
                                    aria-selected="false">Repetidos</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="tab_Intercambio1" data-toggle="tab" href="#tab_Intercambio" role="tab" aria-controls="contact-md"
-                                   aria-selected="false">Intercambio</a>
-                            </li>
                         </ul>
                         
                         <div class="tab-content card pt-5" id="myTabContentMD" style="padding-bottom: 30px;">
-                            <div class="tab-pane fade show active" id="tab_Nuevos" role="tabpanel" aria-labelledby="home-tab-md">
-                                <div class="container-fluid" style="padding-bottom: 30px;">
-                                    <div class="row">
-                                        <div class="col-lg-12" style="position: relative; height: 350px; overflow: auto; display: block;">
-                                            <table id="myTable" class="table table-bordered table-striped mb-0 table-responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
-                                                <thead>
-                                                    <tr role="row">
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Código</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nro. Documento</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Apellido Paterno</th>
-                                                        <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Apellido Materno</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Primer Nombre</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sexo</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0px;">Distrito</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 155px;">Direccion</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nro. Hermanos</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Grado Ref.</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Estado actual</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr role="row" class="even" ng-repeat="nuevos in listaAlumnosNuevos">
-                                                        <td tabindex="0" class="sorting_1">{{nuevos.codigo_alumno}}</td>
-                                                        <td>{{nuevos.numero_documento}}</td>
-                                                        <td>{{nuevos.apellido_paterno}}</td>
-                                                        <td>{{nuevos.apellido_materno}}</td>
-                                                        <td class=" dt-body-right">{{nuevos.primer_nombre}}</td>
-                                                        <td>{{nuevos.sexo}}</td>
-                                                        <td>{{nuevos.nom_distrito}}</td>
-                                                        <td>{{nuevos.direccion}}</td>
-                                                        <td>{{nuevos.nro_hermanos}}</td>
-                                                        <td>{{nuevos.ref_grado_anterior}}</td>
-                                                        <td>{{nuevos.nom_estado_alumno}}</td>
-                                                        <td class="text-center"><button class="btn btn-mdb-color btn-sm"><span class="fa fa-pencil-square-o"></span></button> <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button></td>
-                                                    </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th rowspan="1" colspan="1">Código</th>
-                                                        <th rowspan="1" colspan="1">Nro. Documento</th>
-                                                        <th rowspan="1" colspan="1">Apellido Paterno</th>
-                                                        <th class="dt-body-right" rowspan="1" colspan="1">Apellido Materno</th>
-                                                        <th rowspan="1" colspan="1">Primer Nombre</th>
-                                                        <th class="dt-body-right" rowspan="1" colspan="1">Sexo</th>
-                                                        <th rowspan="1" colspan="1">Distrito</th>
-                                                        <th rowspan="1" colspan="1">Direccion</th>
-                                                        <th rowspan="1" colspan="1">Nro. Hermanos</th>
-                                                        <th rowspan="1" colspan="1">Grado Ref.</th>
-                                                        <th rowspan="1" colspan="1">Estado Actual</th>
-                                                        <th rowspan="1" colspan="1" style="text-align: center;">Acciones</th>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="tab_Antiguos" role="tabpanel" aria-labelledby="profile-tab-md">
+                            <div class="tab-pane fade show active" id="tab_Antiguos" role="tabpanel" aria-labelledby="profile-tab-md">
                                 <div class="container-fluid" style="padding-bottom: 30px;">
                                     <div class="row">
                                         <div class="col-lg-12" style="position: relative; overflow: auto; display: block; height: 350px;">
-                                            <table id="myTable" class="table table-bordered table-striped mb-0 table-responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
+                                            <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="example_info">
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Código</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nro. Documento</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Apellido Paterno</th>
-                                                        <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Apellido Materno</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Primer Nombre</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Nombre Completo</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sexo</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0px;">Distrito</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 155px;">Direccion</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nro. Hermanos</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Grado Ref.</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Estado actual</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0px;">¿Copia de DNI?</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr role="row" class="even" ng-repeat="antiguo in listaAlumnosAntiguos">
+                                                    <div class="form-row" style="margin-bottom: 5px;">
+                                                        <div class="col-lg-9"></div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group has-search">
+                                                                <span class="fa fa-search form-control-feedback"></span>
+                                                                <input type="text" ng-model="searchKeywordA" class="form-control">
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <tr class="even" dir-paginate="antiguo in listaAlumnosAntiguos | filter: searchKeywordA | itemsPerPage : 7">
                                                         <td tabindex="0" class="sorting_1">{{antiguo.codigo_alumno}}</td>
                                                         <td>{{antiguo.numero_documento}}</td>
-                                                        <td>{{antiguo.apellido_paterno}}</td>
-                                                        <td>{{antiguo.apellido_materno}}</td>
-                                                        <td class=" dt-body-right">{{antiguo.primer_nombre}}</td>
+                                                        <td>{{antiguo.nombre_completo_alumno}}</td>
                                                         <td>{{antiguo.sexo}}</td>
                                                         <td>{{antiguo.nom_distrito}}</td>
-                                                        <td>{{antiguo.direccion}}</td>
-                                                        <td>{{antiguo.nro_hermanos}}</td>
-                                                        <td>{{antiguo.ref_grado_anterior}}</td>
-                                                        <td>{{antiguo.nom_estado_alumno}}</td>
-                                                        <td class="text-center"><button class="btn btn-mdb-color btn-sm"><span class="fa fa-pencil-square-o"></span></button> <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button></td>
+                                                        <td>{{antiguo.flg_copia_dni}}</td>
+                                                        <td class="text-center"><button class="btn btn-mdb-color btn-sm" ng-click="controlFormAlumno()" value="{{antiguo.codigo_alumno}}"><span class="fa fa-pencil-square-o"></span></button> <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button></td>
                                                     </tr>
                                                 </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th rowspan="1" colspan="1">Código</th>
-                                                        <th rowspan="1" colspan="1">Nro. Documento</th>
-                                                        <th rowspan="1" colspan="1">Apellido Paterno</th>
-                                                        <th class="dt-body-right" rowspan="1" colspan="1">Apellido Materno</th>
-                                                        <th rowspan="1" colspan="1">Primer Nombre</th>
-                                                        <th class="dt-body-right" rowspan="1" colspan="1">Sexo</th>
-                                                        <th rowspan="1" colspan="1">Distrito</th>
-                                                        <th rowspan="1" colspan="1">Direccion</th>
-                                                        <th rowspan="1" colspan="1">Nro. Hermanos</th>
-                                                        <th rowspan="1" colspan="1">Grado Ref.</th>
-                                                        <th rowspan="1" colspan="1">Estado Actual</th>
-                                                        <th rowspan="1" colspan="1" style="text-align: center;">Acciones</th>
-                                                    </tr>
-                                                </tfoot>
+                                                <dir-pagination-controls
+                                                    max-size="7"
+                                                    direction-links="true"
+                                                    boundary-links="true">
+                                                </dir-pagination-controls>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="tab-pane fade" id="tab_Repetidos" role="tabpanel" aria-labelledby="contact-tab-md">
                                 <div class="container-fluid" style="padding-bottom: 30px;">
                                     <div class="row">
-                                        <div class="col-lg-12" style="position: relative; height: 350px; overflow: auto; display: block;">
-                                            <table id="myTable" class="table table-bordered table-striped mb-0 table-responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
+                                        <div class="col-lg-12" style="position: relative; overflow: auto; display: block; height: 350px;">
+                                            <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="example_info">
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Código</th>
@@ -714,15 +632,22 @@
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Primer Nombre</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sexo</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0px;">Distrito</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 155px;">Direccion</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nro. Hermanos</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Grado Ref.</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Estado actual</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0px;">¿Copia de DNI?</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr role="row" class="even" ng-repeat="repetido in listaAlumnosRepetidos">
+                                                    <div class="form-row" style="margin-bottom: 5px;">
+                                                        <div class="col-lg-9"></div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group has-search">
+                                                                <span class="fa fa-search form-control-feedback"></span>
+                                                                <input type="text" ng-model="searchKeywordA" class="form-control">
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <tr class="even" dir-paginate="repetido in listaAlumnosRepetidos | filter: searchKeywordA | itemsPerPage : 7">
                                                         <td tabindex="0" class="sorting_1">{{repetido.codigo_alumno}}</td>
                                                         <td>{{repetido.numero_documento}}</td>
                                                         <td>{{repetido.apellido_paterno}}</td>
@@ -730,11 +655,8 @@
                                                         <td class=" dt-body-right">{{repetido.primer_nombre}}</td>
                                                         <td>{{repetido.sexo}}</td>
                                                         <td>{{repetido.nom_distrito}}</td>
-                                                        <td>{{repetido.direccion}}</td>
-                                                        <td>{{repetido.nro_hermanos}}</td>
-                                                        <td>{{repetido.ref_grado_anterior}}</td>
-                                                        <td>{{repetido.nom_estado_alumno}}</td>
-                                                        <td class="text-center"><button class="btn btn-mdb-color btn-sm"><span class="fa fa-pencil-square-o"></span></button> <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button></td>
+                                                        <td>{{antiguo.flg_copia_dni}}</td>
+                                                        <td class="text-center"><button class="btn btn-mdb-color btn-sm" ng-click="controlFormAlumno()" value="{{repetido.codigo_alumno}}"><span class="fa fa-pencil-square-o"></span></button> <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button></td>
                                                     </tr>
                                                 </tbody>
                                                 <tfoot>
@@ -746,72 +668,15 @@
                                                         <th rowspan="1" colspan="1">Primer Nombre</th>
                                                         <th class="dt-body-right" rowspan="1" colspan="1">Sexo</th>
                                                         <th rowspan="1" colspan="1">Distrito</th>
-                                                        <th rowspan="1" colspan="1">Direccion</th>
-                                                        <th rowspan="1" colspan="1">Nro. Hermanos</th>
-                                                        <th rowspan="1" colspan="1">Grado Ref.</th>
-                                                        <th rowspan="1" colspan="1">Estado Actual</th>
+                                                        <th rowspan="1" colspan="1">¿Copia de DNI?</th>
                                                         <th rowspan="1" colspan="1" style="text-align: center;">Acciones</th>
                                                     </tr>
                                                 </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="tab_Intercambio" role="tabpanel" aria-labelledby="contact-tab-md">
-                                <div class="container-fluid" style="padding-bottom: 30px;">
-                                    <div class="row">
-                                        <div class="col-lg-12" style="position: relative; height: 350px; overflow: auto; display: block;">
-                                            <table id="myTable" class="table table-bordered table-striped mb-0 table-responsive" style="width: 100%;" role="grid" aria-describedby="example_info">
-                                                <thead>
-                                                    <tr role="row">
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Código</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nro. Documento</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Apellido Paterno</th>
-                                                        <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Apellido Materno</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Primer Nombre</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sexo</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0px;">Distrito</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 155px;">Direccion</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nro. Hermanos</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Grado Ref.</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Estado actual</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr role="row" class="even" ng-repeat="intercambio in listaAlumnosIntercambio">
-                                                        <td tabindex="0" class="sorting_1">{{intercambio.codigo_alumno}}</td>
-                                                        <td>{{intercambio.numero_documento}}</td>
-                                                        <td>{{intercambio.apellido_paterno}}</td>
-                                                        <td>{{intercambio.apellido_materno}}</td>
-                                                        <td class=" dt-body-right">{{intercambio.primer_nombre}}</td>
-                                                        <td>{{intercambio.sexo}}</td>
-                                                        <td>{{intercambio.nom_distrito}}</td>
-                                                        <td>{{intercambio.direccion}}</td>
-                                                        <td>{{intercambio.nro_hermanos}}</td>
-                                                        <td>{{intercambio.ref_grado_anterior}}</td>
-                                                        <td>{{intercambio.nom_estado_alumno}}</td>
-                                                        <td class="text-center"><button class="btn btn-mdb-color btn-sm"><span class="fa fa-pencil-square-o"></span></button> <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button></td>
-                                                    </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th rowspan="1" colspan="1">Código</th>
-                                                        <th rowspan="1" colspan="1">Nro. Documento</th>
-                                                        <th rowspan="1" colspan="1">Apellido Paterno</th>
-                                                        <th class="dt-body-right" rowspan="1" colspan="1">Apellido Materno</th>
-                                                        <th rowspan="1" colspan="1">Primer Nombre</th>
-                                                        <th class="dt-body-right" rowspan="1" colspan="1">Sexo</th>
-                                                        <th rowspan="1" colspan="1">Distrito</th>
-                                                        <th rowspan="1" colspan="1">Direccion</th>
-                                                        <th rowspan="1" colspan="1">Nro. Hermanos</th>
-                                                        <th rowspan="1" colspan="1">Grado Ref.</th>
-                                                        <th rowspan="1" colspan="1">Estado Actual</th>
-                                                        <th rowspan="1" colspan="1" style="text-align: center;">Acciones</th>
-                                                    </tr>
-                                                </tfoot>
+                                                <dir-pagination-controls
+                                                    max-size="7"
+                                                    direction-links="true"
+                                                    boundary-links="true">
+                                                </dir-pagination-controls>
                                             </table>
                                         </div>
                                     </div>
@@ -833,16 +698,85 @@
                 </div>
             </div>
         </main>
+
+        <form>
+            <div class="modal fade bd-example-modal-lg" id="modalMatricula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="container-fluid">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Ingrese codigo de alumno</label>
+                                    <div class="col-sm-4">
+                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Codigo de estudiante" style="margin-top: 10px;">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <button type="submit" class="btn btn-outline-light-blue btn-sm" style="margin-top: 14px;">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Codigo de matricula(*)</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Fecha realizada (*)</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            <small id="date" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Fecha Modificado</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            <small id="date" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Codigo del estudiante (*)</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Nombre Completo (*)</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                            <small id="date" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         
         
     </div>
     <!--Modal: Login / Register Form-->
     <%@include file="foot.jspf" %>
     <script>
-        function redirectToFormulario() {
-            $window.location.href = '/SIASEP_TP/resources/views/direc_formAlumno.jsp';
-        }
-        
         jQuery(function ($) {
         $(".sidebar-dropdown > a").click(function () {
         $(".sidebar-submenu").slideUp(200);
