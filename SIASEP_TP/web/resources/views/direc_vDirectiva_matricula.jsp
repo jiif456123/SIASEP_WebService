@@ -553,13 +553,14 @@
                     <div class="tab-pane fade show active" id="Administrar_matricula" role="tabpanel" aria-labelledby="pill_administrar_matricula">
                         
                         <div class="row pt-4" style="padding-bottom: 22px;">
-                            <div class="col-lg-6" style="text-align: left;">
+                            <div class="col-lg-4 text-center" style="text-align: left;">
                                 <h2><strong>MATRICULA ESCOLAR</strong></h2>
-                                <h5>Módulo para registro de alumnos durante ciclo escolar</h5>
+                                <h6>Lista de matriculas durante el año escolar</h6>
                             </div>
-                            <div class="col-lg-6" style="text-align: right;">
+                            <div class="col-lg-8" style="text-align: right;">
                                 <button class="btn btn-outline-green" ng-click="navegaDirectivaAlumno()"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Crear Matricula</button>
-                                <button class="btn btn-warning"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;Reportes Estadisticos</button>
+                                <button class="btn btn-outline-brown" data-toggle="modal" data-target="#modalHistorial"><i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;Historial</button>
+                                <button class="btn btn-outline-warning"><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp;Reportes Estadisticos</button>
                             </div>
                         </div>
 
@@ -572,6 +573,7 @@
                                 <a class="nav-link" id="tab_Repetidos1" data-toggle="tab" href="#tab_Repetidos" role="tab" aria-controls="contact-md"
                                    aria-selected="false">Deshabilitado</a>
                             </li>
+                            
                         </ul>
                         
                         <div class="tab-content card pt-5" id="myTabContentMD" style="padding-bottom: 30px;">
@@ -582,25 +584,26 @@
                                             <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="example_info">
                                                 <thead>
                                                     <tr role="row">
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Codigo de matricula</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nombre Completo del Estudiante</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Codigo de matricula</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Codigo del estudiante</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nombre Completo del Estudiante</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Fecha realizada</th>
                                                         <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Estado Actual</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="text-align: center">Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <div class="form-row" style="margin-bottom: 5px;">
-                                                        <div class="col-lg-2 text-center">
-                                                            <button class="btn btn-info btn-md" data-toggle="modal" data-target="#modalHistorial">Historial</button>
-                                                        </div>
-                                                        <div class="col-lg-7" style="padding-top: 7px;">
+                                                        <div class="col-lg-7 text-center">
                                                             <select class="form-control" ng-model="selectedPeriodoIdHabilitado"  
                                                                     ng-options="periodo.id_periodo_anual as periodo.fec_inicio_anual for periodo in listaPeriodos" ng-change="getListaMatHabilitado()">
-                                                            <option value="" disabled>-- Seleccione la fecha inicial del año  --</option>
+                                                                <option value="" disabled>-- Seleccione la fecha inicio de clases  --</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-lg-3" style="padding-top: 7px;">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-3">
                                                             <div class="form-group has-search">
                                                                 <span class="fa fa-search form-control-feedback"></span>
                                                                 <input type="text" ng-model="searchKeywordA" class="form-control">
@@ -608,29 +611,41 @@
                                                             
                                                         </div>
                                                     </div>
-                                                    <tr class="even" dir-paginate="matabi in listaMatHabilitado | filter: searchKeywordA | itemsPerPage : 7">
+                                                    <tr class="even" dir-paginate="matabi in listaMatHabilitado | filter: searchKeywordA | itemsPerPage : 15">
                                                         <td tabindex="0" class="sorting_1">{{matabi.codigo_matricula}}</td>
+                                                        <td>{{matabi.codigo_alumno}}</td>
                                                         <td>{{matabi.nombre_alumno}}</td>
                                                         <td>{{matabi.fec_realizada}}</td>
-                                                        <td>{{matabi.nom_estado_matricula}}</td>
-                                                        <td class="text-center"><button class="btn btn-danger btn-sm" value="{{matabi.id_matricula}}"><span class="fa fa-trash"></span></button></td>
+                                                        <td align="center">
+                                                            <button id="btnDeshabilitado" class="btn btn-md purple-gradient btn-default" value="{{matabi.id_matricula}}-2" 
+                                                                     data-ng-click="abrirModalAgregaObs($event)" data-toggle="modal" data-target=".modalAñadirObservacion">
+                                                                <span class="fa fa-hand-o-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Deshabilitar</button>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <button class="btn-floating btn-indigo btn-lg" value="{{matabi.id_matricula}}" data-ng-click="verObservacion($event)"
+                                                                    title="Ver Observación" style="margin-right: 3px;" data-toggle="modal" data-target=".modalObservaciones"><span class="fa fa-clone"></span></button>
+                                                            <button class="btn-floating btn-danger btn-lg" value="{{matabi.id_matricula}}" data-ng-click="eliminaMatricula($event)"
+                                                                    title="Eliminar"><span class="fa fa-trash"></span></button>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">Código de matricula</th>
-                                                        <th rowspan="1" colspan="1">Fecha de realizacion</th>
-                                                        <th rowspan="1" colspan="1">Fecha modificada</th>
+                                                        <th rowspan="1" colspan="1">Código del estudiante</th>
+                                                        <th rowspan="1" colspan="1">Nombre Completo del Estudiante</th>
+                                                        <th rowspan="1" colspan="1">Fecha realizada</th>
                                                         <th class="dt-body-right" rowspan="1" colspan="1">Estado Actual</th>
                                                         <th rowspan="1" colspan="1" style="text-align: center;">Acciones</th>
                                                     </tr>
                                                 </tfoot>
                                                 <dir-pagination-controls
-                                                    max-size="7"
+                                                    max-size="15"
                                                     direction-links="true"
                                                     boundary-links="true">
                                                 </dir-pagination-controls>
                                             </table>
+                                            <pagination ng-model="currentPage" total-items="totalItems" max-size="maxSize" boundary-links="true"></pagination>
                                         </div>
                                     </div>
                                 </div>
@@ -642,11 +657,12 @@
                                             <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="example_info">
                                                 <thead>
                                                     <tr role="row">
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Codigo de matricula</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nombre Completo del Estudiante</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Codigo de matricula</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Codigo del estudiante</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nombre Completo del Estudiante</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Fecha realizada</th>
                                                         <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Estado Actual</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="text-align: center">Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -654,7 +670,7 @@
                                                         <div class="col-lg-9">
                                                             <select class="form-control" ng-model="selectedPeriodoIdDeshabilitado"  
                                                                     ng-options="periodo.id_periodo_anual as periodo.fec_inicio_anual for periodo in listaPeriodos" ng-change="getListaMatDeshabilitado()">
-                                                            <option value="" disabled>-- Seleccione la fecha inicial del año  --</option>
+                                                            <option value="" disabled>-- Seleccione la fecha inicio de clases  --</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-lg-3">
@@ -662,22 +678,32 @@
                                                                 <span class="fa fa-search form-control-feedback"></span>
                                                                 <input type="text" ng-model="searchKeywordA" class="form-control">
                                                             </div>
-                                                            
                                                         </div>
                                                     </div>
                                                     <tr class="even" dir-paginate="matdesa in listaMatDeshabilitado | filter: searchKeywordA | itemsPerPage : 7">
                                                         <td tabindex="0" class="sorting_1">{{matdesa.codigo_matricula}}</td>
+                                                        <td>{{matdesa.codigo_alumno}}</td>
                                                         <td>{{matdesa.nombre_alumno}}</td>
                                                         <td>{{matdesa.fec_realizada}}</td>
-                                                        <td>{{matdesa.nom_estado_matricula}}</td>
-                                                        <td class="text-center"><button class="btn btn-danger btn-sm" value="{{matdesa.id_matricula}}"><span class="fa fa-trash"></span></button></td>
+                                                        <td align="center">
+                                                            <button id="btnHabilitado" class="btn btn-md purple-gradient btn-default" value="{{matdesa.id_matricula}}-1" 
+                                                                     data-ng-click="abrirModalAgregaObs($event)" data-toggle="modal" data-target=".modalAñadirObservacion">
+                                                                <span class="fa fa-hand-o-up" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Habilitar</button>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <button class="btn-floating btn-indigo btn-lg" value="{{matdesa.id_matricula}}" data-ng-click="verObservacion($event)"
+                                                                    title="Ver Observación" style="margin-right: 3px;" data-toggle="modal" data-target=".modalObservaciones"><span class="fa fa-clone"></span></button>
+                                                            <button class="btn-floating btn-danger btn-lg" value="{{matdesa.id_matricula}}" data-ng-click="eliminaMatricula($event)"
+                                                                    title="Eliminar"><span class="fa fa-trash"></span></button>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
                                                         <th rowspan="1" colspan="1">Código de matricula</th>
-                                                        <th rowspan="1" colspan="1">Fecha de realizacion</th>
-                                                        <th rowspan="1" colspan="1">Fecha modificada</th>
+                                                        <th rowspan="1" colspan="1">Código del estudiante</th>
+                                                        <th rowspan="1" colspan="1">Nombre Completo del Estudiante</th>
+                                                        <th rowspan="1" colspan="1">Fecha realizada</th>
                                                         <th class="dt-body-right" rowspan="1" colspan="1">Estado Actual</th>
                                                         <th rowspan="1" colspan="1" style="text-align: center;">Acciones</th>
                                                     </tr>
@@ -709,44 +735,113 @@
             </div>
         </main>
 
-        <form>
-            <div class="modal fade bd-example-modal-lg " id="modalHistorial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        <div class="modal fade bd-example-modal-lg" id="modalHistorial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <h3 style="padding-bottom: 18px; padding-top: 6px;">Historial de Matriculas realizadas</h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th scope="col">Codigo de Matricula</th>
+                                        <th scope="col">Responsable</th>
+                                        <th scope="col">Ultima fecha que modificó</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="histo in listaHistorialMatricula">
+                                        <td>{{histo.codigo_matricula}}</td>
+                                        <td>{{histo.nombre_trabajador}}</td>
+                                        <td>{{histo.fec_modificacion}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <h3 style="padding-bottom: 18px; padding-top: 6px;">Historial de Matriculas realizadas</h3>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr class="table-secondary">
-                                            <th scope="col">Codigo de Estudiante</th>
-                                            <th scope="col">Responsable</th>
-                                            <th scope="col">Ultima fecha que modificó</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="histo in listaHistorialMatricula">
-                                            <td>{{histo.codigo_matricula}}</td>
-                                            <td>{{histo.nombre_trabajador}}</td>
-                                            <td>{{histo.fec_modificacion}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
         
+        <div class="modal fade modalObservaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <h4 style="padding-bottom: 18px; padding-top: 6px; text-align: center;">Descripcion de Matricula Realizada</h4>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Responsable</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly value="{{datosObservacion.nombre_trabajador}}">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Tipo de Trabajador</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly value="{{datosObservacion.nom_tipo_trabajador}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="txtObservacion">Observación (*)</label>
+                                        <textarea class="form-control" id="txtObservacion" rows="5" readonly>{{datosObservacion.dscrp_observacion}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade modalAñadirObservacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="title">Añadir observación a la ocurrencia</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="txtObservacion">Observación (*)</label>
+                                        <textarea class="form-control" id="txtObservacion" rows="5" ng-model="txtObsMatricula">{{datosObservacion.dscrp_observacion}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" ng-click="cambiaEstadoMatricula()">Realizar Cambio</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
     </div>
     <!--Modal: Login / Register Form-->

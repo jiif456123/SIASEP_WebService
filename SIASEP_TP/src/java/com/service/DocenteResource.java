@@ -1,4 +1,4 @@
-package com.services;
+package com.service;
 
 import com.google.gson.Gson;
 import java.util.List;
