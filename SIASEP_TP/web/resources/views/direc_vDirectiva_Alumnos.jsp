@@ -631,12 +631,10 @@
                                                 <tr role="row">
                                                     <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Código</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nro. Documento</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Apellido Paterno</th>
-                                                    <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Apellido Materno</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Primer Nombre</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sexo</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0px;">Distrito</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 0px;">¿Copia de DNI?</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Nombre Completo</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Grado Anterior</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sección</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nivel Academico</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
                                                 </tr>
                                             </thead>
@@ -666,19 +664,6 @@
                                                 </td>
                                             </tr>
                                             </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th rowspan="1" colspan="1">Código</th>
-                                                    <th rowspan="1" colspan="1">Nro. Documento</th>
-                                                    <th rowspan="1" colspan="1">Apellido Paterno</th>
-                                                    <th class="dt-body-right" rowspan="1" colspan="1">Apellido Materno</th>
-                                                    <th rowspan="1" colspan="1">Primer Nombre</th>
-                                                    <th class="dt-body-right" rowspan="1" colspan="1">Sexo</th>
-                                                    <th rowspan="1" colspan="1">Distrito</th>
-                                                    <th rowspan="1" colspan="1">¿Copia de DNI?</th>
-                                                    <th rowspan="1" colspan="1" style="text-align: center;">Acciones</th>
-                                                </tr>
-                                            </tfoot>
                                             <dir-pagination-controls
                                                 max-size="7"
                                                 direction-links="true"
@@ -700,10 +685,10 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <div class="container-fluid">
-                                <h4 class="title" style="padding-top: 2px;">Crear matricula escolar</h4>
+                            <div class="container-fluid text-center">
+                                <h4>PASO #02: <span style="font-weight: lighter;">Habilitar la matricula escolar al alumno seleccionado</span></h4>
+                            <label style="margin-top: 5px;">Se autogenera los datos de la matricula y las fechas correspondientes de este año.</label>
                             </div>
-                            
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

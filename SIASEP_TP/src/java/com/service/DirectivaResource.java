@@ -95,7 +95,7 @@ public class DirectivaResource {
         Gson gson =new Gson();
         List lista = null;
         try{
-            lista = matriculaHelper.getListHistorialMatricula();
+//            lista = matriculaHelper.getListHistorialMatricula();
         }
         catch(Exception ex){
             System.out.println("getListaHistorialMatricula: "+ex);
@@ -129,7 +129,7 @@ public class DirectivaResource {
         ListaMatriculaDTO listaMatriculaDTO = gson.fromJson(data, ListaMatriculaDTO.class);
         ListaMatriculaDTO respuesta = new ListaMatriculaDTO();
         try {
-            respuesta = matriculaHelper.getObservacionMatricula(listaMatriculaDTO.getId_matricula());
+//            respuesta = matriculaHelper.getObservacionMatricula(listaMatriculaDTO.getId_matricula());
         }catch(Exception e){
             System.out.println("verObservacionMatricula: "+e.getMessage());
         }

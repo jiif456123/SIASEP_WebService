@@ -36,8 +36,8 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
     };
     
     $scope.getListaPeriodos = function() {
-        $scope.selectedPeriodoIdHabilitado = 4; //ES EL AÑO ACTUAL SEGUN LA BASE DE DATOS
-        $scope.selectedPeriodoIdDeshabilitado = 4; //ES EL AÑO ACTUAL SEGUN LA BASE DE DATOS
+        $scope.selectedPeriodoIdHabilitado = 1; //ES EL AÑO ACTUAL SEGUN LA BASE DE DATOS
+        $scope.selectedPeriodoIdDeshabilitado = 1; //ES EL AÑO ACTUAL SEGUN LA BASE DE DATOS
         $http({
             method: 'GET',
             url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listaPeriodoSelect',
@@ -73,15 +73,15 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
         });
     };
     $scope.getListaHistorialMatr = function() {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/getListaHistorialMatricula',
-            data: { }
-        }).then(function successCallback(response) {
-            $scope.listaHistorialMatricula = response.data;
-        }, function errorCallback(response) {
-            alert("ERROR getListaAlumnosAntiguos");
-        });
+//        $http({
+//            method: 'GET',
+//            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/getListaHistorialMatricula',
+//            data: { }
+//        }).then(function successCallback(response) {
+//            $scope.listaHistorialMatricula = response.data;
+//        }, function errorCallback(response) {
+//            alert("ERROR getListaAlumnosAntiguos");
+//        });
     };
     $scope.abrirModalAgregaObs = function() {
         var dataparaEstado = event.currentTarget.value.split('-');
@@ -108,16 +108,16 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
         };
     };
     $scope.verObservacion = function() {
-        var idMatricula = event.currentTarget.value;
-        $http({
-            method: 'POST',
-            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/verObservacionMatricula',
-            data: { id_matricula : idMatricula }
-        }).then(function successCallback(response) {
-            $scope.datosObservacion = response.data;
-        }, function errorCallback(response) {
-            alert("cambiaEstadoMatricula no funciona ERROOR");
-        });
+//        var idMatricula = event.currentTarget.value;
+//        $http({
+//            method: 'POST',
+//            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/verObservacionMatricula',
+//            data: { id_matricula : idMatricula }
+//        }).then(function successCallback(response) {
+//            $scope.datosObservacion = response.data;
+//        }, function errorCallback(response) {
+//            alert("cambiaEstadoMatricula no funciona ERROOR");
+//        });
     };
     
     
@@ -162,6 +162,9 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
     };
     $scope.rellenarDatosAlumno = function() {
         var idPerAlumno = event.currentTarget.value;
+        var primeracadena = 'MT';
+        var segundacadena = Math.floor(Math.random() * 999999 + 1);
+        var res = primeracadena.concat(segundacadena);
         $http({
             method: 'POST',
             url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/getDatosGeneradosMatr',
@@ -169,7 +172,7 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
         }).then(function successCallback(response) {
             $scope.modCodAlumno = response.data.codigo_alumno;
             $scope.modNombreAlumno = response.data.nombre_alumno;
-            $scope.modCodMatricula = response.data.codigo_matr;
+            $scope.modCodMatricula = res;
             $scope.modFecRealizada = response.data.fecha_actual;
             $scope.modPeriodoEscolar = response.data.top_periodo;
             $scope.getDatosMatr = response.data;
@@ -202,6 +205,8 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
                 }
         }).then(function successCallback(response) {
             alert("Se registro correctamente la matricula.");
+            $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva_matricula.jsp';
+            $scope.getInfoUsuario();
         }, function errorCallback(response) {
             alert("insertarMatricula no funciona ERROOR");
         });

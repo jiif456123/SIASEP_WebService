@@ -114,18 +114,18 @@ public class MatriculaHelper {
         Transaction transaction = session.beginTransaction();
         Query query = session.createSQLQuery("SELECT peralu.id_per_alumno, peralu.codigo_alumno, per.numero_documento, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_completo_alumno,\n" +
                                              "       peralu.ref_grado_anterior, peralu.ref_seccion, peralu.ref_nivel\n" +
-                                             "FROM   per_alumno as peralu, matricula as matr, persona as per, tipo_alumno as tial\n" +
+                                             "FROM   per_alumno as peralu, persona as per, tipo_alumno as tial\n" +
                                              "WHERE (peralu.fkid_persona = per.id_persona AND \n" +
-                                             "	     peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
-                                             "	     tial.id_tipo_alumno = 1)\n" +
+                                             "        peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
+                                             "        tial.id_tipo_alumno = 1)\n" +
                                              "EXCEPT \n" +
                                              "SELECT peralu.id_per_alumno, peralu.codigo_alumno, per.numero_documento, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_completo_alumno,\n" +
                                              "       peralu.ref_grado_anterior, peralu.ref_seccion, peralu.ref_nivel\n" +
                                              "FROM   per_alumno as peralu, matricula as matr, persona as per, tipo_alumno as tial\n" +
                                              "WHERE (matr.fkid_per_alumno = peralu.id_per_alumno AND\n" +
-                                             "	     peralu.fkid_persona = per.id_persona AND \n" +
-                                             "	     peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
-                                             "	     tial.id_tipo_alumno = 1)").setResultTransformer(Transformers.aliasToBean(ListaAlumnoMatriculaDTO.class));
+                                             "        peralu.fkid_persona = per.id_persona AND \n" +
+                                             "        peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
+                                             "        tial.id_tipo_alumno = 1)").setResultTransformer(Transformers.aliasToBean(ListaAlumnoMatriculaDTO.class));
         List<ListaAlumnoMatriculaDTO> resultList=query.list();
         transaction.commit();
         session.close();
@@ -137,18 +137,18 @@ public class MatriculaHelper {
         Transaction transaction = session.beginTransaction();
         Query query = session.createSQLQuery("SELECT peralu.id_per_alumno, peralu.codigo_alumno, per.numero_documento, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_completo_alumno,\n" +
                                              "       peralu.ref_grado_anterior, peralu.ref_seccion, peralu.ref_nivel\n" +
-                                             "FROM   per_alumno as peralu, matricula as matr, persona as per, tipo_alumno as tial\n" +
+                                             "FROM   per_alumno as peralu, persona as per, tipo_alumno as tial\n" +
                                              "WHERE (peralu.fkid_persona = per.id_persona AND \n" +
-                                             "	     peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
-                                             "	     tial.id_tipo_alumno = 2)\n" +
+                                             "        peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
+                                             "        tial.id_tipo_alumno = 2)\n" +
                                              "EXCEPT \n" +
                                              "SELECT peralu.id_per_alumno, peralu.codigo_alumno, per.numero_documento, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_completo_alumno,\n" +
                                              "       peralu.ref_grado_anterior, peralu.ref_seccion, peralu.ref_nivel\n" +
                                              "FROM   per_alumno as peralu, matricula as matr, persona as per, tipo_alumno as tial\n" +
                                              "WHERE (matr.fkid_per_alumno = peralu.id_per_alumno AND\n" +
-                                             "	     peralu.fkid_persona = per.id_persona AND \n" +
-                                             "	     peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
-                                             "	     tial.id_tipo_alumno = 2)").setResultTransformer(Transformers.aliasToBean(ListaAlumnoMatriculaDTO.class));
+                                             "        peralu.fkid_persona = per.id_persona AND \n" +
+                                             "        peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
+                                             "        tial.id_tipo_alumno = 2)").setResultTransformer(Transformers.aliasToBean(ListaAlumnoMatriculaDTO.class));
         List<ListaAlumnoMatriculaDTO> resultList=query.list();
         transaction.commit();
         session.close();
@@ -159,14 +159,21 @@ public class MatriculaHelper {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createSQLQuery("SELECT peralu.id_per_alumno, peralu.codigo_alumno, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_alumno, \n" +
-                                             "	    (select TOP 1 fec_inicio_anual from periodo_anual ORDER BY id_periodo_anual ASC) as top_periodo, \n" +
-                                             "	    (select TOP 1 id_periodo_anual from periodo_anual ORDER BY id_periodo_anual ASC) as id_top_periodo, \n" +
-                                             "	    (select CONCAT('MT', FLOOR(RAND(CHECKSUM(NEWID()))*(999999-100000+1)+1000)) as randomCod from matricula) as  codigo_matr, \n" +
-                                             "	    (select CONVERT(DATE, GETDATE()) [Current Date])  as fecha_actual \n" +
+                                             "      (select TOP 1 fec_inicio_anual from periodo_anual ORDER BY id_periodo_anual ASC) as top_periodo, \n" +
+                                             "      (select TOP 1 id_periodo_anual from periodo_anual ORDER BY id_periodo_anual ASC) as id_top_periodo, \n" +
+                                             "      (select CONVERT(DATE, GETDATE()) [Current Date])  as fecha_actual \n" +
+                                             "FROM   per_alumno as peralu, persona as per \n" +
+                                             "WHERE (peralu.fkid_persona = per.id_persona AND \n" +
+                                             "       peralu.id_per_alumno = :idPerAlumno)\n" +
+                                             "EXCEPT\n" +
+                                             "SELECT peralu.id_per_alumno, peralu.codigo_alumno, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_alumno, \n" +
+                                             "      (select TOP 1 fec_inicio_anual from periodo_anual ORDER BY id_periodo_anual ASC) as top_periodo, \n" +
+                                             "      (select TOP 1 id_periodo_anual from periodo_anual ORDER BY id_periodo_anual ASC) as id_top_periodo, \n" +
+                                             "      (select CONVERT(DATE, GETDATE()) [Current Date])  as fecha_actual \n" +
                                              "FROM   matricula as matr, per_alumno as peralu, persona as per \n" +
-                                             "WHERE (matr.fkid_per_alumno != peralu.id_per_alumno AND \n" +
+                                             "WHERE (matr.fkid_per_alumno = peralu.id_per_alumno AND \n" +
                                              "       peralu.fkid_persona = per.id_persona AND \n" +
-                                             "	     peralu.id_per_alumno = :idPerAlumno) ").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
+                                             "       peralu.id_per_alumno = :idPerAlumno) ").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
         query.setParameter("idPerAlumno", idPerAlumno);
         ListaMatriculaDTO result = (ListaMatriculaDTO) query.list().get(0);
         transaction.commit();
