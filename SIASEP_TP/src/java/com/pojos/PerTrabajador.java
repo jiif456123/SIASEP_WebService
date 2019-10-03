@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Sep 28, 2019 5:52:23 PM by Hibernate Tools 4.3.1
+// Generated Oct 2, 2019 9:32:16 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,23 +13,26 @@ public class PerTrabajador  implements java.io.Serializable {
 
      private int idPerTrabajador;
      private Persona persona;
+     private TipoTrabajador tipoTrabajador;
      private int codigoTrabajador;
-     private Set<Matricula> matriculas = new HashSet<Matricula>(0);
+     private Set<HistorialMatricula> historialMatriculas = new HashSet<HistorialMatricula>(0);
 
     public PerTrabajador() {
     }
 
 	
-    public PerTrabajador(int idPerTrabajador, Persona persona, int codigoTrabajador) {
+    public PerTrabajador(int idPerTrabajador, Persona persona, TipoTrabajador tipoTrabajador, int codigoTrabajador) {
         this.idPerTrabajador = idPerTrabajador;
         this.persona = persona;
+        this.tipoTrabajador = tipoTrabajador;
         this.codigoTrabajador = codigoTrabajador;
     }
-    public PerTrabajador(int idPerTrabajador, Persona persona, int codigoTrabajador, Set<Matricula> matriculas) {
+    public PerTrabajador(int idPerTrabajador, Persona persona, TipoTrabajador tipoTrabajador, int codigoTrabajador, Set<HistorialMatricula> historialMatriculas) {
        this.idPerTrabajador = idPerTrabajador;
        this.persona = persona;
+       this.tipoTrabajador = tipoTrabajador;
        this.codigoTrabajador = codigoTrabajador;
-       this.matriculas = matriculas;
+       this.historialMatriculas = historialMatriculas;
     }
    
     public int getIdPerTrabajador() {
@@ -46,6 +49,13 @@ public class PerTrabajador  implements java.io.Serializable {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
+    public TipoTrabajador getTipoTrabajador() {
+        return this.tipoTrabajador;
+    }
+    
+    public void setTipoTrabajador(TipoTrabajador tipoTrabajador) {
+        this.tipoTrabajador = tipoTrabajador;
+    }
     public int getCodigoTrabajador() {
         return this.codigoTrabajador;
     }
@@ -53,12 +63,12 @@ public class PerTrabajador  implements java.io.Serializable {
     public void setCodigoTrabajador(int codigoTrabajador) {
         this.codigoTrabajador = codigoTrabajador;
     }
-    public Set<Matricula> getMatriculas() {
-        return this.matriculas;
+    public Set<HistorialMatricula> getHistorialMatriculas() {
+        return this.historialMatriculas;
     }
     
-    public void setMatriculas(Set<Matricula> matriculas) {
-        this.matriculas = matriculas;
+    public void setHistorialMatriculas(Set<HistorialMatricula> historialMatriculas) {
+        this.historialMatriculas = historialMatriculas;
     }
 
 
