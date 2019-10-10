@@ -180,8 +180,7 @@ public class MatriculaHelper {
         session.close();
         return result;
     }
-    public void registrarMatriculaByDato(String codigo_matricula, String fec_realizada, int fkid_per_alumno, int fkid_estado_matricula, int fkid_periodo_anual, 
-                                         String fec_modificacion, String dscrp_observacion, int id_usuario) {
+    public void registrarMatriculaByDato(String codigo_matricula, String fec_realizada, int fkid_per_alumno, int fkid_estado_matricula, int fkid_periodo_anual) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query queryMatricula = session.createSQLQuery("INSERT INTO matricula(codigo_matricula, fec_realizada, fkid_per_alumno, fkid_estado_matricula, fkid_periodo_anual) "
@@ -191,6 +190,17 @@ public class MatriculaHelper {
         queryMatricula.setParameter("fkid_per_alumno", fkid_per_alumno);
         queryMatricula.setParameter("fkid_estado_matricula", fkid_estado_matricula);
         queryMatricula.setParameter("fkid_periodo_anual", fkid_periodo_anual);
+        queryMatricula.executeUpdate();
+        
+        transaction.commit();
+        session.close();
+    }
+    
+    public void insertarObservacionMatr(String fec_modificacion, String dscrp_observacion, int id_usuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Query queryMatricula = session.createSQLQuery("INSERT INTO matricula(codigo_matricula, fec_realizada, fkid_per_alumno, fkid_estado_matricula, fkid_periodo_anual) "
+                                           + "VALUES (:codigo_matricula, :fec_realizada, :fkid_per_alumno, :fkid_estado_matricula, :fkid_periodo_anual) ").setResultTransformer(Transformers.aliasToBean(MatriculaDTO.class));
         queryMatricula.executeUpdate();
         
 //        int id_matricula = Integer.parseInt(queryMatricula.list().get(0).toString());
@@ -214,7 +224,6 @@ public class MatriculaHelper {
         transaction.commit();
         session.close();
     }
-    
     
     
 }

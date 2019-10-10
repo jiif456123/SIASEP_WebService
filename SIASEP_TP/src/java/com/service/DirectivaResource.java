@@ -214,10 +214,7 @@ public class DirectivaResource {
                     matriculaDTO.getFec_realizada(), 
                     matriculaDTO.getId_per_alumno(), 
                     matriculaDTO.getId_estado_matricula(), 
-                    matriculaDTO.getId_periodo_anual(),
-                    matriculaDTO.getFec_modificacion(),
-                    matriculaDTO.getDscrp_observacion(),
-                    matriculaDTO.getId_usuario()
+                    matriculaDTO.getId_periodo_anual()
             );
             respuesta = Response.status(200).entity(matriculaDTO).build();
         }

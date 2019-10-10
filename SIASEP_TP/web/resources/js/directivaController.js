@@ -99,25 +99,23 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
                 }
             }).then(function successCallback(response) {
                 alert("Se ejecuto dicho cambio.");
-                $scope.getListaMatHabilitado();
-                $scope.getListaMatDeshabilitado();
-                $scope.getListaHistorialMatr();
+                $scope.getInfoUsuario();
             }, function errorCallback(response) {
                 alert("cambiaEstadoMatricula no funciona ERROOR");
             });
         };
     };
     $scope.verObservacion = function() {
-//        var idMatricula = event.currentTarget.value;
-//        $http({
-//            method: 'POST',
-//            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/verObservacionMatricula',
-//            data: { id_matricula : idMatricula }
-//        }).then(function successCallback(response) {
-//            $scope.datosObservacion = response.data;
-//        }, function errorCallback(response) {
-//            alert("cambiaEstadoMatricula no funciona ERROOR");
-//        });
+        var idMatricula = event.currentTarget.value;
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/verObservacionMatricula',
+            data: { id_matricula : idMatricula }
+        }).then(function successCallback(response) {
+            $scope.datosObservacion = response.data;
+        }, function errorCallback(response) {
+            alert("cambiaEstadoMatricula no funciona ERROOR");
+        });
     };
     
     
