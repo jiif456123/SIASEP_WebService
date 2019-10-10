@@ -129,7 +129,7 @@ public class DirectivaResource {
         ListaMatriculaDTO listaMatriculaDTO = gson.fromJson(data, ListaMatriculaDTO.class);
         ListaMatriculaDTO respuesta = new ListaMatriculaDTO();
         try {
-//            respuesta = matriculaHelper.getObservacionMatricula(listaMatriculaDTO.getId_matricula());
+            respuesta = matriculaHelper.getObservacionMatricula(listaMatriculaDTO.getId_matricula());
         }catch(Exception e){
             System.out.println("verObservacionMatricula: "+e.getMessage());
         }
@@ -214,10 +214,11 @@ public class DirectivaResource {
                     matriculaDTO.getFec_realizada(), 
                     matriculaDTO.getId_per_alumno(), 
                     matriculaDTO.getId_estado_matricula(), 
-                    matriculaDTO.getId_periodo_anual(),
-                    matriculaDTO.getFec_modificacion(),
-                    matriculaDTO.getDscrp_observacion(),
-                    matriculaDTO.getId_usuario()
+                    matriculaDTO.getId_periodo_anual()
+            );
+            matriculaHelper.insertarObservacionHistorial(matriculaDTO.getFec_modificacion(), 
+                                                         matriculaDTO.getDscrp_observacion(), 
+                                                         matriculaDTO.getId_usuario()
             );
             respuesta = Response.status(200).entity(matriculaDTO).build();
         }

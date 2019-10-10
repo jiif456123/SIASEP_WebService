@@ -576,19 +576,19 @@
                             
                         </ul>
                         
-                        <div class="tab-content card pt-5" id="myTabContentMD" style="padding-bottom: 30px;">
+                        <div class="tab-content card pt-5" id="myTabContentMD" style="padding-bottom: 30px; background-color: ghostwhite;">
                             <div class="tab-pane fade show active" id="tab_Antiguos" role="tabpanel" aria-labelledby="profile-tab-md">
                                 <div class="container-fluid" style="padding-bottom: 30px;">
                                     <div class="row">
                                         <div class="col-lg-12" style="position: relative; overflow: auto; display: block; height: 350px;">
-                                            <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="example_info">
+                                            <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%; background-color: white;" role="grid" aria-describedby="example_info">
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Codigo de matricula</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Codigo del estudiante</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nombre Completo del Estudiante</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Fecha realizada</th>
-                                                        <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Estado Actual</th>
+                                                        <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Cambiar Estado a..</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="text-align: center">Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -619,11 +619,11 @@
                                                         <td align="center">
                                                             <button id="btnDeshabilitado" class="btn btn-md purple-gradient btn-default" value="{{matabi.id_matricula}}-2" 
                                                                      data-ng-click="abrirModalAgregaObs($event)" data-toggle="modal" data-target=".modalAñadirObservacion">
-                                                                <span class="fa fa-hand-o-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Deshabilitar</button>
+                                                                <span class="fa fa-chevron-circle-down" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Deshabilitar</button>
                                                         </td>
                                                         <td class="text-center">
                                                             <button class="btn-floating btn-indigo btn-lg" value="{{matabi.id_matricula}}" data-ng-click="verObservacion($event)"
-                                                                    title="Ver Observación" style="margin-right: 3px;" data-toggle="modal" data-target=".modalObservaciones"><span class="fa fa-clone"></span></button>
+                                                                    title="Ver ultima modificación" style="margin-right: 3px;" data-toggle="modal" data-target=".modalObservaciones"><span class="fa fa-clone"></span></button>
                                                             <button class="btn-floating btn-danger btn-lg" value="{{matabi.id_matricula}}" data-ng-click="eliminaMatricula($event)"
                                                                     title="Eliminar"><span class="fa fa-trash"></span></button>
                                                         </td>
@@ -635,7 +635,7 @@
                                                         <th rowspan="1" colspan="1">Código del estudiante</th>
                                                         <th rowspan="1" colspan="1">Nombre Completo del Estudiante</th>
                                                         <th rowspan="1" colspan="1">Fecha realizada</th>
-                                                        <th class="dt-body-right" rowspan="1" colspan="1">Estado Actual</th>
+                                                        <th class="dt-body-right" rowspan="1" colspan="1">Cambiar Estado a..</th>
                                                         <th rowspan="1" colspan="1" style="text-align: center;">Acciones</th>
                                                     </tr>
                                                 </tfoot>
@@ -654,14 +654,14 @@
                                 <div class="container-fluid" style="padding-bottom: 30px;">
                                     <div class="row">
                                         <div class="col-lg-12" style="position: relative; overflow: auto; display: block; height: 350px;">
-                                            <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="example_info">
+                                            <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%; background-color: white;" role="grid" aria-describedby="example_info">
                                                 <thead>
                                                     <tr role="row">
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Codigo de matricula</th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Codigo del estudiante</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nombre Completo del Estudiante</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Fecha realizada</th>
-                                                        <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Estado Actual</th>
+                                                        <th class="dt-body-right sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Cambiar Estado a..</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="text-align: center">Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -688,11 +688,11 @@
                                                         <td align="center">
                                                             <button id="btnHabilitado" class="btn btn-md purple-gradient btn-default" value="{{matdesa.id_matricula}}-1" 
                                                                      data-ng-click="abrirModalAgregaObs($event)" data-toggle="modal" data-target=".modalAñadirObservacion">
-                                                                <span class="fa fa-hand-o-up" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Habilitar</button>
+                                                                <span class="fa fa-chevron-circle-up" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Habilitar</button>
                                                         </td>
                                                         <td class="text-center">
                                                             <button class="btn-floating btn-indigo btn-lg" value="{{matdesa.id_matricula}}" data-ng-click="verObservacion($event)"
-                                                                    title="Ver Observación" style="margin-right: 3px;" data-toggle="modal" data-target=".modalObservaciones"><span class="fa fa-clone"></span></button>
+                                                                    title="Ver ultima modificación" style="margin-right: 3px;" data-toggle="modal" data-target=".modalObservaciones"><span class="fa fa-clone"></span></button>
                                                             <button class="btn-floating btn-danger btn-lg" value="{{matdesa.id_matricula}}" data-ng-click="eliminaMatricula($event)"
                                                                     title="Eliminar"><span class="fa fa-trash"></span></button>
                                                         </td>
@@ -704,7 +704,7 @@
                                                         <th rowspan="1" colspan="1">Código del estudiante</th>
                                                         <th rowspan="1" colspan="1">Nombre Completo del Estudiante</th>
                                                         <th rowspan="1" colspan="1">Fecha realizada</th>
-                                                        <th class="dt-body-right" rowspan="1" colspan="1">Estado Actual</th>
+                                                        <th class="dt-body-right" rowspan="1" colspan="1">Cambiar Estado a..</th>
                                                         <th rowspan="1" colspan="1" style="text-align: center;">Acciones</th>
                                                     </tr>
                                                 </tfoot>
@@ -775,6 +775,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <h6>Ultima fecha modificada: <span>{{datosObservacion.fec_modificacion}}</span></h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

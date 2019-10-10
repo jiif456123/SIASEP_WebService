@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.transform.Transformers;
+import org.hibernate.type.IntegerType;
 
 public class MatriculaHelper {
     
@@ -31,12 +32,13 @@ public class MatriculaHelper {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createSQLQuery("SELECT mat.id_matricula, mat.codigo_matricula, peralu.codigo_alumno, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_alumno, \n" +
-                                             "	     mat.fec_realizada\n" +
+                                             "       mat.fec_realizada\n" +
                                              "FROM   matricula as mat INNER JOIN per_alumno as peralu ON (mat.fkid_per_alumno = peralu.id_per_alumno) \n" +
-                                             "	     INNER JOIN persona as per ON (peralu.fkid_persona = per.id_persona) \n" +
-                                             "	     INNER JOIN estado_matricula as esma ON (mat.fkid_estado_matricula = esma.id_estado_matricula) \n" +
-                                             "	     INNER JOIN periodo_anual as pean ON (mat.fkid_periodo_anual = pean.id_periodo_anual)\n" +
-                                             "WHERE (fkid_estado_matricula = 1 AND fkid_periodo_anual = :fkidPeriodoAnual);").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
+                                             "       INNER JOIN persona as per ON (peralu.fkid_persona = per.id_persona) \n" +
+                                             "       INNER JOIN estado_matricula as esma ON (mat.fkid_estado_matricula = esma.id_estado_matricula) \n" +
+                                             "       INNER JOIN periodo_anual as pean ON (mat.fkid_periodo_anual = pean.id_periodo_anual)\n" +
+                                             "WHERE (fkid_estado_matricula = 1 AND fkid_periodo_anual = :fkidPeriodoAnual) \n" +
+                                             "ORDER BY mat.id_matricula DESC ").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
         query.setParameter("fkidPeriodoAnual", fkidPeriodoAnual);
         List<ListaMatriculaDTO> resultList=query.list();
         transaction.commit();
@@ -47,12 +49,13 @@ public class MatriculaHelper {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createSQLQuery("SELECT mat.id_matricula, mat.codigo_matricula, peralu.codigo_alumno, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_alumno, \n" +
-                                             "	     mat.fec_realizada\n" +
+                                             "       mat.fec_realizada\n" +
                                              "FROM   matricula as mat INNER JOIN per_alumno as peralu ON (mat.fkid_per_alumno = peralu.id_per_alumno) \n" +
-                                             "	     INNER JOIN persona as per ON (peralu.fkid_persona = per.id_persona) \n" +
-                                             "	     INNER JOIN estado_matricula as esma ON (mat.fkid_estado_matricula = esma.id_estado_matricula) \n" +
-                                             "	     INNER JOIN periodo_anual as pean ON (mat.fkid_periodo_anual = pean.id_periodo_anual)\n" +
-                                             "WHERE (fkid_estado_matricula = 2 AND fkid_periodo_anual = :fkidPeriodoAnual);").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
+                                             "       INNER JOIN persona as per ON (peralu.fkid_persona = per.id_persona) \n" +
+                                             "       INNER JOIN estado_matricula as esma ON (mat.fkid_estado_matricula = esma.id_estado_matricula) \n" +
+                                             "       INNER JOIN periodo_anual as pean ON (mat.fkid_periodo_anual = pean.id_periodo_anual)\n" +
+                                             "WHERE (fkid_estado_matricula = 2 AND fkid_periodo_anual = :fkidPeriodoAnual) \n" +
+                                             "ORDER BY mat.id_matricula DESC ").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
         query.setParameter("fkidPeriodoAnual", fkidPeriodoAnual);
         List<ListaMatriculaDTO> resultList=query.list();
         transaction.commit();
@@ -95,11 +98,13 @@ public class MatriculaHelper {
     public ListaMatriculaDTO getObservacionMatricula(int idMatricula) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        Query query = session.createSQLQuery("SELECT matr.dscrp_observacion, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_trabajador, titra.nom_tipo_trabajador\n" +
-                                             "FROM   matricula as matr INNER JOIN per_trabajador as pertra ON (matr.fkid_per_trabajador = pertra.id_per_trabajador) \n" +
+        Query query = session.createSQLQuery("SELECT TOP 1 hima.fec_modificacion, hima.dscrp_observacion, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_trabajador, \n" +
+                                             "       titra.nom_tipo_trabajador\n" +
+                                             "FROM   historial_matricula as hima INNER JOIN per_trabajador as pertra ON (hima.fkid_per_trabajador = pertra.id_per_trabajador) \n" +
                                              "       INNER JOIN tipo_trabajador as titra ON (pertra.fkid_tipo_trabajador = titra.id_tipo_trabajador) \n" +
-                                             "	     INNER JOIN persona as per ON (pertra.fkid_persona = per.id_persona)\n" +
-                                             "WHERE (matr.id_matricula = :idMatricula);").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
+                                             "	     INNER JOIN persona as per ON (pertra.fkid_persona = per.id_persona) \n" +
+                                             "WHERE (hima.fkid_matricula = :idMatricula)\n" +
+                                             "ORDER BY hima.id_historial_matricula DESC ").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
         query.setParameter("idMatricula", idMatricula);
         ListaMatriculaDTO result = (ListaMatriculaDTO) query.list().get(0);
         transaction.commit();
@@ -180,11 +185,11 @@ public class MatriculaHelper {
         session.close();
         return result;
     }
-    public void registrarMatriculaByDato(String codigo_matricula, String fec_realizada, int fkid_per_alumno, int fkid_estado_matricula, int fkid_periodo_anual, 
-                                         String fec_modificacion, String dscrp_observacion, int id_usuario) {
+    public void registrarMatriculaByDato(String codigo_matricula, String fec_realizada, int fkid_per_alumno, int fkid_estado_matricula, int fkid_periodo_anual) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        Query queryMatricula = session.createSQLQuery("INSERT INTO matricula(codigo_matricula, fec_realizada, fkid_per_alumno, fkid_estado_matricula, fkid_periodo_anual) "
+        Query queryMatricula = session.createSQLQuery("INSERT INTO matricula(codigo_matricula, fec_realizada, fkid_per_alumno, "
+                                                                          + "fkid_estado_matricula, fkid_periodo_anual) "
                                            + "VALUES (:codigo_matricula, :fec_realizada, :fkid_per_alumno, :fkid_estado_matricula, :fkid_periodo_anual) ").setResultTransformer(Transformers.aliasToBean(MatriculaDTO.class));
         queryMatricula.setParameter("codigo_matricula", codigo_matricula);
         queryMatricula.setParameter("fec_realizada", fec_realizada);
@@ -193,23 +198,29 @@ public class MatriculaHelper {
         queryMatricula.setParameter("fkid_periodo_anual", fkid_periodo_anual);
         queryMatricula.executeUpdate();
         
-//        int id_matricula = Integer.parseInt(queryMatricula.list().get(0).toString());
-//        
-//        Query qIdTrabajador = session.createSQLQuery("SELECT pertra.id_per_trabajador\n" +
-//                                             "FROM   usuario as usu INNER JOIN persona as per ON (usu.fkid_persona = per.id_persona) \n" +
-//                                             "	     INNER JOIN per_trabajador as pertra ON (per.id_persona = pertra.fkid_persona)\n" +
-//                                             "WHERE (usu.id_usuario = :id_usuario) ").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
-//        qIdTrabajador.setParameter("id_usuario", id_usuario);
-//        
-//        int id_per_trabajador = Integer.parseInt(qIdTrabajador.list().get(0).toString());
-//        
-//        Query queryHistorial = session.createSQLQuery("INSERT INTO historial_matricula(fec_modificacion, dscrp_observacion, fkid_matricula, fkid_per_trabajador) "
-//                                           + "VALUES (:fec_modificacion, :dscrp_observacion, :id_matricula, :id_per_trabajador) ").setResultTransformer(Transformers.aliasToBean(MatriculaDTO.class));
-//        queryHistorial.setParameter("codigo_matricula", codigo_matricula);
-//        queryHistorial.setParameter("fec_realizada", fec_realizada);
-//        queryHistorial.setParameter("id_matricula", id_matricula);
-//        queryHistorial.setParameter("id_per_trabajador", id_per_trabajador);
-//        queryHistorial.executeUpdate();
+        transaction.commit();
+        session.close();
+    }
+    
+    public void insertarObservacionHistorial(String fec_modificacion, String dscrp_observacion, int id_usuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        Integer idMatricula = (Integer) session.createSQLQuery("SELECT TOP 1 id_matricula FROM matricula ORDER BY id_matricula DESC ").addScalar("id_matricula", new IntegerType()).uniqueResult();
+        System.out.println("solo sale un valor entero: "+idMatricula);
+        
+        Integer idTrabajador = (Integer) session.createSQLQuery("SELECT pertra.id_per_trabajador \n" +
+                                                     "FROM   usuario as usu INNER JOIN persona as per ON (usu.fkid_persona = per.id_persona) \n" +
+                                                     "       INNER JOIN per_trabajador as pertra ON (per.id_persona = pertra.fkid_persona) \n" +
+                                                     "WHERE (usu.id_usuario = "+id_usuario+") ").addScalar("id_per_trabajador", new IntegerType()).uniqueResult();
+        System.out.println("aca igual -----> "+idTrabajador);
+        
+        Query queryHistorial = session.createSQLQuery("INSERT INTO historial_matricula(fec_modificacion, dscrp_observacion, fkid_matricula, fkid_per_trabajador) "
+                                           + "VALUES (:fec_modificacion, :dscrp_observacion, :id_matricula, :id_per_trabajador) ").setResultTransformer(Transformers.aliasToBean(MatriculaDTO.class));
+        queryHistorial.setParameter("fec_modificacion", fec_modificacion);
+        queryHistorial.setParameter("dscrp_observacion", dscrp_observacion);
+        queryHistorial.setParameter("id_matricula", idMatricula);
+        queryHistorial.setParameter("id_per_trabajador", idTrabajador);
+        queryHistorial.executeUpdate();
         
         transaction.commit();
         session.close();

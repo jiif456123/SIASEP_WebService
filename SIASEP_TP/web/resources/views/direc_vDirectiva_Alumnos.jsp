@@ -494,6 +494,40 @@
         pointer-events: none;
         color: #aaa;
     }
+    .btn-circle {
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        text-align: center;
+        padding: 0;
+        border-radius: 50%;
+    }
+
+    .btn-circle i {
+        position: relative;
+        top: -1px;
+    }
+
+    .btn-circle-sm {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 0.9rem;
+    }
+
+    .btn-circle-lg {
+        width: 55px;
+        height: 55px;
+        line-height: 55px;
+        font-size: 1.1rem;
+    }
+
+    .btn-circle-xl {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        font-size: 1.3rem;
+    }
 </style>
 </head>
 <body ng-app="myAdmin" ng-controller="directivaCtrl" class="fixed-sn">
@@ -552,9 +586,12 @@
                 <div class="tab-pane fade show active" id="Administrar_matricula" role="tabpanel" aria-labelledby="pill_administrar_matricula">
 
                     <div class="row pt-4" style="padding-bottom: 22px;">
-                        <div class="col-lg-12" style="text-align: left;">
+                        <div class="col-lg-10" style="text-align: left;">
                             <h4>PASO #01: <span style="font-weight: lighter;">Seleccione un alumno en específico para la matrícula escolar</span></h4>
                             <label style="margin-top: 5px;">Se recomienda verificar minuciosamente los datos para corroborar la información presente del estudiante</label>
+                        </div>
+                        <div class="col-lg-2" style="text-align: right; padding-top: 5px;">
+                            <button class="btn btn-danger btn-circle btn-circle-lg m-1" onclick="window.history.back();" title="Regresar al anterior paso"><i class="fa fa-arrow-left"></i></button>
                         </div>
                     </div>
 
