@@ -545,7 +545,8 @@
                                 <i class="fa fa-book"></i> <span class="clearfix d-none d-sm-inline-block">Módulos</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuB">
-                                <a class="dropdown-item" href="#" ng-click="navegaAdminMatricula()">Administrar Matricula</a>
+                                <a class="dropdown-item" href="#" ng-click="navegaMatricularAlumno()">Matricular Alumno</a>
+                                <a class="dropdown-item" href="#">Modificar Alumno</a>
                                 <a class="dropdown-item" href="#">Generar Horario</a>
                                 <a class="dropdown-item" href="#">Generar Libreta</a>
                                 <hr>
@@ -571,9 +572,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Ver perfil&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge badge-pill badge-warning">Nuevo</span></a>
-                                <a class="dropdown-item" href="#">Cambiar Contraseña</a>
+                                <a class="dropdown-item" href="#">Configurar Cuenta</a>
                                 <hr>
-                                <a class="dropdown-item" href="#" ng-click="cerrarSesion()" style="text-align: center;  ">Cerrar sesión</a>
+                                <a class="dropdown-item" href="#" ng-click="cerrarSesion()" style="text-align: center;  ">
+                                    <i class="fa fa-power-off" style="color: #de5f38;"></i>&nbsp;&nbsp;&nbsp;Cerrar sesión</a>
                             </div>
                         </li>
                     </ul>
@@ -583,7 +585,7 @@
 
         <main class="page-content">
             <div class="container">
-                <div class="tab-pane fade show active" id="Administrar_matricula" role="tabpanel" aria-labelledby="pill_administrar_matricula">
+                <div class="tab-pane fade show active" id="matricular_alumno" role="tabpanel" aria-labelledby="pill_matricular_alumno">
 
                     <div class="row pt-4" style="padding-bottom: 22px;">
                         <div class="col-lg-10" style="text-align: left;">
@@ -597,116 +599,120 @@
 
                     <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="tab_Antiguos1" data-toggle="tab" href="#tab_Antiguos" role="tab" aria-controls="profile-md"
+                            <a class="nav-link active" id="tab_Antiguos1" data-toggle="tab" href="#tab_Antiguos" role="tab" aria-controls="antiguo-md"
                                aria-selected="false">Antiguos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab_Repetidos1" data-toggle="tab" href="#tab_Repetidos" role="tab" aria-controls="contact-md"
+                            <a class="nav-link" id="tab_Repetidos1" data-toggle="tab" href="#tab_Repetidos" role="tab" aria-controls="repetido-md"
                                aria-selected="false">Repetidos</a>
                         </li>
                     </ul>
 
                     <div class="tab-content card pt-5" id="myTabContentMD" style="padding-bottom: 30px;">
-                        <div class="tab-pane fade show active" id="tab_Antiguos" role="tabpanel" aria-labelledby="profile-tab-md">
+                        <div class="tab-pane fade show active" id="tab_Antiguos" role="tabpanel" aria-labelledby="antiguos-tab">
                             <div class="container-fluid" style="padding-bottom: 30px;">
                                 <div class="row">
-                                    <div class="col-lg-12" style="position: relative; overflow: auto; display: block; height: 350px;">
-                                        <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="example_info">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Código</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nro. Documento</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Nombre Completo</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Grado Anterior</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sección</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nivel Academico</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            <div class="form-row" style="margin-bottom: 5px;">
-                                                <div class="col-lg-9"></div>
-                                                <div class="col-lg-3">
-                                                    <div class="form-group has-search">
-                                                        <span class="fa fa-search form-control-feedback"></span>
-                                                        <input type="text" ng-model="searchKeywordA" class="form-control">
-                                                    </div>
-
+                                    <div class="col-lg-12">
+                                        <div class="form-row" style="margin-bottom: 5px;">
+                                            <div class="col-lg-9"></div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group has-search">
+                                                    <span class="fa fa-search form-control-feedback"></span>
+                                                    <input type="text" ng-model="searchKeywordA" class="form-control">
                                                 </div>
+
                                             </div>
-                                            <tr class="even" dir-paginate="antiguo in listaAlumnosAntiguos | filter: searchKeywordA | itemsPerPage : 7">
-                                                <td tabindex="0" class="sorting_1">{{antiguo.codigo_alumno}}</td>
-                                                <td>{{antiguo.numero_documento}}</td>
-                                                <td>{{antiguo.nombre_completo_alumno}}</td>
-                                                <td>{{antiguo.ref_grado_anterior}}</td>
-                                                <td>{{antiguo.ref_seccion}}</td>
-                                                <td>{{antiguo.ref_nivel}}</td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-mdb-color btn-sm" data-ng-click="controlFormAlumno($event)" value="{{antiguo.id_per_alumno}}" title="Ver información detallado">
-                                                        <span class="fa fa-address-book"></span></button> 
-                                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target=".modalMatricula" title="Crear Matricula"
-                                                            data-ng-click="rellenarDatosAlumno($event)" value="{{antiguo.id_per_alumno}}"><span class="fa fa-check"></span></button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                            <dir-pagination-controls
-                                                max-size="7"
-                                                direction-links="true"
-                                                boundary-links="true">
-                                            </dir-pagination-controls>
-                                        </table>
+                                        </div>
+                                        <div style="position: relative; overflow: auto; display: block; height: 350px;">
+                                            <table id="tablaAlumnoAntiguos" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="tabla-antiguos">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Código</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nro. Documento</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Nombre Completo</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Grado Anterior</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sección</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nivel Academico</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr class="even" dir-paginate="antiguo in listaAlumnosAntiguos | filter: searchKeywordA | itemsPerPage : 150">
+                                                        <td tabindex="0" class="sorting_1">{{antiguo.codigo_alumno}}</td>
+                                                        <td>{{antiguo.numero_documento}}</td>
+                                                        <td>{{antiguo.nombre_completo_alumno}}</td>
+                                                        <td>{{antiguo.ref_grado_anterior}}</td>
+                                                        <td>{{antiguo.ref_seccion}}</td>
+                                                        <td>{{antiguo.ref_nivel}}</td>
+                                                        <td class="text-center">
+                                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target=".modalMatricula" title="Crear Matricula"
+                                                                    data-ng-click="rellenarDatosAlumno($event)" value="{{antiguo.id_per_alumno}}">
+                                                                <span class="fa fa-check"></span>&nbsp;&nbsp;&nbsp;Matricular</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <dir-pagination-controls
+                                                    max-size="150"
+                                                    direction-links="true"
+                                                    boundary-links="true">
+                                                </dir-pagination-controls>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="tab_Repetidos" role="tabpanel" aria-labelledby="contact-tab-md">
+                        <div class="tab-pane fade" id="tab_Repetidos" role="tabpanel" aria-labelledby="repetidos-tab">
                             <div class="container-fluid" style="padding-bottom: 30px;">
                                 <div class="row">
-                                    <div class="col-lg-12" style="position: relative; overflow: auto; display: block; height: 350px;">
-                                        <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="example_info">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Código</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nro. Documento</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Nombre Completo</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Grado Anterior</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sección</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nivel Academico</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            <div class="form-row" style="margin-bottom: 5px;">
-                                                <div class="col-lg-9"></div>
-                                                <div class="col-lg-3">
-                                                    <div class="form-group has-search">
-                                                        <span class="fa fa-search form-control-feedback"></span>
-                                                        <input type="text" ng-model="searchKeywordA" class="form-control">
-                                                    </div>
-
+                                    <div class="col-lg-12">
+                                        <div class="form-row" style="margin-bottom: 5px;">
+                                            <div class="col-lg-9"></div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group has-search">
+                                                    <span class="fa fa-search form-control-feedback"></span>
+                                                    <input type="text" ng-model="searchKeywordA" class="form-control">
                                                 </div>
+
                                             </div>
-                                            <tr class="even" dir-paginate="repetido in listaAlumnosRepetidos | filter: searchKeywordA | itemsPerPage : 7">
-                                                <td tabindex="0" class="sorting_1">{{repetido.codigo_alumno}}</td>
-                                                <td>{{repetido.numero_documento}}</td>
-                                                <td>{{repetido.nombre_completo_alumno}}</td>
-                                                <td>{{repetido.ref_grado_anterior}}</td>
-                                                <td>{{repetido.ref_seccion}}</td>
-                                                <td>{{repetido.ref_nivel}}</td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-mdb-color btn-sm" data-ng-click="controlFormAlumno($event)" value="{{repetido.id_per_alumno}}" title="Ver información detallado">
-                                                        <span class="fa fa-address-book"></span></button> 
-                                                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target=".modalMatricula" title="Crear Matricula"
-                                                            data-ng-click="rellenarDatosAlumno($event)" value="{{repetido.id_per_alumno}}"><span class="fa fa-check"></span></button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                            <dir-pagination-controls
-                                                max-size="7"
-                                                direction-links="true"
-                                                boundary-links="true">
-                                            </dir-pagination-controls>
-                                        </table>
+                                        </div>
+                                        <div style="position: relative; overflow: auto; display: block; height: 350px;">
+                                            <table id="tablaAlumnoRepetidos" class="table table-bordered table-striped mb-0" style="width: 100%;" role="grid" aria-describedby="tabla-repetidos">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 75px;">Código</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 130px;">Nro. Documento</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" >Nombre Completo</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Grado Anterior</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Sección</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Nivel Academico</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" style="width: 180px; text-align: center">Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr class="even" dir-paginate="repetido in listaAlumnosRepetidos | filter: searchKeywordA | itemsPerPage : 150">
+                                                        <td tabindex="0" class="sorting_1">{{repetido.codigo_alumno}}</td>
+                                                        <td>{{repetido.numero_documento}}</td>
+                                                        <td>{{repetido.nombre_completo_alumno}}</td>
+                                                        <td>{{repetido.ref_grado_anterior}}</td>
+                                                        <td>{{repetido.ref_seccion}}</td>
+                                                        <td>{{repetido.ref_nivel}}</td>
+                                                        <td class="text-center">
+                                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target=".modalMatricula" title="Crear Matricula"
+                                                                    data-ng-click="rellenarDatosAlumno($event)" value="{{repetido.id_per_alumno}}">
+                                                                <span class="fa fa-check"></span>&nbsp;&nbsp;&nbsp;Matricular</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <dir-pagination-controls
+                                                    max-size="150"
+                                                    direction-links="true"
+                                                    boundary-links="true">
+                                                </dir-pagination-controls>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -717,34 +723,34 @@
             </div>
         </main>
 
-        <form>
-            <div class="modal fade bd-example-modal-lg modalMatricula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="container-fluid text-center">
-                                <h4>PASO #02: <span style="font-weight: lighter;">Habilitar la matricula escolar al alumno seleccionado</span></h4>
+        <div class="modal fade bd-example-modal-lg modalMatricula" tabindex="-1" role="dialog" aria-labelledby="matricula-modal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="container-fluid text-center">
+                            <h4>PASO #02: <span style="font-weight: lighter;">Habilitar la matricula escolar al alumno seleccionado</span></h4>
                             <label style="margin-top: 5px;">Se autogenera los datos de la matricula y las fechas correspondientes de este año.</label>
-                            </div>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                         </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form class="formMatricula" novalidate>
                         <div class="modal-body">
                             <div class="container-fluid">
                                 <div class="form-row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Codigo del estudiante (*)</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly
+                                            <label for="txtCodigoEstudiante">Codigo del estudiante (*)</label>
+                                            <input type="text" class="form-control" id="txtCodigoEstudiante" aria-describedby="codigoEstudiante" readonly
                                                    ng-model="modCodAlumno">
                                             <small id="emailHelp" class="form-text text-muted">Este casillero es obligatorio.</small>
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Nombre Completo (*)</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly 
+                                            <label for="txtNombreCompleto">Nombre Completo (*)</label>
+                                            <input type="text" class="form-control" id="txtNombreCompleto" aria-describedby="nombreCompletoAlumno" readonly 
                                                    ng-model="modNombreAlumno">
                                             <small id="emailHelp" class="form-text text-muted">Este casillero es obligatorio.</small>
                                         </div>
@@ -753,24 +759,24 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Codigo de matricula(*)</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly
+                                            <label for="txtCodigoMatricula">Codigo de matricula(*)</label>
+                                            <input type="text" class="form-control" id="txtCodigoMatricula" aria-describedby="codigoMatricula" readonly
                                                    ng-model="modCodMatricula">
                                             <small id="emailHelp" class="form-text text-muted">Este casillero es obligatorio.</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Fecha realizada (*)</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly 
+                                            <label for="txtFechaRealizada">Fecha realizada (*)</label>
+                                            <input type="text" class="form-control" id="txtFechaRealizada" aria-describedby="fechaRealizada" readonly 
                                                    ng-model="modFecRealizada">
                                             <small id="emailHelp" class="form-text text-muted">Este casillero es obligatorio.</small>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Periodo Escolar</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly 
+                                            <label for="txtPeriodoEscolar">Periodo Escolar</label>
+                                            <input type="text" class="form-control" id="txtPeriodoEscolar" aria-describedby="periodoEscolar" readonly 
                                                    ng-model="modPeriodoEscolar">
                                             <small id="date" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                                         </div>
@@ -781,8 +787,14 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="txtObservacion">Observación (*)</label>
-                                            <textarea class="form-control" id="txtObservacion" rows="6" required ng-model="modObservacionSet"></textarea>
-                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                            <textarea class="form-control" id="txtObservacion" rows="6" required ng-model="modObservacionSet" 
+                                                      placeholder="Escribe un comentario.." maxlength="254" minlength="8"></textarea>
+                                            <div class="valid-feedback">
+                                                Se escribio correctamente este casillero.
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Debe contener minimo 8 a 200 caracteres para que sea valido la observacion
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -790,18 +802,36 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-success" data-ng-click="insertarMatricula($event)" value="{{getDatosMatr.id_per_alumno}}-{{getDatosMatr.id_top_periodo}}">Aceptar</button>
+                            <button type="submit" class="btn btn-success" data-ng-click="insertarMatricula($event)" value="{{getDatosMatr.id_per_alumno}}-{{getDatosMatr.id_top_periodo}}">Aceptar</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-        </form>
-
+        </div>
 
     </div>
-    <!--Modal: Login / Register Form-->
-    <%@include file="foot.jspf" %>
+
+        
+        <%@include file="foot.jspf" %>
     <script>
+                (function() {
+                    'use strict';
+                    window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('formMatricula');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                    }, false);
+                })();
+    
                 jQuery(function ($) {
                     $(".sidebar-dropdown > a").click(function () {
                         $(".sidebar-submenu").slideUp(200);

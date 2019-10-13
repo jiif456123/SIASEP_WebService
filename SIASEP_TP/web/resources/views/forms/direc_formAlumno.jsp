@@ -1,4 +1,4 @@
-<%@include file="head.jspf" %>
+<%@include file="../head.jspf" %>
 <style>
     @keyframes swing {
         0% {
@@ -488,7 +488,7 @@
 </head>
 <body ng-app="myAdmin" ng-controller="directivaCtrl" class="fixed-sn">
     <div class="page-wrapper chiller-theme toggled">
-        <%@include file="direc_navBarDirectiva.jsp"%>
+        <%@include file="../direc_navBarDirectiva.jsp"%>
         <!-- sidebar-wrapper  -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark default-color">
@@ -573,7 +573,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-10">
-                                                        <%@include file="forms/Matricula_datosAlumno.jsp"%>
+                                                        <%@include file="Matricula_datosAlumno.jsp"%>
                                                     </div>
                                                 </div>
                                             </div>
@@ -964,7 +964,7 @@
 
     </div>
     <!--Modal: Login / Register Form-->
-    <%@include file="foot.jspf" %>
+    <%@include file="../foot.jspf" %>
     <script>
                 jQuery(function ($) {
                     $(".sidebar-dropdown > a").click(function () {

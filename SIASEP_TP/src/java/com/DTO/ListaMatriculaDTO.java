@@ -77,6 +77,13 @@ public class ListaMatriculaDTO {
     Date top_periodo;
     Integer id_top_periodo;
 
+    Integer id_log_matricula;
+    String lg_codigo_matricula;
+    Date lg_fec_modificacion;
+    String lg_dscrp_observacion;
+    String lg_nom_estado_matricula;
+    Integer lg_id_per_trabajador;
+
     public Integer getId_matricula() {
         return id_matricula;
     }
@@ -573,9 +580,58 @@ public class ListaMatriculaDTO {
         this.id_top_periodo = id_top_periodo;
     }
 
-    @Override
-    public String toString() {
-        return "ListaMatriculaDTO{" + "id_matricula=" + id_matricula + ", codigo_matricula=" + codigo_matricula + ", fec_realizada=" + fec_realizada + ", fkid_per_alumno=" + fkid_per_alumno + ", fkid_estado_matricula=" + fkid_estado_matricula + ", fkid_periodo_anual=" + fkid_periodo_anual + ", id_periodo_anual=" + id_periodo_anual + ", fec_inicio_anual=" + fec_inicio_anual + ", fec_fin_anual=" + fec_fin_anual + ", id_estado_matricula=" + id_estado_matricula + ", nom_estado_matricula=" + nom_estado_matricula + ", id_tipo_trabajador=" + id_tipo_trabajador + ", nom_tipo_trabajador=" + nom_tipo_trabajador + ", id_historial_matricula=" + id_historial_matricula + ", fec_modificacion=" + fec_modificacion + ", dscrp_observacion=" + dscrp_observacion + ", fkid_matricula=" + fkid_matricula + ", fkid_per_trabajador=" + fkid_per_trabajador + ", id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", id_usuario=" + id_usuario + ", username=" + username + ", password=" + password + ", fec_creacion=" + fec_creacion + ", fkid_estado_usuario=" + fkid_estado_usuario + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", nombre_ie_anterior=" + nombre_ie_anterior + ", ref_nivel=" + ref_nivel + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion=" + ref_seccion + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", flg_tercio_superior=" + flg_tercio_superior + ", grupo_sanguineo=" + grupo_sanguineo + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", flg_foto_alumno=" + flg_foto_alumno + ", fkid_persona=" + fkid_persona + ", fkid_tipo_alumno=" + fkid_tipo_alumno + ", id_per_trabajador=" + id_per_trabajador + ", codigo_trabajador=" + codigo_trabajador + ", fkid_tipo_trabajador=" + fkid_tipo_trabajador + ", nombre_trabajador=" + nombre_trabajador + ", nombre_alumno=" + nombre_alumno + ", codigo_matr=" + codigo_matr + ", fecha_actual=" + fecha_actual + ", top_periodo=" + top_periodo + ", id_top_periodo=" + id_top_periodo + '}';
+    public Integer getId_log_matricula() {
+        return id_log_matricula;
     }
 
+    public void setId_log_matricula(Integer id_log_matricula) {
+        this.id_log_matricula = id_log_matricula;
+    }
+
+    public String getLg_codigo_matricula() {
+        return lg_codigo_matricula;
+    }
+
+    public void setLg_codigo_matricula(String lg_codigo_matricula) {
+        this.lg_codigo_matricula = lg_codigo_matricula;
+    }
+
+    public Date getLg_fec_modificacion() {
+        return lg_fec_modificacion;
+    }
+
+    public void setLg_fec_modificacion(Date lg_fec_modificacion) {
+        this.lg_fec_modificacion = lg_fec_modificacion;
+    }
+
+    public String getLg_dscrp_observacion() {
+        return lg_dscrp_observacion;
+    }
+
+    public void setLg_dscrp_observacion(String lg_dscrp_observacion) {
+        this.lg_dscrp_observacion = lg_dscrp_observacion;
+    }
+
+    public String getLg_nom_estado_matricula() {
+        return lg_nom_estado_matricula;
+    }
+
+    public void setLg_nom_estado_matricula(String lg_nom_estado_matricula) {
+        this.lg_nom_estado_matricula = lg_nom_estado_matricula;
+    }
+
+    public Integer getLg_id_per_trabajador() {
+        return lg_id_per_trabajador;
+    }
+
+    public void setLg_id_per_trabajador(Integer lg_id_per_trabajador) {
+        this.lg_id_per_trabajador = lg_id_per_trabajador;
+    }
+
+    @Override
+    public String toString() {
+        return "ListaMatriculaDTO{" + "id_matricula=" + id_matricula + ", codigo_matricula=" + codigo_matricula + ", fec_realizada=" + fec_realizada + ", fkid_per_alumno=" + fkid_per_alumno + ", fkid_estado_matricula=" + fkid_estado_matricula + ", fkid_periodo_anual=" + fkid_periodo_anual + ", id_periodo_anual=" + id_periodo_anual + ", fec_inicio_anual=" + fec_inicio_anual + ", fec_fin_anual=" + fec_fin_anual + ", id_estado_matricula=" + id_estado_matricula + ", nom_estado_matricula=" + nom_estado_matricula + ", id_tipo_trabajador=" + id_tipo_trabajador + ", nom_tipo_trabajador=" + nom_tipo_trabajador + ", id_historial_matricula=" + id_historial_matricula + ", fec_modificacion=" + fec_modificacion + ", dscrp_observacion=" + dscrp_observacion + ", fkid_matricula=" + fkid_matricula + ", fkid_per_trabajador=" + fkid_per_trabajador + ", id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", id_usuario=" + id_usuario + ", username=" + username + ", password=" + password + ", fec_creacion=" + fec_creacion + ", fkid_estado_usuario=" + fkid_estado_usuario + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", nombre_ie_anterior=" + nombre_ie_anterior + ", ref_nivel=" + ref_nivel + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion=" + ref_seccion + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", flg_tercio_superior=" + flg_tercio_superior + ", grupo_sanguineo=" + grupo_sanguineo + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", flg_foto_alumno=" + flg_foto_alumno + ", fkid_persona=" + fkid_persona + ", fkid_tipo_alumno=" + fkid_tipo_alumno + ", id_per_trabajador=" + id_per_trabajador + ", codigo_trabajador=" + codigo_trabajador + ", fkid_tipo_trabajador=" + fkid_tipo_trabajador + ", nombre_trabajador=" + nombre_trabajador + ", nombre_alumno=" + nombre_alumno + ", codigo_matr=" + codigo_matr + ", fecha_actual=" + fecha_actual + ", top_periodo=" + top_periodo + ", id_top_periodo=" + id_top_periodo + ", id_log_matricula=" + id_log_matricula + ", lg_codigo_matricula=" + lg_codigo_matricula + ", lg_fec_modificacion=" + lg_fec_modificacion + ", lg_dscrp_observacion=" + lg_dscrp_observacion + ", lg_nom_estado_matricula=" + lg_nom_estado_matricula + ", lg_id_per_trabajador=" + lg_id_per_trabajador + '}';
+    }
+    
+    
 }

@@ -88,14 +88,15 @@ public class DirectivaResource {
         return gson.toJson(lista);
     }
     
-    @GET
+    @POST
     @Path("getListaHistorialMatricula")
     @Produces("application/json")
     public String getListaHistorialMatricula(String data) {
         Gson gson =new Gson();
         List lista = null;
+        ListaMatriculaDTO listaMatriculaDTO = gson.fromJson(data, ListaMatriculaDTO.class);
         try{
-//            lista = matriculaHelper.getListHistorialMatricula();
+            lista = matriculaHelper.getListHistorialMatricula(listaMatriculaDTO.getId_usuario());
         }
         catch(Exception ex){
             System.out.println("getListaHistorialMatricula: "+ex);
@@ -107,16 +108,18 @@ public class DirectivaResource {
     @Path("cambiaEstadoMatr")
     @Produces("application/json")
     public Response cambiaEstadoMatr(String data) {
+        System.out.println("a verrrr "+data);
         Response respuesta;
         Gson gson = new Gson();
-        ListaMatriculaDTO listaMatriculaDTO = gson.fromJson(data, ListaMatriculaDTO.class);
+        MatriculaDTO matriculaDTO = gson.fromJson(data, MatriculaDTO.class);
         try{
-            matriculaHelper.cambiarEstadoByID(listaMatriculaDTO.getId_matricula(), listaMatriculaDTO.getFkid_estado_matricula());
-            respuesta = Response.status(200).entity(listaMatriculaDTO).build();
+            matriculaHelper.cambiarEstadoByID(matriculaDTO.getId_matricula(), matriculaDTO.getFkid_estado_matricula());
+            matriculaHelper.insertarObsEstadoMatricula(matriculaDTO.getId_matricula(), matriculaDTO.getDscrp_observacion(), matriculaDTO.getId_usuario());
+            respuesta = Response.status(200).entity(matriculaDTO).build();
         }
         catch(Exception ex){
             System.out.println("cambiaEstadoMatr: " + ex);
-            respuesta = Response.status(500).entity(listaMatriculaDTO).build();
+            respuesta = Response.status(500).entity(matriculaDTO).build();
         }
         return respuesta;
     }
@@ -136,7 +139,6 @@ public class DirectivaResource {
         return gson.toJson(respuesta);
     }
     
-    
     @POST
     @Path("eliminarMatriculaAlumno")
     @Produces("application/json")
@@ -155,7 +157,6 @@ public class DirectivaResource {
         return respuesta;
     }
     
-
     @GET
     @Path("getListaAlumnosAntiguos")
     @Produces("application/json")
@@ -215,13 +216,10 @@ public class DirectivaResource {
                     matriculaDTO.getId_per_alumno(), 
                     matriculaDTO.getId_estado_matricula(), 
                     matriculaDTO.getId_periodo_anual()
-<<<<<<< HEAD
-=======
             );
             matriculaHelper.insertarObservacionHistorial(matriculaDTO.getFec_modificacion(), 
                                                          matriculaDTO.getDscrp_observacion(), 
                                                          matriculaDTO.getId_usuario()
->>>>>>> 94d5e17afe1e5027287d41e35be629fe0c038c7a
             );
             respuesta = Response.status(200).entity(matriculaDTO).build();
         }
