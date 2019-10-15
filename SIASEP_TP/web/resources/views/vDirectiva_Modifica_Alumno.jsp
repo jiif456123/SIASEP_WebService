@@ -1,4 +1,4 @@
-<%@include file="../head.jspf" %>
+<%@include file="head.jspf" %>
 <style>
     @keyframes swing {
         0% {
@@ -486,9 +486,9 @@
 
 </style>
 </head>
-<body ng-app="myAdmin" ng-controller="directivaCtrl" class="fixed-sn">
+<body ng-app="myModificaMatr" ng-controller="modificaMatrCtrl" class="fixed-sn">
     <div class="page-wrapper chiller-theme toggled">
-        <%@include file="../direc_navBarDirectiva.jsp"%>
+        <%@include file="navBarDirectiva.jsp"%>
         <!-- sidebar-wrapper  -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark default-color">
@@ -501,7 +501,8 @@
                                 <i class="fa fa-book"></i> <span class="clearfix d-none d-sm-inline-block">Módulos</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuB">
-                                <a class="dropdown-item" href="#" ng-click="navegaAdminMatricula()">Administrar Matricula</a>
+                                <a class="dropdown-item" href="#" ng-click="navegaMatricularAlumno()">Matricular Alumno</a>
+                                <a class="dropdown-item" href="#">Modificar Alumno</a>
                                 <a class="dropdown-item" href="#">Generar Horario</a>
                                 <a class="dropdown-item" href="#">Generar Libreta</a>
                                 <hr>
@@ -527,9 +528,10 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Ver perfil&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge badge-pill badge-warning">Nuevo</span></a>
-                                <a class="dropdown-item" href="#">Cambiar Contraseña</a>
+                                <a class="dropdown-item" href="#">Configurar Cuenta</a>
                                 <hr>
-                                <a class="dropdown-item" href="#" ng-click="cerrarSesion()" style="text-align: center;  ">Cerrar sesión</a>
+                                <a class="dropdown-item" href="#" ng-click="cerrarSesion()" style="text-align: center;">
+                                     <i class="fa fa-power-off" style="color: #de5f38;"></i>&nbsp;&nbsp;&nbsp;Cerrar sesión</a>
                             </div>
                         </li>
                     </ul>
@@ -537,7 +539,7 @@
             </nav>
         </header>
 
-        <form id="formularioMatricula">
+        <form class="formularioMatricula">
             <main class="page-content">
                 <div class="container-fluid">
                     <div class="tab-content" id="pills-tabContent">
@@ -573,7 +575,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-10">
-                                                        <%@include file="Matricula_datosAlumno.jsp"%>
+                                                        <%@include file="forms/vDirectiva_Modifica_Info.jsp"%>
                                                     </div>
                                                 </div>
                                             </div>
@@ -620,7 +622,7 @@
                                 </div>
 
                                 <div class="col-lg-2 text-center" style="padding-top: 32px;">
-                                    <button class="btn btn-lg btn-success">MATRICULAR</button>
+                                    <button type="submit" class="btn btn-lg btn-success">MATRICULAR</button>
                                     <br>
                                     <a class="btn btn-lg btn-danger" href = "javascript:history.back()">CANCELAR</a>
                                 </div>
@@ -964,39 +966,57 @@
 
     </div>
     <!--Modal: Login / Register Form-->
-    <%@include file="../foot.jspf" %>
+    <%@include file="foot.jspf" %>
     <script>
-                jQuery(function ($) {
-                    $(".sidebar-dropdown > a").click(function () {
-                        $(".sidebar-submenu").slideUp(200);
-                        if (
-                                $(this)
-                                .parent()
-                                .hasClass("active")
-                                ) {
-                            $(".sidebar-dropdown").removeClass("active");
-                            $(this)
-                                    .parent()
-                                    .removeClass("active");
-                        } else {
-                            $(".sidebar-dropdown").removeClass("active");
-                            $(this)
-                                    .next(".sidebar-submenu")
-                                    .slideDown(200);
-                            $(this)
-                                    .parent()
-                                    .addClass("active");
-                        }
-                    });
-                    $("#close-sidebar").click(function () {
-                        $(".page-wrapper").removeClass("toggled");
-                    });
-                    $("#show-sidebar").click(function () {
-                        $(".page-wrapper").addClass("toggled");
-                    });
-                });
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('formularioMatricula');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+            }, false);
+        })(); 
+        
+        jQuery(function ($) {
+            $(".sidebar-dropdown > a").click(function () {
+                $(".sidebar-submenu").slideUp(200);
+                if (
+                        $(this)
+                        .parent()
+                        .hasClass("active")
+                        ) {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                            .parent()
+                            .removeClass("active");
+                } else {
+                    $(".sidebar-dropdown").removeClass("active");
+                    $(this)
+                            .next(".sidebar-submenu")
+                            .slideDown(200);
+                    $(this)
+                            .parent()
+                            .addClass("active");
+                }
+            });
+            $("#close-sidebar").click(function () {
+                $(".page-wrapper").removeClass("toggled");
+            });
+            $("#show-sidebar").click(function () {
+                $(".page-wrapper").addClass("toggled");
+            });
+        });
     </script>
-    <script src="http://localhost:8084/SIASEP_TP/resources/js/directivaController.js" type="text/javascript"></script>
+    <script src="http://localhost:8084/SIASEP_TP/resources/js/direc_ModificarController.js" type="text/javascript"></script>
     <script src="http://localhost:8084/SIASEP_TP/resources/js/dirPagination.js" type="text/javascript"></script>     
 </body>
 </html>

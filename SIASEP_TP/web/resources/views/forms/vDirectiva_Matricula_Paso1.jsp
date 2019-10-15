@@ -1,4 +1,4 @@
-<%@include file="head.jspf" %>
+<%@include file="../head.jspf" %>
 <style>
     @keyframes swing {
         0% {
@@ -530,9 +530,9 @@
     }
 </style>
 </head>
-<body ng-app="myAdmin" ng-controller="directivaCtrl" class="fixed-sn">
+<body ng-app="myMatricula" ng-controller="matriculaCtrl" class="fixed-sn">
     <div class="page-wrapper chiller-theme toggled">
-        <%@include file="direc_navBarDirectiva.jsp"%>
+        <%@include file="../navBarDirectiva.jsp"%>
         <!-- sidebar-wrapper  -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark default-color">
@@ -812,7 +812,7 @@
     </div>
 
         
-        <%@include file="foot.jspf" %>
+        <%@include file="../foot.jspf" %>
     <script>
                 (function() {
                     'use strict';
@@ -862,7 +862,7 @@
                     });
                 });
     </script>
-    <script src="http://localhost:8084/SIASEP_TP/resources/js/directivaController.js" type="text/javascript"></script>
+    <script src="http://localhost:8084/SIASEP_TP/resources/js/direc_MatriculaController.js" type="text/javascript"></script>
     <script src="http://localhost:8084/SIASEP_TP/resources/js/dirPagination.js" type="text/javascript"></script>     
 </body>
 </html>

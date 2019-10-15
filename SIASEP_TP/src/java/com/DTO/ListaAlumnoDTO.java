@@ -2,7 +2,7 @@ package com.DTO;
 
 import java.util.Date;
 
-public class ListaAlumnoMatriculaDTO {
+public class ListaAlumnoDTO {
 
     Integer id_persona;
     String primer_nombre;

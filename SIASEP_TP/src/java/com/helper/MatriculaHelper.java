@@ -1,6 +1,6 @@
 package com.helper;
 
-import com.DTO.ListaAlumnoMatriculaDTO;
+import com.DTO.ListaAlumnoDTO;
 import com.DTO.ListaMatriculaDTO;
 import com.DTO.MatriculaDTO;
 import com.utilities.HibernateUtil;
@@ -150,7 +150,7 @@ public class MatriculaHelper {
     
     
     
-    public List<ListaAlumnoMatriculaDTO> getListMatriculaByAntiguo() {
+    public List<ListaAlumnoDTO> getListMatriculaByAntiguo() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createSQLQuery("SELECT peralu.id_per_alumno, peralu.codigo_alumno, per.numero_documento, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_completo_alumno,\n" +
@@ -166,14 +166,14 @@ public class MatriculaHelper {
                                              "WHERE (matr.fkid_per_alumno = peralu.id_per_alumno AND\n" +
                                              "        peralu.fkid_persona = per.id_persona AND \n" +
                                              "        peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
-                                             "        tial.id_tipo_alumno = 1)").setResultTransformer(Transformers.aliasToBean(ListaAlumnoMatriculaDTO.class));
-        List<ListaAlumnoMatriculaDTO> resultList=query.list();
+                                             "        tial.id_tipo_alumno = 1)").setResultTransformer(Transformers.aliasToBean(ListaAlumnoDTO.class));
+        List<ListaAlumnoDTO> resultList=query.list();
         transaction.commit();
         session.close();
         return resultList;
     }
     
-    public List<ListaAlumnoMatriculaDTO> getListMatriculaByRepetido() {
+    public List<ListaAlumnoDTO> getListMatriculaByRepetido() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createSQLQuery("SELECT peralu.id_per_alumno, peralu.codigo_alumno, per.numero_documento, CONCAT(per.apellido_paterno,' ',per.apellido_materno,', ',per.primer_nombre) as nombre_completo_alumno,\n" +
@@ -189,8 +189,8 @@ public class MatriculaHelper {
                                              "WHERE (matr.fkid_per_alumno = peralu.id_per_alumno AND\n" +
                                              "        peralu.fkid_persona = per.id_persona AND \n" +
                                              "        peralu.fkid_tipo_alumno = tial.id_tipo_alumno AND\n" +
-                                             "        tial.id_tipo_alumno = 2)").setResultTransformer(Transformers.aliasToBean(ListaAlumnoMatriculaDTO.class));
-        List<ListaAlumnoMatriculaDTO> resultList=query.list();
+                                             "        tial.id_tipo_alumno = 2)").setResultTransformer(Transformers.aliasToBean(ListaAlumnoDTO.class));
+        List<ListaAlumnoDTO> resultList=query.list();
         transaction.commit();
         session.close();
         return resultList;

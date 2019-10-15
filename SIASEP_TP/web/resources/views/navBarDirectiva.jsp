@@ -47,7 +47,7 @@
                 <li><a id="pill_matricular_alumno" class="active" data-toggle="pill" href="#" ng-click="navegaMatricularAlumno()">
                         <i class="fa fa-book"></i><span>Matricular Alumno</span></a>
                 </li>
-                <li><a id="pill_generar_horario" data-toggle="pill" href="#Modificar_Alumno">
+                <li><a id="pill_generar_horario" data-toggle="pill" href="#" ng-click="navegaModificarAlumno()">
                         <i class="fa fa-book"></i><span>Modificar Alumno</span></a>
                 </li>
                 <li><a id="pill_generar_horario" data-toggle="pill" href="#Generar_horario">

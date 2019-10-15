@@ -496,9 +496,9 @@
     }
 </style>
 </head>
-<body ng-app="myAdmin" ng-controller="directivaCtrl" class="fixed-sn">
+<body ng-app="myMatricula" ng-controller="matriculaCtrl" class="fixed-sn">
     <div class="page-wrapper chiller-theme toggled">
-        <%@include file="direc_navBarDirectiva.jsp"%>
+        <%@include file="navBarDirectiva.jsp"%>
         <!-- sidebar-wrapper  -->
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark default-color">
@@ -560,7 +560,7 @@
                                 <h6>Lista de matriculas durante el año escolar</h6>
                             </div>
                             <div class="col-lg-8" style="text-align: right;">
-                                <button class="btn btn-outline-green" ng-click="navegaDirectivaAlumno()"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Crear Matricula</button>
+                                <button class="btn btn-outline-green" ng-click="navegaPasoNro1()"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Crear Matricula</button>
                                 <button class="btn btn-outline-brown" data-toggle="modal" data-target="#modalHistorial"><i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;Historial</button>
                                 <button class="btn btn-outline-warning"><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp;Reportes Estadisticos</button>
                             </div>
@@ -568,18 +568,18 @@
 
                         <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab_Antiguos1" data-toggle="tab" href="#tab_Antiguos" role="tab" aria-controls="profile-md"
+                                <a class="nav-link active" id="tab_habi" data-toggle="tab" href="#tab_md_habi" role="tab" aria-controls="habilitado-md"
                                    aria-selected="false">Habilitado</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab_Repetidos1" data-toggle="tab" href="#tab_Repetidos" role="tab" aria-controls="contact-md"
+                                <a class="nav-link" id="tab_desha" data-toggle="tab" href="#tab_md_desha" role="tab" aria-controls="deshabilitado-md"
                                    aria-selected="false">Deshabilitado</a>
                             </li>
 
                         </ul>
 
                         <div class="tab-content card pt-5" id="myTabContentMD" style="padding-bottom: 30px; background-color: ghostwhite;">
-                            <div class="tab-pane fade show active" id="tab_Antiguos" role="tabpanel" aria-labelledby="profile-tab-md">
+                            <div class="tab-pane fade show active" id="tab_md_habi" role="tabpanel" aria-labelledby="habilitado-tab-md">
                                 <div class="container-fluid" style="padding-bottom: 30px;">
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -655,7 +655,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="tab_Repetidos" role="tabpanel" aria-labelledby="contact-tab-md">
+                            <div class="tab-pane fade" id="tab_md_desha" role="tabpanel" aria-labelledby="tab-deshabilitado">
                                 <div class="container-fluid" style="padding-bottom: 30px;">
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -674,7 +674,7 @@
                                                 </div>
                                             </div>
                                             <div style="position: relative; overflow: auto; display: block; height: 350px;">
-                                                <table id="myTable" class="table table-bordered table-striped mb-0" style="width: 100%; background-color: white;" role="grid" aria-describedby="example_info">
+                                                <table id="tablaMatriculaDesha" class="table table-bordered table-striped mb-0" style="width: 100%; background-color: white;" role="grid" aria-describedby="deshabilitado-tabla">
                                                     <thead>
                                                         <tr role="row">
                                                             <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1">Codigo de matricula</th>
@@ -745,7 +745,7 @@
             </div>
         </main>
 
-        <div class="modal fade bd-example-modal-lg" id="modalHistorial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade bd-example-modal-lg" id="modalHistorial" tabindex="-1" role="dialog" aria-labelledby="historial" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="overflow-y: initial !important;">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -787,7 +787,7 @@
             </div>
         </div>
 
-        <div class="modal fade modalObservaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade modalObservaciones" tabindex="-1" role="dialog" aria-labelledby="observaciones" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -831,7 +831,7 @@
             </div>
         </div>
 
-        <div class="modal fade modalAñadirObservacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade modalAñadirObservacion" tabindex="-1" role="dialog" aria-labelledby="añadirObservacion" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -889,10 +889,8 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
+        
     <!--Modal: Login / Register Form-->
     <%@include file="foot.jspf" %>
     <script>
@@ -944,7 +942,7 @@
         });
     });
     </script>
-    <script src="http://localhost:8084/SIASEP_TP/resources/js/directivaController.js" type="text/javascript"></script>
+    <script src="http://localhost:8084/SIASEP_TP/resources/js/direc_MatriculaController.js" type="text/javascript"></script>
     <script src="http://localhost:8084/SIASEP_TP/resources/js/dirPagination.js" type="text/javascript"></script>     
 </body>
 </html>
