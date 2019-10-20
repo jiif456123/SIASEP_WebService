@@ -502,7 +502,6 @@ INSERT INTO centro_labores(nom_centro_labores) VALUES('Federacion Peruana de Fut
 INSERT INTO centro_labores(nom_centro_labores) VALUES('Hospital Ricardo Palma');
 go
 INSERT INTO periodo_anual VALUES ('2019-03-15', NULL);
-INSERT INTO periodo_anual VALUES ('2018-03-15', NULL);
 go
 INSERT INTO tipo_trabajador VALUES ('Director(a)');
 INSERT INTO tipo_trabajador VALUES ('Sub-Director(a)');
