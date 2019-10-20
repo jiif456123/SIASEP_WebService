@@ -1,0 +1,11 @@
+----------------------------------------------------------------------------
+CASO DE USO DEL SISTEMA - MATRICULAR ALUMNO
+Descripcion:
+Permite matricular al alumno durante el periodo actual.
+Asi como manejar el estado de matricula.
+
+- Usar el script siasep_bd.sql
+----------------------------------------------------------------------------
+
+Responsables:
+TPG - Jose Miralles

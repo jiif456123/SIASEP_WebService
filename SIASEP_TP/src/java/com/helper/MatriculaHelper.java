@@ -16,14 +16,14 @@ public class MatriculaHelper {
     public MatriculaHelper() {
     }
     
-    public Integer getIdTrabajadorByUsuario(int id_usuario) {
+    public Integer getIdTrabajadorByUsuario() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Integer idTrabajador = (Integer) session.createSQLQuery(
                 "SELECT pertra.id_per_trabajador \n" +
                 "FROM   usuario as usu INNER JOIN persona as per ON (usu.fkid_persona = per.id_persona) \n" +
                 "       INNER JOIN per_trabajador as pertra ON (per.id_persona = pertra.fkid_persona) \n" +
-                "WHERE (usu.id_usuario = "+id_usuario+") ")
+                "WHERE (usu.id_usuario = 2) ")
                 .addScalar("id_per_trabajador", new IntegerType())
                 .uniqueResult();
         transaction.commit();
@@ -76,7 +76,7 @@ public class MatriculaHelper {
         session.close();
         return resultList;
     }
-    public List<ListaMatriculaDTO> getListHistorialMatricula(int id_usuario) {
+    public List<ListaMatriculaDTO> getListHistorialMatricula() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query qExist = session.createSQLQuery("select COUNT(*) from sysobjects where name='log_matricula' and xtype='U' ");
@@ -89,7 +89,7 @@ public class MatriculaHelper {
                                                  "FROM   log_matricula\n" +
                                                  "WHERE (lg_id_per_trabajador = :idTrabajador)\n" +
                                                  "ORDER BY id_log_matricula DESC ").setResultTransformer(Transformers.aliasToBean(ListaMatriculaDTO.class));
-            query.setParameter("idTrabajador", getIdTrabajadorByUsuario(id_usuario));
+            query.setParameter("idTrabajador", getIdTrabajadorByUsuario());
             resultList=query.list();
         }
         transaction.commit();
@@ -108,14 +108,14 @@ public class MatriculaHelper {
         session.close();
     }
     
-    public void insertarObsEstadoMatricula(int idMatricula, String dscrp_observacion, int id_usuario) {
+    public void insertarObsEstadoMatricula(int idMatricula, String dscrp_observacion) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createSQLQuery("INSERT INTO historial_matricula(fec_modificacion, dscrp_observacion, fkid_matricula, fkid_per_trabajador)\n" +
                                              "VALUES ((select CONVERT(DATE, GETDATE()) [fecha_actual]), :dscrp_observacion, :idMatricula, :idTrabajador) ").setResultTransformer(Transformers.aliasToBean(MatriculaDTO.class));
         query.setParameter("idMatricula", idMatricula);
         query.setParameter("dscrp_observacion", dscrp_observacion);
-        query.setParameter("idTrabajador", getIdTrabajadorByUsuario(id_usuario));
+        query.setParameter("idTrabajador", getIdTrabajadorByUsuario());
         query.executeUpdate();
         transaction.commit();
         session.close();
@@ -238,7 +238,7 @@ public class MatriculaHelper {
         session.close();
     }
     
-    public void insertarObservacionHistorial(String fec_modificacion, String dscrp_observacion, int id_usuario) {
+    public void insertarObservacionHistorial(String fec_modificacion, String dscrp_observacion) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Integer idMatricula = (Integer) session.createSQLQuery("SELECT TOP 1 id_matricula FROM matricula ORDER BY id_matricula DESC ").addScalar("id_matricula", new IntegerType()).uniqueResult();
@@ -249,7 +249,7 @@ public class MatriculaHelper {
         queryHistorial.setParameter("fec_modificacion", fec_modificacion);
         queryHistorial.setParameter("dscrp_observacion", dscrp_observacion);
         queryHistorial.setParameter("id_matricula", idMatricula);
-        queryHistorial.setParameter("id_per_trabajador", getIdTrabajadorByUsuario(id_usuario));
+        queryHistorial.setParameter("id_per_trabajador", getIdTrabajadorByUsuario());
         queryHistorial.executeUpdate();
         
         transaction.commit();

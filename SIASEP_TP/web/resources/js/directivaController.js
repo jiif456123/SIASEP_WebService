@@ -2,25 +2,21 @@ var app = angular.module("myAdmin",['ngStorage','angularUtils.directives.dirPagi
 
 app.controller("directivaCtrl", function($scope, $http, $window) {
     
-    var sesionCodigoUsuario = sessionStorage.getItem('idUsuarioLogged');
-    var sesionNombreTipo = sessionStorage.getItem('tipoUsuario');
-    var sesionTipoUsuario = sessionStorage.getItem('fkidTipoUsuario');
-
     //NAVEGA DESDE EL MODULO O EL NAVBAR LLENDO A "MATRICULAR ALUMNO"
     $scope.navegaDirectivaAlumno = function() {
        $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva_Alumnos.jsp';
        $scope.getInfoUsuario();
     };
     $scope.navegaMatricularAlumno = function() {
-       $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva_matricula.jsp';
+       $window.location.href = '/SIASEP_TP/';
        $scope.getInfoUsuario();
     };
     
     //CONTROLA LOS DEMAS METODOS GET Y CARGA DE DATOS
     $scope.getInfoUsuario = function() {
-        $scope.nombre = sessionStorage.getItem('nombreUsuario');
-        $scope.apellido = sessionStorage.getItem('apellidoUsuario');
-        $scope.tipousuario = sesionNombreTipo;
+        $scope.nombre = 'Ricardo';
+        $scope.apellido = 'Villanueva';
+        $scope.tipousuario = 'Dpto. Secretaria';
         $scope.getListaPeriodos();
         $scope.getListaMatHabilitado();
         $scope.getListaMatDeshabilitado();
@@ -77,7 +73,7 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
         $http({
             method: 'POST',
             url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/getListaHistorialMatricula',
-            data: { id_usuario : sesionCodigoUsuario }
+            data: { }
         }).then(function successCallback(response) {
             $scope.listaHistorialMatricula = response.data;
         }, function errorCallback(response) {
@@ -97,8 +93,7 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
                     url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/cambiaEstadoMatr',
                     data: { id_matricula : idMatricula,
                             fkid_estado_matricula : idEstadoMatricula,
-                            dscrp_observacion : txtObservacionAnterior,
-                            id_usuario : sesionCodigoUsuario
+                            dscrp_observacion : txtObservacionAnterior
                     }
                 }).then(function successCallback(response) {
                     alert("Se ejecuto dicho cambio.");
@@ -203,12 +198,11 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
                         id_estado_matricula : estadoMatriculaDefault,
                         id_periodo_anual : idPeriodoAnual,
                         fec_modificacion : fechaRealizada,
-                        dscrp_observacion : observacionSet,
-                        id_usuario : sesionCodigoUsuario
+                        dscrp_observacion : observacionSet
                     }
             }).then(function successCallback(response) {
                 alert("Se registro correctamente la matricula.");
-                $window.location.href = '/SIASEP_TP/resources/views/direc_vDirectiva_matricula.jsp';
+                $window.location.href = '/SIASEP_TP/';
                 $scope.getInfoUsuario();
             }, function errorCallback(response) {
                 alert("insertarMatricula no funciona ERROOR");
@@ -216,13 +210,6 @@ app.controller("directivaCtrl", function($scope, $http, $window) {
         } else {
             console.log("Excepcion controlada (insertarMatricula)");
         }
-    };
-    
-    
-    //LogOut
-    $scope.cerrarSesion = function() {
-        sessionStorage.clear();
-        $window.location.href = '/SIASEP_TP/';
     };
     
 });

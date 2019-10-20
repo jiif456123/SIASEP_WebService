@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Oct 2, 2019 9:32:16 AM by Hibernate Tools 4.3.1
+// Generated Oct 20, 2019 2:02:36 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -29,7 +29,6 @@ public class Persona  implements java.io.Serializable {
      private Set<PerTrabajador> perTrabajadors = new HashSet<PerTrabajador>(0);
      private Set<Usuario> usuarios = new HashSet<Usuario>(0);
      private Set<PerAlumno> perAlumnos = new HashSet<PerAlumno>(0);
-     private Set<PerFamiliar> perFamiliars = new HashSet<PerFamiliar>(0);
 
     public Persona() {
     }
@@ -48,7 +47,7 @@ public class Persona  implements java.io.Serializable {
         this.sexo = sexo;
         this.direccion = direccion;
     }
-    public Persona(int idPersona, Distrito distrito, LugarNacimiento lugarNacimiento, TipoDocumento tipoDocumento, String primerNombre, String apellidoMaterno, String apellidoPaterno, String numeroDocumento, Date fecNacimiento, char sexo, String telefonoCasa, String telefonoCelular, String direccion, String correo, Set<PerTrabajador> perTrabajadors, Set<Usuario> usuarios, Set<PerAlumno> perAlumnos, Set<PerFamiliar> perFamiliars) {
+    public Persona(int idPersona, Distrito distrito, LugarNacimiento lugarNacimiento, TipoDocumento tipoDocumento, String primerNombre, String apellidoMaterno, String apellidoPaterno, String numeroDocumento, Date fecNacimiento, char sexo, String telefonoCasa, String telefonoCelular, String direccion, String correo, Set<PerTrabajador> perTrabajadors, Set<Usuario> usuarios, Set<PerAlumno> perAlumnos) {
        this.idPersona = idPersona;
        this.distrito = distrito;
        this.lugarNacimiento = lugarNacimiento;
@@ -66,7 +65,6 @@ public class Persona  implements java.io.Serializable {
        this.perTrabajadors = perTrabajadors;
        this.usuarios = usuarios;
        this.perAlumnos = perAlumnos;
-       this.perFamiliars = perFamiliars;
     }
    
     public int getIdPersona() {
@@ -187,13 +185,6 @@ public class Persona  implements java.io.Serializable {
     
     public void setPerAlumnos(Set<PerAlumno> perAlumnos) {
         this.perAlumnos = perAlumnos;
-    }
-    public Set<PerFamiliar> getPerFamiliars() {
-        return this.perFamiliars;
-    }
-    
-    public void setPerFamiliars(Set<PerFamiliar> perFamiliars) {
-        this.perFamiliars = perFamiliars;
     }
 
 

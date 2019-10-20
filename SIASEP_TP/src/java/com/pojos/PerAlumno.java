@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Oct 2, 2019 9:32:16 AM by Hibernate Tools 4.3.1
+// Generated Oct 20, 2019 2:02:36 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -28,12 +28,7 @@ public class PerAlumno  implements java.io.Serializable {
      private boolean flgCopiaDni;
      private boolean flgViveConPadres;
      private boolean flgFotoAlumno;
-     private Set<Religion> religions = new HashSet<Religion>(0);
-     private Set<Enfermedad> enfermedads = new HashSet<Enfermedad>(0);
      private Set<Matricula> matriculas = new HashSet<Matricula>(0);
-     private Set<VinculoFamiliar> vinculoFamiliars = new HashSet<VinculoFamiliar>(0);
-     private Set<Alergia> alergias = new HashSet<Alergia>(0);
-     private Set<Discapacidad> discapacidads = new HashSet<Discapacidad>(0);
 
     public PerAlumno() {
     }
@@ -54,7 +49,7 @@ public class PerAlumno  implements java.io.Serializable {
         this.flgViveConPadres = flgViveConPadres;
         this.flgFotoAlumno = flgFotoAlumno;
     }
-    public PerAlumno(int idPerAlumno, Persona persona, TipoAlumno tipoAlumno, int codigoAlumno, String nombreIeAnterior, String refNivel, char refGradoAnterior, char refSeccion, Double refPonderadoAnterior, Boolean flgTercioSuperior, String grupoSanguineo, String lenguaMaterna, String segundaLengua, int nroHermanos, boolean flgCopiaDni, boolean flgViveConPadres, boolean flgFotoAlumno, Set<Religion> religions, Set<Enfermedad> enfermedads, Set<Matricula> matriculas, Set<VinculoFamiliar> vinculoFamiliars, Set<Alergia> alergias, Set<Discapacidad> discapacidads) {
+    public PerAlumno(int idPerAlumno, Persona persona, TipoAlumno tipoAlumno, int codigoAlumno, String nombreIeAnterior, String refNivel, char refGradoAnterior, char refSeccion, Double refPonderadoAnterior, Boolean flgTercioSuperior, String grupoSanguineo, String lenguaMaterna, String segundaLengua, int nroHermanos, boolean flgCopiaDni, boolean flgViveConPadres, boolean flgFotoAlumno, Set<Matricula> matriculas) {
        this.idPerAlumno = idPerAlumno;
        this.persona = persona;
        this.tipoAlumno = tipoAlumno;
@@ -72,12 +67,7 @@ public class PerAlumno  implements java.io.Serializable {
        this.flgCopiaDni = flgCopiaDni;
        this.flgViveConPadres = flgViveConPadres;
        this.flgFotoAlumno = flgFotoAlumno;
-       this.religions = religions;
-       this.enfermedads = enfermedads;
        this.matriculas = matriculas;
-       this.vinculoFamiliars = vinculoFamiliars;
-       this.alergias = alergias;
-       this.discapacidads = discapacidads;
     }
    
     public int getIdPerAlumno() {
@@ -199,47 +189,12 @@ public class PerAlumno  implements java.io.Serializable {
     public void setFlgFotoAlumno(boolean flgFotoAlumno) {
         this.flgFotoAlumno = flgFotoAlumno;
     }
-    public Set<Religion> getReligions() {
-        return this.religions;
-    }
-    
-    public void setReligions(Set<Religion> religions) {
-        this.religions = religions;
-    }
-    public Set<Enfermedad> getEnfermedads() {
-        return this.enfermedads;
-    }
-    
-    public void setEnfermedads(Set<Enfermedad> enfermedads) {
-        this.enfermedads = enfermedads;
-    }
     public Set<Matricula> getMatriculas() {
         return this.matriculas;
     }
     
     public void setMatriculas(Set<Matricula> matriculas) {
         this.matriculas = matriculas;
-    }
-    public Set<VinculoFamiliar> getVinculoFamiliars() {
-        return this.vinculoFamiliars;
-    }
-    
-    public void setVinculoFamiliars(Set<VinculoFamiliar> vinculoFamiliars) {
-        this.vinculoFamiliars = vinculoFamiliars;
-    }
-    public Set<Alergia> getAlergias() {
-        return this.alergias;
-    }
-    
-    public void setAlergias(Set<Alergia> alergias) {
-        this.alergias = alergias;
-    }
-    public Set<Discapacidad> getDiscapacidads() {
-        return this.discapacidads;
-    }
-    
-    public void setDiscapacidads(Set<Discapacidad> discapacidads) {
-        this.discapacidads = discapacidads;
     }
 
 

@@ -77,7 +77,7 @@
         <a href="#">
             <i class="fa fa-cog"></i>
         </a>
-        <a ng-click="cerrarSesion()">
+        <a>
             <i class="fa fa-power-off" style="color: #de5f38;" title="Cerrar Sesion"></i>
         </a>
     </div>

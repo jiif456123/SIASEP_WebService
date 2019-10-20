@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Oct 2, 2019 9:32:16 AM by Hibernate Tools 4.3.1
+// Generated Oct 20, 2019 2:02:36 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;

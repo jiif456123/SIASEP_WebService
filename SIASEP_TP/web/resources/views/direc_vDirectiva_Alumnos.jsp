@@ -574,7 +574,7 @@
                                 <a class="dropdown-item" href="#">Ver perfil&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge badge-pill badge-warning">Nuevo</span></a>
                                 <a class="dropdown-item" href="#">Configurar Cuenta</a>
                                 <hr>
-                                <a class="dropdown-item" href="#" ng-click="cerrarSesion()" style="text-align: center;  ">
+                                <a class="dropdown-item" href="#" style="text-align: center;  ">
                                     <i class="fa fa-power-off" style="color: #de5f38;"></i>&nbsp;&nbsp;&nbsp;Cerrar sesión</a>
                             </div>
                         </li>

@@ -46,30 +46,18 @@ Contributor(s):
     <property name="hibernate.connection.username">admin</property>
     <property name="hibernate.connection.password">admin</property>
     <mapping resource="com/pojos/PerTrabajador.hbm.xml"/>
+    <mapping resource="com/pojos/Distrito.hbm.xml"/>
     <mapping resource="com/pojos/EstadoUsuario.hbm.xml"/>
-    <mapping resource="com/pojos/CentroLabores.hbm.xml"/>
     <mapping resource="com/pojos/HistorialMatricula.hbm.xml"/>
+    <mapping resource="com/pojos/TipoDocumento.hbm.xml"/>
+    <mapping resource="com/pojos/PeriodoAnual.hbm.xml"/>
     <mapping resource="com/pojos/Usuario.hbm.xml"/>
     <mapping resource="com/pojos/PerAlumno.hbm.xml"/>
     <mapping resource="com/pojos/TipoAlumno.hbm.xml"/>
     <mapping resource="com/pojos/LugarNacimiento.hbm.xml"/>
-    <mapping resource="com/pojos/TipoFamiliar.hbm.xml"/>
-    <mapping resource="com/pojos/Matricula.hbm.xml"/>
-    <mapping resource="com/pojos/TipoUsuario.hbm.xml"/>
-    <mapping resource="com/pojos/Persona.hbm.xml"/>
-    <mapping resource="com/pojos/MultiRole.hbm.xml"/>
-    <mapping resource="com/pojos/EstadoCivil.hbm.xml"/>
-    <mapping resource="com/pojos/PerFamiliar.hbm.xml"/>
-    <mapping resource="com/pojos/Distrito.hbm.xml"/>
-    <mapping resource="com/pojos/Discapacidad.hbm.xml"/>
-    <mapping resource="com/pojos/TipoDocumento.hbm.xml"/>
-    <mapping resource="com/pojos/Enfermedad.hbm.xml"/>
-    <mapping resource="com/pojos/GradoInstruccion.hbm.xml"/>
-    <mapping resource="com/pojos/VinculoFamiliar.hbm.xml"/>
-    <mapping resource="com/pojos/PeriodoAnual.hbm.xml"/>
     <mapping resource="com/pojos/EstadoMatricula.hbm.xml"/>
     <mapping resource="com/pojos/TipoTrabajador.hbm.xml"/>
-    <mapping resource="com/pojos/Religion.hbm.xml"/>
-    <mapping resource="com/pojos/Alergia.hbm.xml"/>
+    <mapping resource="com/pojos/Matricula.hbm.xml"/>
+    <mapping resource="com/pojos/Persona.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
