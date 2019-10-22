@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 2, 2019 9:32:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.TipoAlumno" table="tipo_alumno" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
+        <id name="idTipoAlumno" type="int">
+            <column name="id_tipo_alumno" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomTipoAlumno" type="string">
+            <column name="nom_tipo_alumno" length="150" />
+        </property>
+        <set name="perAlumnos" table="per_alumno" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkid_tipo_alumno" not-null="true" />
+            </key>
+            <one-to-many class="com.pojos.PerAlumno" />
+        </set>
+    </class>
+</hibernate-mapping>

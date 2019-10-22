@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 2, 2019 9:32:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.MultiRole" table="multi_role" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
+        <id name="idMultiRole" type="int">
+            <column name="id_multi_role" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoUsuario" class="com.pojos.TipoUsuario" fetch="select">
+            <column name="fkid_tipo_usuario" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="com.pojos.Usuario" fetch="select">
+            <column name="fkid_usuario" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

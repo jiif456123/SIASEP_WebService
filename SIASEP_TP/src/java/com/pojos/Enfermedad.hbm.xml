@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 2, 2019 9:32:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.Enfermedad" table="enfermedad" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
+        <id name="idEnfermedad" type="int">
+            <column name="id_enfermedad" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomEnfermedad" type="string">
+            <column name="nom_enfermedad" length="45" />
+        </property>
+        <set name="perAlumnos" table="alumno_has_enfermedad" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="fkid_enfermedad" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.pojos.PerAlumno">
+                <column name="fkid_per_alumno" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
