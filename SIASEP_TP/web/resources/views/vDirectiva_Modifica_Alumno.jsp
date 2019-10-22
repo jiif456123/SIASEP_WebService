@@ -484,6 +484,23 @@
     .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
     .toggle.ios .toggle-handle { border-radius: 20px; }
 
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+    }
+    .custom-combobox-input {
+        margin: 0;
+        padding: 5px 10px;
+        width: 330px;
+    }
+    
 </style>
 </head>
 <body ng-app="myModificaMatr" ng-controller="modificaMatrCtrl" class="fixed-sn">
@@ -501,8 +518,8 @@
                                 <i class="fa fa-book"></i> <span class="clearfix d-none d-sm-inline-block">Módulos</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuB">
-                                <a class="dropdown-item" href="#" ng-click="navegaMatricularAlumno()">Matricular Alumno</a>
-                                <a class="dropdown-item" href="#">Modificar Alumno</a>
+                                <a class="dropdown-item" href="#" onclick="window.location.href = 'http://localhost:8084/SIASEP_TP/'">Matricular Alumno</a>
+                                <a class="dropdown-item" href="#" onclick="window.location.href = 'http://localhost:8084/SIASEP_TP/resources/views/vDirectiva_Modifica_Alumno.jsp'">Modificar Alumno</a>
                                 <a class="dropdown-item" href="#">Generar Horario</a>
                                 <a class="dropdown-item" href="#">Generar Libreta</a>
                                 <hr>
@@ -539,435 +556,601 @@
             </nav>
         </header>
 
-        <form class="formularioMatricula">
-            <main class="page-content">
-                <div class="container-fluid">
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="Administrar_matricula" role="tabpanel" aria-labelledby="pill_administrar_matricula">
-
-                            <div class="row ">
-                                <div class="col-lg-1">&nbsp;</div>
-                                <div class="col-lg-9">
-                                    <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="datos-alumno-md" data-toggle="tab" href="#datos-alumno" role="tab" aria-controls="datos-alumno"
-                                               aria-selected="true" style="font-weight: bold; color: #1e2229;">DATOS DEL ALUMNO</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="datos-familiar-md" data-toggle="tab" href="#datos-familiar" role="tab" aria-controls="datos-familiar"
-                                               aria-selected="false" style="font-weight: bold; color: #1e2229;">DATOS DEL FAMILIAR</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content card pt-4" id="myTabContentMD" style="padding: 0px 10px 0px 10px;">
-                                        <div class="tab-pane fade show active" id="datos-alumno" role="tabpanel" aria-labelledby="datos-alumno-md" style="padding-bottom: 30px;">
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" 
-                                                               aria-controls="v-pills-home" aria-selected="true">Datos Personales</a>
-                                                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                                                               aria-controls="v-pills-profile" aria-selected="false">Contacto</a>
-                                                            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" 
-                                                               aria-controls="v-pills-messages" aria-selected="false">Datos Generales</a>
-                                                            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" 
-                                                               aria-controls="v-pills-settings" aria-selected="false">Constancia</a>
+        <main class="page-content">
+            <div class="container">
+                <div class="tab-content" id="pills-tabContent" style="margin-bottom: 50px;">
+                    <div class="tab-pane fade show active" id="Administrar_matricula" role="tabpanel" aria-labelledby="pill_administrar_matricula">
+                        <div class="row ">
+                            <div class="col-lg-12">
+                                <div class="pt-4" style="padding-bottom: 35px; text-align: left;">
+                                    <h2><strong>MODIFICAR INFORMACIÓN DEL ALUMNO</strong></h2>
+                                    <h6>Consulte la informacion personal del alumno y si desee realizar algun cambio</h6>
+                                </div>
+                                
+                                
+                                <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="datos-alumno-md" data-toggle="tab" href="#datos-alumno" role="tab" aria-controls="datos-alumno"
+                                           aria-selected="true" style="font-weight: bold; color: #1e2229;">DATOS DEL ALUMNO</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="datos-familiar-md" data-toggle="tab" href="#datos-familiar" role="tab" aria-controls="datos-familiar"
+                                           aria-selected="false" style="font-weight: bold; color: #1e2229;">DATOS DEL FAMILIAR</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content card pt-4" id="myTabContentMD" style="padding: 0px 10px 0px 10px;">
+                                    <div class="tab-pane fade show active" id="datos-alumno" role="tabpanel" aria-labelledby="datos-alumno-md" style="padding-bottom: 30px;">
+                                        <div class="container-fluid">
+                                            <div class="row pt-2" style="padding-bottom: 22px;">
+                                                <div class="col-lg-6">
+                                                    <div class=" ui-widget">
+                                                        <div class="form-group" style="margin-top: 15px;">
+                                                            <label for="txtAlumnoBuscar">Buscar alumno por:&nbsp;&nbsp;&nbsp;</label>
+                                                            <select class="form-control" id="comboboxAlumno" ng-model="selAlumnoSeleccionado" 
+                                                                    ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_completo_alumno for labusq in listaAlumnosBusqueda"
+                                                                    ng-change="buscarAlumnoInfo()">
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-10">
-                                                        <%@include file="forms/vDirectiva_Modifica_Info.jsp"%>
+                                                </div>
+                                                <div class="col-lg-2" style="text-align: left; padding-top: 6px;">
+                                                    <button class="btn btn-info btn-md" ng-click="buscaAlumnoInfo()"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Buscar</button>
+                                                </div>
+                                                <div class="col-lg-4" style="text-align: right; padding-top: 2px;">
+                                                    <button class="btn btn-success"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;&nbsp;Realizar Cambios</button>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row" style="padding-top: 12px;">
+                                                <div class="col-lg-2">
+                                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" 
+                                                           aria-controls="v-pills-home" aria-selected="true">Datos Personales</a>
+                                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+                                                           aria-controls="v-pills-profile" aria-selected="false">Contacto</a>
+                                                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" 
+                                                           aria-controls="v-pills-messages" aria-selected="false">Datos Generales</a>
+                                                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" 
+                                                           aria-controls="v-pills-settings" aria-selected="false">Constancia</a>
                                                     </div>
+                                                </div>
+                                                <div class="col-lg-10">
+                                                    <%@include file="forms/vDirectiva_Modifica_Info.jsp"%>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="datos-familiar" role="tabpanel" aria-labelledby="datos-familiar-md">
-                                            <div class="container-fluid">
-                                                <div class="form-row pt-3">
-                                                    <div class="col" style="text-align: left;">
-                                                        <button class="btn btn-info btn-md" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar un vinculo</button>
+                                    </div>
+                                    <div class="tab-pane fade" id="datos-familiar" role="tabpanel" aria-labelledby="datos-familiar-md">
+                                        <div class="container-fluid">
+                                            <div class="row pt-2" style="padding-bottom: 22px;">
+                                                <div class="col-lg-6">
+                                                    <div class=" ui-widget">
+                                                        <div class="form-group" style="margin-top: 15px;">
+                                                            <label for="txtAlumnoBuscar">Buscar alumno por:&nbsp;&nbsp;&nbsp;</label>
+                                                            <select class="form-control" id="comboboxVinculo" ng-model="selAlumnoSeleccionado" 
+                                                                    ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_completo_alumno for labusq in listaAlumnosBusqueda"
+                                                                    ng-change="buscarAlumnoInfo()">
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="row pt-3">
-                                                    <div class="col-lg-12">
-                                                        <table class="table table-bordered table-sm">
-                                                            <thead>
-                                                                <tr class="table-secondary">
-                                                                    <th scope="col">Nro. Documento</th>
-                                                                    <th scope="col">Tipo de Familiar</th>
-                                                                    <th scope="col">Nombre Completo</th>
-                                                                    <th scope="col">Celular de Emergencia</th>
-                                                                    <th scope="col">Ocupación</th>
-                                                                    <th scope="col">¿Es Apoderado?</th>
-                                                                    <th scope="col">Acciones</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Mark</td>
-                                                                    <td>Otto</td>
-                                                                    <td>@mdo</td>
-                                                                    <td>@mdo</td>
-                                                                    <td>@mdo</td>
-                                                                    <td>@mdo</td>
-                                                                    <td class="text-center"><button class="btn btn-mdb-color btn-sm"><span class="fa fa-pencil-square-o"></span></button> <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                        <p style="font-weight: lighter;">*Nota: Solo se considera un apoderado por alumno matriculado</p>
-                                                    </div>
+                                                <div class="col-lg-2" style="text-align: left; padding-top: 6px;">
+                                                    <button class="btn btn-info btn-md" ng-click="buscaAlumnoInfo()"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Buscar</button>
+                                                </div>
+                                                <div class="col-lg-4" style="text-align: right; padding-top: 6px;">
+                                                    <button class="btn btn-outline-blue-grey btn-md" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar un vinculo</button>
+                                                </div>
+                                            </div>
+                                            <div class="row pt-3">
+                                                <div class="col-lg-12">
+                                                    <table class="table table-bordered table-sm">
+                                                        <thead>
+                                                            <tr class="table-secondary">
+                                                                <th scope="col">Nro. Documento</th>
+                                                                <th scope="col">Tipo de Familiar</th>
+                                                                <th scope="col">Nombre Completo</th>
+                                                                <th scope="col">Celular de Emergencia</th>
+                                                                <th scope="col">Ocupación</th>
+                                                                <th scope="col">¿Es Apoderado?</th>
+                                                                <th scope="col">Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                <td class="text-center"><button class="btn btn-mdb-color btn-sm"><span class="fa fa-pencil-square-o"></span></button> <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <p style="font-weight: lighter;">*Nota: Solo se considera un apoderado por alumno matriculado</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-2 text-center" style="padding-top: 32px;">
-                                    <button type="submit" class="btn btn-lg btn-success">MATRICULAR</button>
-                                    <br>
-                                    <a class="btn btn-lg btn-danger" href = "javascript:history.back()">CANCELAR</a>
-                                </div>
                             </div>
-
                         </div>
 
-                        <div class="tab-pane fade" id="Generar_horario" role="tabpanel" aria-labelledby="pill_generar_horario">
-                            EN DESARROLLO..
-                        </div>
-                        <div class="tab-pane fade" id="Generar_Libreta" role="tabpanel" aria-labelledby="pill_generar_libreta">
-                            EN DESARROLLO..aaaaa
-                        </div>
-                        <div class="tab-pane fade" id="Gestionar_Roles" role="tabpanel" aria-labelledby="pill_gestionar_roles">
-                            EN DESARROLLO..wwwww
-                        </div>                                    
                     </div>
+
+                    <div class="tab-pane fade" id="Generar_horario" role="tabpanel" aria-labelledby="pill_generar_horario">
+                        EN DESARROLLO..
+                    </div>
+                    <div class="tab-pane fade" id="Generar_Libreta" role="tabpanel" aria-labelledby="pill_generar_libreta">
+                        EN DESARROLLO..aaaaa
+                    </div>
+                    <div class="tab-pane fade" id="Gestionar_Roles" role="tabpanel" aria-labelledby="pill_gestionar_roles">
+                        EN DESARROLLO..wwwww
+                    </div>                                    
                 </div>
-            </main>
+            </div>
+        </main>
 
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="form-group row">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">Ingrese:</label>
-                                <div class="col-sm-7">
-                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Nro. Documento">
-                                </div>
-                                <div class="col-sm-3">
-                                    <button type="submit" class="btn btn-outline-light-blue btn-sm">Buscar</button>
-                                </div>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Ingrese:</label>
+                            <div class="col-sm-7">
+                                <input type="email" class="form-control" id="inputEmail3" placeholder="Nro. Documento">
                             </div>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#datos_personales" role="tab" 
-                                               aria-controls="v-pills-home" aria-selected="true">Datos Personales</a>
-                                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#datos_contacto" role="tab"
-                                               aria-controls="v-pills-profile" aria-selected="false">Contacto</a>
-                                            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#datos_laborales" role="tab" 
-                                               aria-controls="v-pills-messages" aria-selected="false">Datos Laborales y Otros</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="tab-content" id="v-pills-tabContent">
-                                            <div class="tab-pane fade show active" id="datos_personales" role="tabpanel" aria-labelledby="datos_personales-tab">
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <h3 style="font-weight: lighter;">Datos Personales</h3>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">¿ES APODERADO? (*)</label>
-                                                            <input type="checkbox" checked data-toggle="toggle" data-style="ios" data-on="SI" data-off="NO">
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelect1">Tipo de Documento (*)</label>
-                                                            <select class="md-form" id="exampleSelect1">
-                                                                <option>DNI</option>
-                                                                <option>PASAPORTE</option>
-                                                            </select>
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Numero de Documento (*)</label>
-                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelect1">Estado Civil (*)</label>
-                                                            <select class="form-control" id="exampleSelect1">
-                                                                <option>A -</option>
-                                                                <option>A +</option>
-                                                                <option>B -</option>
-                                                                <option>B +</option>
-                                                                <option>AB -</option>
-                                                                <option>AB +</option>
-                                                                <option>O -</option>
-                                                                <option>O +</option>
-                                                            </select>
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Primer Nombre (*)</label>
-                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Apellido Paterno (*)</label>
-                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Apellido Materno (*)</label>
-                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="example-date-input">Fecha de Nacimiento (*)</label>
-                                                            <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelect1">Lugar de Nacimiento (*)</label>
-                                                            <select class="form-control" id="exampleSelect1">
-                                                                <option>A -</option>
-                                                                <option>A +</option>
-                                                                <option>B -</option>
-                                                                <option>B +</option>
-                                                                <option>AB -</option>
-                                                                <option>AB +</option>
-                                                                <option>O -</option>
-                                                                <option>O +</option>
-                                                            </select>
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group" style="text-align: left;">
-                                                            <label for="relSexo">Sexo (*)</label>
-                                                            <div class="form-control" id="relSexo" style="padding: 0px 0px 7px 0px;">
-                                                                <div class="row" style="padding-top: 8px;">
-                                                                    <div class="col-lg-6" style="text-align: right;">
-                                                                        <div class="form-check-inline" style="text-align: right;">
-                                                                            <label class="form-check-label" style="font-size: 13px;">
-                                                                                <input type="radio" class="form-check-input" name="optradio">Hombre
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6" style="text-align: left;">
-                                                                        <div class="form-check-inline" style="text-align: left;">
-                                                                            <label class="form-check-label" style="font-size: 13px;">
-                                                                                <input type="radio" class="form-check-input" name="optradio">Mujer
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-                                            <div class="tab-pane fade" id="datos_contacto" role="tabpanel" aria-labelledby="datos_contacto-tab">
-                                                <h3 style="font-weight: lighter;">Datos de Contacto</h3>
-                                                <div class="row pt-3">
-                                                    <div class="col-lg-5">
-                                                        <div class="form-row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="exampleSelect1">Distrito (*)</label>
-                                                                    <select class="selectpicker form-control" data-live-search="true" 
-                                                                            id="exampleSelect1" data-width="96%" data-size="7">
-                                                                        <option>San Juan de Miraflores</option>
-                                                                        <option>San Juan de Miraflores</option>
-                                                                        <option>San Juan de Miraflores</option>
-                                                                        <option>San Juan de Miraflores</option>
-                                                                        <option>San Juan de Miraflores</option>
-                                                                        <option>San Juan de Miraflores</option>
-                                                                        <option>San Juan de Miraflores</option>
-                                                                        <option>San Juan de Miraflores</option>
-                                                                        <option>San Juan de Miraflores</option>
-                                                                    </select>
-                                                                    <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-7">
-                                                        <div class="form-row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputEmail1">Telefono de Casa</label>
-                                                                    <input type="text" class="form-control" id="exampleInputEmail1" style="margin-top: 12px;"
-                                                                           aria-describedby="emailHelp" placeholder="Enter email">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputEmail1">Celular de Emergencia (*)</label>
-                                                                    <input type="text" class="form-control" id="exampleInputEmail1" style="margin-top: 12px;"
-                                                                           aria-describedby="emailHelp" placeholder="Enter email">
-                                                                    <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="form-row" style="padding-top: 10px;">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Dirección del hogar (*)</label>
-                                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Correo electrónico</label>
-                                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example123@gmail.com">
-                                                        </div>
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                            <div class="tab-pane fade" id="datos_laborales" role="tabpanel" aria-labelledby="datos_laborales-tab">
-                                                <h3 style="font-weight: lighter;">Datos Laborales</h3>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelect1">Tipo de Familiar (*)</label>
-                                                            <select class="form-control" id="exampleSelect1">
-                                                                <option>A -</option>
-                                                                <option>A +</option>
-                                                                <option>B -</option>
-                                                                <option>B +</option>
-                                                                <option>AB -</option>
-                                                                <option>AB +</option>
-                                                                <option>O -</option>
-                                                                <option>O +</option>
-                                                            </select>
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group" style="text-align: left;">
-                                                            <label for="relSexo">¿Entregó Copia de DNI? (*)</label>
-                                                            <div class="form-control" id="relSexo" style="padding: 0px 0px 7px 0px;">
-                                                                <div class="row" style="padding-top: 8px;">
-                                                                    <div class="col-lg-6" style="text-align: right;">
-                                                                        <div class="form-check-inline" style="text-align: right;">
-                                                                            <label class="form-check-label" style="font-size: 14px;">
-                                                                                <input type="radio" class="form-check-input" name="optradio">SI
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6" style="text-align: left;">
-                                                                        <div class="form-check-inline" style="text-align: left;">
-                                                                            <label class="form-check-label" style="font-size: 14px;">
-                                                                                <input type="radio" class="form-check-input" name="optradio">NO
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio marcar una de las opciones.</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelect1">Grado de instruccion (*)</label>
-                                                            <select class="form-control" id="exampleSelect1" style="margin-top: 12px;">
-                                                                <option>A -</option>
-                                                                <option>A +</option>
-                                                                <option>B -</option>
-                                                                <option>B +</option>
-                                                                <option>AB -</option>
-                                                                <option>AB +</option>
-                                                                <option>O -</option>
-                                                                <option>O +</option>
-                                                            </select>
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">Ocupación</label>
-                                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-                                                                   placeholder="example123@gmail.com" style="margin-top: 12px;">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="exampleSelect1">Centro de Labores (*)</label>
-                                                            <select class="selectpicker form-control" data-live-search="true" 
-                                                                    id="exampleSelect1" data-width="96%" data-size="7">
-                                                                <option>San Juan de Miraflores</option>
-                                                                <option>San Juan de Miraflores</option>
-                                                                <option>San Juan de Miraflores</option>
-                                                                <option>San Juan de Miraflores</option>
-                                                                <option>San Juan de Miraflores</option>
-                                                                <option>San Juan de Miraflores</option>
-                                                                <option>San Juan de Miraflores</option>
-                                                                <option>San Juan de Miraflores</option>
-                                                                <option>San Juan de Miraflores</option>
-                                                            </select>
-                                                            <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                        </div>
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-outline-light-blue btn-sm">Buscar</button>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Vincular existente</button>
-                            <button type="button" class="btn btn-primary">Registrar nuevo</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#datos_personales" role="tab" 
+                                           aria-controls="v-pills-home" aria-selected="true">Datos Personales</a>
+                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#datos_contacto" role="tab"
+                                           aria-controls="v-pills-profile" aria-selected="false">Contacto</a>
+                                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#datos_laborales" role="tab" 
+                                           aria-controls="v-pills-messages" aria-selected="false">Datos Laborales y Otros</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active" id="datos_personales" role="tabpanel" aria-labelledby="datos_personales-tab">
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <h3 style="font-weight: lighter;">Datos Personales</h3>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">¿ES APODERADO? (*)</label>
+                                                        <input type="checkbox" checked data-toggle="toggle" data-style="ios" data-on="SI" data-off="NO">
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleSelect1">Tipo de Documento (*)</label>
+                                                        <select class="md-form" id="exampleSelect1">
+                                                            <option>DNI</option>
+                                                            <option>PASAPORTE</option>
+                                                        </select>
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Numero de Documento (*)</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleSelect1">Estado Civil (*)</label>
+                                                        <select class="form-control" id="exampleSelect1">
+                                                            <option>A -</option>
+                                                            <option>A +</option>
+                                                            <option>B -</option>
+                                                            <option>B +</option>
+                                                            <option>AB -</option>
+                                                            <option>AB +</option>
+                                                            <option>O -</option>
+                                                            <option>O +</option>
+                                                        </select>
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Primer Nombre (*)</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Apellido Paterno (*)</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Apellido Materno (*)</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="example-date-input">Fecha de Nacimiento (*)</label>
+                                                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleSelect1">Lugar de Nacimiento (*)</label>
+                                                        <select class="form-control" id="exampleSelect1">
+                                                            <option>A -</option>
+                                                            <option>A +</option>
+                                                            <option>B -</option>
+                                                            <option>B +</option>
+                                                            <option>AB -</option>
+                                                            <option>AB +</option>
+                                                            <option>O -</option>
+                                                            <option>O +</option>
+                                                        </select>
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group" style="text-align: left;">
+                                                        <label for="relSexo">Sexo (*)</label>
+                                                        <div class="form-control" id="relSexo" style="padding: 0px 0px 7px 0px;">
+                                                            <div class="row" style="padding-top: 8px;">
+                                                                <div class="col-lg-6" style="text-align: right;">
+                                                                    <div class="form-check-inline" style="text-align: right;">
+                                                                        <label class="form-check-label" style="font-size: 13px;">
+                                                                            <input type="radio" class="form-check-input" name="optradio">Hombre
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6" style="text-align: left;">
+                                                                    <div class="form-check-inline" style="text-align: left;">
+                                                                        <label class="form-check-label" style="font-size: 13px;">
+                                                                            <input type="radio" class="form-check-input" name="optradio">Mujer
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="tab-pane fade" id="datos_contacto" role="tabpanel" aria-labelledby="datos_contacto-tab">
+                                            <h3 style="font-weight: lighter;">Datos de Contacto</h3>
+                                            <div class="row pt-3">
+                                                <div class="col-lg-5">
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="exampleSelect1">Distrito (*)</label>
+                                                                <select class="selectpicker form-control" data-live-search="true" 
+                                                                        id="exampleSelect1" data-width="96%" data-size="7">
+                                                                    <option>San Juan de Miraflores</option>
+                                                                    <option>San Juan de Miraflores</option>
+                                                                    <option>San Juan de Miraflores</option>
+                                                                    <option>San Juan de Miraflores</option>
+                                                                    <option>San Juan de Miraflores</option>
+                                                                    <option>San Juan de Miraflores</option>
+                                                                    <option>San Juan de Miraflores</option>
+                                                                    <option>San Juan de Miraflores</option>
+                                                                    <option>San Juan de Miraflores</option>
+                                                                </select>
+                                                                <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1">Telefono de Casa</label>
+                                                                <input type="text" class="form-control" id="exampleInputEmail1" style="margin-top: 12px;"
+                                                                       aria-describedby="emailHelp" placeholder="Enter email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1">Celular de Emergencia (*)</label>
+                                                                <input type="text" class="form-control" id="exampleInputEmail1" style="margin-top: 12px;"
+                                                                       aria-describedby="emailHelp" placeholder="Enter email">
+                                                                <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-row" style="padding-top: 10px;">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Dirección del hogar (*)</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Correo electrónico</label>
+                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example123@gmail.com">
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        <div class="tab-pane fade" id="datos_laborales" role="tabpanel" aria-labelledby="datos_laborales-tab">
+                                            <h3 style="font-weight: lighter;">Datos Laborales</h3>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleSelect1">Tipo de Familiar (*)</label>
+                                                        <select class="form-control" id="exampleSelect1">
+                                                            <option>A -</option>
+                                                            <option>A +</option>
+                                                            <option>B -</option>
+                                                            <option>B +</option>
+                                                            <option>AB -</option>
+                                                            <option>AB +</option>
+                                                            <option>O -</option>
+                                                            <option>O +</option>
+                                                        </select>
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group" style="text-align: left;">
+                                                        <label for="relSexo">¿Entregó Copia de DNI? (*)</label>
+                                                        <div class="form-control" id="relSexo" style="padding: 0px 0px 7px 0px;">
+                                                            <div class="row" style="padding-top: 8px;">
+                                                                <div class="col-lg-6" style="text-align: right;">
+                                                                    <div class="form-check-inline" style="text-align: right;">
+                                                                        <label class="form-check-label" style="font-size: 14px;">
+                                                                            <input type="radio" class="form-check-input" name="optradio">SI
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6" style="text-align: left;">
+                                                                    <div class="form-check-inline" style="text-align: left;">
+                                                                        <label class="form-check-label" style="font-size: 14px;">
+                                                                            <input type="radio" class="form-check-input" name="optradio">NO
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio marcar una de las opciones.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleSelect1">Grado de instruccion (*)</label>
+                                                        <select class="form-control" id="exampleSelect1" style="margin-top: 12px;">
+                                                            <option>A -</option>
+                                                            <option>A +</option>
+                                                            <option>B -</option>
+                                                            <option>B +</option>
+                                                            <option>AB -</option>
+                                                            <option>AB +</option>
+                                                            <option>O -</option>
+                                                            <option>O +</option>
+                                                        </select>
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Ocupación</label>
+                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
+                                                               placeholder="example123@gmail.com" style="margin-top: 12px;">
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="exampleSelect1">Centro de Labores (*)</label>
+                                                        <select class="selectpicker form-control" data-live-search="true" 
+                                                                id="exampleSelect1" data-width="96%" data-size="7">
+                                                            <option>San Juan de Miraflores</option>
+                                                            <option>San Juan de Miraflores</option>
+                                                            <option>San Juan de Miraflores</option>
+                                                            <option>San Juan de Miraflores</option>
+                                                            <option>San Juan de Miraflores</option>
+                                                            <option>San Juan de Miraflores</option>
+                                                            <option>San Juan de Miraflores</option>
+                                                            <option>San Juan de Miraflores</option>
+                                                            <option>San Juan de Miraflores</option>
+                                                        </select>
+                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Vincular existente</button>
+                        <button type="button" class="btn btn-primary">Registrar nuevo</button>
                     </div>
                 </div>
             </div>
-        </form>                                         
+        </div>
 
     </div>
     <!--Modal: Login / Register Form-->
     <%@include file="foot.jspf" %>
     <script>
+        
+        $('.datepicker').pickadate({
+            format: 'mmmm d, yyyy',
+            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        });
+        
+        $( function() {
+            $.widget( "custom.combobox", {
+              _create: function() {
+                this.wrapper = $( "<span>" )
+                  .addClass( "custom-combobox" )
+                  .insertAfter( this.element );
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+              },
+              _createAutocomplete: function() {
+                var selected = this.element.children( ":selected" ),
+                  value = selected.val() ? selected.text() : "";
+                
+                this.input = $( "<input>" )
+                  .appendTo( this.wrapper )
+                  .attr("id", "txtAlumnoSelected")
+                  .val( value )
+                  .attr( "title", "" )
+                  .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+                  .autocomplete({
+                    delay: 0,
+                    minLength: 0,
+                    source: $.proxy( this, "_source" )
+                  })
+                  .tooltip({
+                    classes: {
+                      "ui-tooltip": "ui-state-highlight"
+                    }
+                  });
+
+                this._on( this.input, {
+                  autocompleteselect: function( event, ui ) {
+                    ui.item.option.selected = true;
+                    this._trigger( "select", event, {
+                      item: ui.item.option
+                    });
+                  },
+
+                  autocompletechange: "_removeIfInvalid"
+                });
+              },
+
+              _createShowAllButton: function() {
+                var input = this.input,
+                  wasOpen = false;
+
+                $( "<a>" )
+                  .attr( "tabIndex", -1 )
+                  .attr( "title", "Mostrar Todo" )
+                  .tooltip()
+                  .appendTo( this.wrapper )
+                  .button({
+                    icons: {
+                      primary: "ui-icon-triangle-1-s"
+                    },
+                    text: false
+                  })
+                  .removeClass( "ui-corner-all" )
+                  .addClass( "custom-combobox-toggle ui-corner-right" )
+                  .on( "mousedown", function() {
+                    wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+                  })
+                  .on( "click", function() {
+                    input.trigger( "focus" );
+
+                    // Close if already visible
+                    if ( wasOpen ) {
+                      return;
+                    }
+
+                    // Pass empty string as value to search for, displaying all results
+                    input.autocomplete( "search", "" );
+                  });
+              },
+
+              _source: function( request, response ) {
+                var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+                response( this.element.children( "option" ).map(function() {
+                  var text = $( this ).text();
+                  if ( this.value && ( !request.term || matcher.test(text) ) )
+                    return {
+                      label: text,
+                      value: text,
+                      option: this
+                    };
+                }) );
+              },
+
+              _removeIfInvalid: function( event, ui ) {
+
+                // Selected an item, nothing to do
+                if ( ui.item ) {
+                  return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children( "option" ).each(function() {
+                  if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+                    this.selected = valid = true;
+                    return false;
+                  }
+                });
+                // Found a match, nothing to do
+                if ( valid ) {
+                  return;
+                }
+                // Remove invalid value
+                this.input
+                  .val( "" )
+                  .attr( "title", "No se encontro la busqueda \""+value+"\"." )
+                  .tooltip( "open" );
+                this.element.val( "" );
+                this._delay(function() {
+                  this.input.tooltip( "close" ).attr( "title", "" );
+                }, 2500 );
+                this.input.autocomplete( "instance" ).term = "";
+              },
+              _destroy: function() {
+                this.wrapper.remove();
+                this.element.show();
+              }
+            });
+            $( "#comboboxAlumno" ).combobox();
+            $( "#comboboxVinculo" ).combobox();
+        } );
+
         (function() {
             'use strict';
             window.addEventListener('load', function() {

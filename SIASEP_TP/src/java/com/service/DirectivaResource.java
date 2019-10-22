@@ -1,9 +1,11 @@
 package com.service;
 
+import com.DTO.ListaAlumnoDTO;
 import com.DTO.ListaMatriculaDTO;
 import com.DTO.MatriculaDTO;
 import com.google.gson.Gson;
 import com.helper.MatriculaHelper;
+import com.helper.ModificaAlumnoHelper;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -20,12 +22,14 @@ import javax.ws.rs.core.Response;
 public class DirectivaResource {
 
     MatriculaHelper matriculaHelper;
+    ModificaAlumnoHelper modificaAlumnoHelper;
     
     @Context
     private UriInfo context;
 
     public DirectivaResource() {
         matriculaHelper = new MatriculaHelper();
+        modificaAlumnoHelper = new ModificaAlumnoHelper();
     }
 
     @GET
@@ -39,6 +43,8 @@ public class DirectivaResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
+    
+    /*-----------------------------------------------INICIO MATRICULA---------------------------------------------------*/
     
     @GET
     @Path("listaPeriodoSelect")
@@ -229,5 +235,39 @@ public class DirectivaResource {
         }
         return respuesta;
     }
+    
+    /*---------------------------------------- FIN DE MATRICULA -----------------------------------------------------*/
+    
+    @GET
+    @Path("listarAlumnosBusqueda")
+    @Produces("application/json")
+    public String listarAlumnosBusqueda(String data) {
+        Gson gson =new Gson();
+        List lista = null;
+        try{
+            lista = modificaAlumnoHelper.getListAlumnosBusqueda();
+        }
+        catch(Exception ex){
+            System.out.println("getListaPeriodoSelect: "+ex);
+        }
+        return gson.toJson(lista);
+    }
+    
+    @POST
+    @Path("listarDatosDelAlumno")
+    @Produces("application/json")
+    public String listarDatosDelAlumno(String data) {
+        System.out.println("-->"+data);
+        Gson gson = new Gson();
+        ListaAlumnoDTO listaAlumnoDTO = gson.fromJson(data, ListaAlumnoDTO.class);
+        ListaAlumnoDTO respuesta = new ListaAlumnoDTO();
+        try {
+            respuesta = modificaAlumnoHelper.getListDatosByAlumno(listaAlumnoDTO.getCodigo_alumno());
+        }catch(Exception e){
+            System.out.println("verObservacionMatricula: "+e.getMessage());
+        }
+        return gson.toJson(respuesta);
+    }
+    
     
 }

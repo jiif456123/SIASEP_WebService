@@ -2,47 +2,81 @@ var app = angular.module("myModificaMatr",['ngStorage','angularUtils.directives.
 
 app.controller("modificaMatrCtrl", function($scope, $http, $window) {
     
-    var sesionCodigoUsuario = sessionStorage.getItem('idUsuarioLogged');
-    var sesionNombreTipo = sessionStorage.getItem('tipoUsuario');
+    //    var sesionCodigoUsuario = sessionStorage.getItem('idUsuarioLogged');
+//    var sesionNombreTipo = sessionStorage.getItem('tipoUsuario');
+//    var sesionTipoUsuario = sessionStorage.getItem('fkidTipoUsuario');
+
+    var sesionCodigoUsuario = '2';
+    var sesionNombreTipo = 'Dpto. Secretaria';
     var sesionTipoUsuario = sessionStorage.getItem('fkidTipoUsuario');
 
-    //NAVEGA DESDE EL MODULO O EL NAVBAR LLENDO A "MATRICULAR ALUMNO"
-    $scope.navegaPasoNro1 = function() {
-       $window.location.href = '/SIASEP_TP/resources/views/forms/vDirectiva_Matricula_Paso1.jsp';
-       $scope.getInfoUsuario();
-    };
-    $scope.navegaModificarAlumno = function() {
-       $window.location.href = '/SIASEP_TP/resources/views/forms/vDirectiva_Modifica_Info.jsp';
-       $scope.getInfoUsuario();
-    };
-    
     //CONTROLA LOS DEMAS METODOS GET Y CARGA DE DATOS
     $scope.getInfoUsuario = function() {
-        $scope.nombre = sessionStorage.getItem('nombreUsuario');
-        $scope.apellido = sessionStorage.getItem('apellidoUsuario');
+        $scope.nombre = 'Ricardo';
+        $scope.apellido = 'Villanueva';   
+//        $scope.nombre = sessionStorage.getItem('nombreUsuario');
+//        $scope.apellido = sessionStorage.getItem('apellidoUsuario');
         $scope.tipousuario = sesionNombreTipo;
-        $scope.getListaPeriodos();
-        $scope.getListaMatHabilitado();
-        $scope.getListaMatDeshabilitado();
-        $scope.getListaHistorialMatr();
-        
-        $scope.getListaAlumnosAntiguos();
-        $scope.getListaAlumnosRepetidos();
+        $scope.obtenerListaAlumno();
+
     };
 
-    $scope.getListaPeriodos = function() {
-        $scope.selectedPeriodoIdHabilitado = 1; //ES EL AÑO ACTUAL SEGUN LA BASE DE DATOS
-        $scope.selectedPeriodoIdDeshabilitado = 1; //ES EL AÑO ACTUAL SEGUN LA BASE DE DATOS
+    $scope.obtenerListaAlumno = function() {
         $http({
             method: 'GET',
-            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listaPeriodoSelect',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listarAlumnosBusqueda',
             data: { }
         }).then(function successCallback(response) {
-            $scope.listaPeriodos = response.data;
+            $scope.listaAlumnosBusqueda = response.data;
         }, function errorCallback(response) {
             alert("ERROR getListaAlumnosAntiguos");
         });
     };
+
+    $scope.buscaAlumnoInfo = function() {
+        var txtAlumnoSelected = document.getElementById("txtAlumnoSelected")
+                                .value.toString()
+                                .substring(0,6);
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listarDatosDelAlumno',
+            data: { codigo_alumno: txtAlumnoSelected}
+        }).then(function successCallback(response) {
+            //Datos Personales
+            $scope.modNombreAlumno = response.data.primer_nombre;
+            $scope.modApePaternoAlumno = response.data.apellido_paterno;
+            $scope.modApeMaternoAlumno = response.data.apellido_materno;
+            $scope.modTipoDocAlumno = ''+response.data.fkid_tipo_documento;
+            $scope.modNroDocAlumno = response.data.numero_documento;
+            $scope.modSexoAlumno = response.data.sexo;
+            $scope.modFecNacAlumno = response.data.fec_nacimiento;
+            $scope.modLugarNacAlumno = ''+response.data.fkid_lugar_nacimiento;
+            //Contacto
+            $scope.modDistritoAlumno = ''+response.data.fkid_distrito;
+            $scope.modTelefonoAlumno = response.data.telefono_casa;
+            $scope.modCelularAlumno = response.data.telefono_celular;
+            $scope.modDireccionAlumno = response.data.direccion;
+            $scope.modCorreoAlumno = (response.data.correo != undefined) ? response.data.correo : 'No tiene correo electronico.';
+            //Datos Generales
+            $scope.modLMaternaAlumno = response.data.lengua_materna;
+            $scope.modLSegundaAlumno = (response.data.segunda_lengua != undefined) ? response.data.segunda_lengua : 'No domina una segunda lengua.';
+            $scope.modNroHermAlumno = response.data.nro_hermanos;
+            $scope.modVivePadresAlumno = response.data.flg_vive_con_padres;
+            //Constancia
+            $scope.modCopiaDNIAlumno = response.data.flg_copia_dni;
+            $scope.modPonderadoAlumno = response.data.ref_ponderado_anterior;
+            $scope.modTercioAlumno = response.data.flg_tercio_superior;
+            $scope.modNivelAnterior = ''+response.data.ref_nivel;
+            $scope.modGradoAnterior = ''+response.data.ref_grado_anterior;
+            $scope.modSeccionReferente = ''+response.data.ref_seccion;
+            $scope.modIEAlumno = response.data.nombre_ie_anterior;
+            $scope.modSanguineoAlumno = response.data.grupo_sanguineo;
+        }, function errorCallback(response) {
+            alert("ERROR buscaAlumnoInfo");
+        });
+        
+    };
+    
     
     $scope.getListaMatHabilitado = function() {
         var idPeriodo = $scope.selectedPeriodoIdHabilitado;

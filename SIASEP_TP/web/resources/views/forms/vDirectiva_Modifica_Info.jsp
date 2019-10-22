@@ -4,42 +4,42 @@
         <div class="form-row pt-3">
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Primer Nombre (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                    <label for="txtNombreAlumno">Primer Nombre (*)</label>
+                    <input type="text" class="form-control" id="txtNombreAlumno" aria-describedby="nombreAlumno" ng-model="modNombreAlumno" readonly>
+                    <small id="nombreAlumno" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Apellido Paterno (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                    <label for="txtApePaternoAlumno">Apellido Paterno (*)</label>
+                    <input type="text" class="form-control" id="txtApePaternoAlumno" aria-describedby="apePaternoAlumno" ng-model="modApePaternoAlumno" readonly>
+                    <small id="apePaternoAlumno" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Apellido Materno (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                    <label for="txtApeMaternoAlumno">Apellido Materno (*)</label>
+                    <input type="text" class="form-control" id="txtApeMaternoAlumno" aria-describedby="apeMaternoAlumno" ng-model="modApeMaternoAlumno" readonly>
+                    <small id="apeMaternoAlumno" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
         </div>
         <div class="form-row">
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleSelect1">Tipo de Documento (*)</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>DNI</option>
-                        <option>PASAPORTE</option>
+                    <label for="selTDAlumno">Tipo de Documento (*)</label>
+                    <select class="form-control" id="selTDAlumno" ng-model="modTipoDocAlumno" disabled>
+                        <option value="1">DNI</option>
+                        <option value="2">PASAPORTE</option>
                     </select>
-                    <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                    <small class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Numero de Documento (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                    <label for="txtNroDocAlumno">Numero de Documento (*)</label>
+                    <input type="text" class="form-control" id="txtNroDocAlumno" aria-describedby="nroDocAlumno" ng-model="modNroDocAlumno" readonly>
+                    <small id="nroDocAlumno" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
@@ -50,14 +50,14 @@
                             <div class="col-lg-6" style="text-align: right;">
                                 <div class="form-check-inline" style="text-align: right;">
                                     <label class="form-check-label" style="font-size: 13px;">
-                                        <input type="radio" class="form-check-input" name="optradio">Hombre
+                                        <input type="radio" class="form-check-input" name="optradioA" required ng-model="modSexoAlumno" value="M" disabled>Hombre
                                     </label>
                                 </div>
                             </div>
                             <div class="col-lg-6" style="text-align: left;">
                                 <div class="form-check-inline" style="text-align: left;">
                                     <label class="form-check-label" style="font-size: 13px;">
-                                        <input type="radio" class="form-check-input" name="optradio">Mujer
+                                        <input type="radio" class="form-check-input" name="optradioA" required ng-model="modSexoAlumno" value="F" disabled>Mujer
                                     </label>
                                 </div>
                             </div>
@@ -69,24 +69,41 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <div class="form-group">
-                    <label for="example-date-input">Fecha de Nacimiento (*)</label>
-                    <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                <div class="form-group" style="position: relative">
+                    <label for="txtFechaNacAlumno">Fecha de Nacimiento (*)</label>
+                    <input class="form-control datepicker" type="text" id="txtFechaNacAlumno" ng-model="modFecNacAlumno" disabled>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleSelect1">Lugar Nacimiento (*)</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>A -</option>
-                        <option>A +</option>
-                        <option>B -</option>
-                        <option>B +</option>
-                        <option>AB -</option>
-                        <option>AB +</option>
-                        <option>O -</option>
-                        <option>O +</option>
+                    <label for="txtLugarNacAlumno">Lugar Nacimiento (*)</label>
+                    <select class="form-control" id="txtLugarNacAlumno" ng-model="modLugarNacAlumno" disabled>
+                        <option value="1">Amazonas</option>
+                        <option value="2">Ancash</option>
+                        <option value="3">Apurimac</option>
+                        <option value="4">Arequipa</option>
+                        <option value="5">Ayacucho</option>
+                        <option value="6">Cajamarca</option>
+                        <option value="7">Callao</option>
+                        <option value="8">Cuzco</option>
+                        <option value="9">Huancavelica</option>
+                        <option value="10">Huanuco</option>
+                        <option value="11">Ica</option>
+                        <option value="12">Junin</option>
+                        <option value="13">La Libertad</option>
+                        <option value="14">Lambayeque</option>
+                        <option value="15">Lima</option>
+                        <option value="16">Loreto</option>
+                        <option value="17">Madre de Dios</option>
+                        <option value="18">Moquegua</option>
+                        <option value="19">Pasco</option>
+                        <option value="20">Piura</option>
+                        <option value="21">Puno</option>
+                        <option value="22">San Martin</option>
+                        <option value="23">Tacna</option>
+                        <option value="24">Tumbes</option>
+                        <option value="25">Ucayali</option>
                     </select>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
@@ -102,17 +119,57 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleSelect1">Distrito (*)</label>
-                            <select class="selectpicker form-control" data-live-search="true" 
-                                    id="exampleSelect1" data-width="96%" data-size="7">
-                                <option>San Juan de Miraflores</option>
-                                <option>San Juan de Miraflores</option>
-                                <option>San Juan de Miraflores</option>
-                                <option>San Juan de Miraflores</option>
-                                <option>San Juan de Miraflores</option>
-                                <option>San Juan de Miraflores</option>
-                                <option>San Juan de Miraflores</option>
-                                <option>San Juan de Miraflores</option>
-                                <option>San Juan de Miraflores</option>
+                            <select class="form-control" id="exampleSelect1" ng-model="modDistritoAlumno" disabled>
+                                <option value="1">Callao</option>
+                                <option value="2">Bellavista</option>
+                                <option value="3">Carmen de la Legua</option>
+                                <option value="4">La Perla</option>
+                                <option value="5">La Punta</option>
+                                <option value="6">Mi Peru</option>   
+                                <option value="7">Ventanilla</option>
+                                <option value="8">Lima</option>
+                                <option value="9">Ancon</option>
+                                <option value="10">Ate</option>
+                                <option value="11">Barranco</option>
+                                <option value="12">Breña</option>     
+                                <option value="13">Carabayllo</option>
+                                <option value="14">Cieneguilla</option>
+                                <option value="15">Chaclacayo</option>
+                                <option value="16">Chomillos</option>
+                                <option value="17">Comas</option>
+                                <option value="18">El Agustino</option>
+                                <option value="19">Indepenndencia</option>
+                                <option value="20">Jesus Maria</option>
+                                <option value="21">La Molina</option>
+                                <option value="22">La Victoria</option>
+                                <option value="23">Lince</option>   
+                                <option value="24">Los Olivos</option>
+                                <option value="25">Lurigancho</option>
+                                <option value="26">Lurin</option>
+                                <option value="27">Magdalena del Mar</option>
+                                <option value="28">Miraflores</option>
+                                <option value="29">Pachacamac</option>     
+                                <option value="30">Pucusana</option>
+                                <option value="31">Pueblo Libre</option>
+                                <option value="32">Puente Piedra</option>
+                                <option value="33">Punta Hermosa</option>
+                                <option value="34">Punta Negra</option>
+                                <option value="35">Rimac</option>
+                                <option value="36">San Bartolo</option>
+                                <option value="37">San Borja</option>
+                                <option value="38">San Isidro</option>
+                                <option value="39">San Juan de Lurigancho</option>
+                                <option value="40">San Juan de Miraflores</option>   
+                                <option value="41">San Luis</option>
+                                <option value="42">San Martin de Porres</option>
+                                <option value="43">San Miguel</option>
+                                <option value="44">Santa Anita</option>
+                                <option value="45">Santa Maria del Mar</option>
+                                <option value="46">Santa Rosa</option>     
+                                <option value="47">Santiago de Surco</option>
+                                <option value="48">Surquillo</option>
+                                <option value="49">Villa el Salvador</option>
+                                <option value="50">Villa Maria del Triunfo </option>
                             </select>
                             <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                         </div>
@@ -124,15 +181,15 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Telefono de Casa</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" style="margin-top: 12px;"
-                                   aria-describedby="emailHelp" placeholder="Enter email">
+                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" ng-model="modTelefonoAlumno" readonly>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Celular</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" style="margin-top: 12px;"
-                                   aria-describedby="emailHelp" placeholder="Enter email">
+                            <input type="text" class="form-control" id="exampleInputEmail1" 
+                                   aria-describedby="emailHelp" ng-model="modCelularAlumno" readonly>
                         </div>
                     </div>
                 </div>
@@ -143,14 +200,14 @@
             <div class="col">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Dirección del hogar (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modDireccionAlumno" readonly>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Correo electrónico</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example123@gmail.com">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modCorreoAlumno" readonly>
                 </div>
             </div>
         </div> 
@@ -162,14 +219,14 @@
             <div class="col">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Lengua Materna que domine (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modLMaternaAlumno" readonly>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Segunda Lengua Materna</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modLSegundaAlumno" readonly>
                 </div>
             </div>
         </div>
@@ -177,7 +234,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Cantidad de Hermanos (*)</label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" min="0">
+                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" min="0" ng-model="modNroHermAlumno" disabled>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
@@ -189,14 +246,14 @@
                             <div class="col-lg-6" style="text-align: right;">
                                 <div class="form-check-inline" style="text-align: right;">
                                     <label class="form-check-label" style="font-size: 14px;">
-                                        <input type="radio" class="form-check-input" name="optradio">SI
+                                        <input type="radio" class="form-check-input" name="optradioB" value="0" ng-model="modVivePadresAlumno" disabled>SI
                                     </label>
                                 </div>
                             </div>
                             <div class="col-lg-6" style="text-align: left;">
                                 <div class="form-check-inline" style="text-align: left;">
                                     <label class="form-check-label" style="font-size: 14px;">
-                                        <input type="radio" class="form-check-input" name="optradio">NO
+                                        <input type="radio" class="form-check-input" name="optradioB" value="1" ng-model="modVivePadresAlumno" disabled>NO
                                     </label>
                                 </div>
                             </div>
@@ -219,14 +276,14 @@
                             <div class="col-lg-6" style="text-align: right;">
                                 <div class="form-check-inline" style="text-align: right;">
                                     <label class="form-check-label" style="font-size: 14px;">
-                                        <input type="radio" class="form-check-input" name="optradio">SI
+                                        <input type="radio" class="form-check-input" name="optradioC" value="0" ng-model="modCopiaDNIAlumno" disabled>SI
                                     </label>
                                 </div>
                             </div>
                             <div class="col-lg-6" style="text-align: left;">
                                 <div class="form-check-inline" style="text-align: left;">
                                     <label class="form-check-label" style="font-size: 14px;">
-                                        <input type="radio" class="form-check-input" name="optradio">NO
+                                        <input type="radio" class="form-check-input" name="optradioC" value="1" ng-model="modCopiaDNIAlumno" disabled>NO
                                     </label>
                                 </div>
                             </div>
@@ -238,7 +295,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Ponderado Referencial (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" min="0">
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modPonderadoAlumno" readonly>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
@@ -250,14 +307,14 @@
                             <div class="col-lg-6" style="text-align: right;">
                                 <div class="form-check-inline" style="text-align: right;">
                                     <label class="form-check-label" style="font-size: 14px;">
-                                        <input type="radio" class="form-check-input" name="optradio">SI
+                                        <input type="radio" class="form-check-input" name="optradioD" value="0" ng-model="modTercioAlumno" disabled>SI
                                     </label>
                                 </div>
                             </div>
                             <div class="col-lg-6" style="text-align: left;">
                                 <div class="form-check-inline" style="text-align: left;">
                                     <label class="form-check-label" style="font-size: 14px;">
-                                        <input type="radio" class="form-check-input" name="optradio">NO
+                                        <input type="radio" class="form-check-input" name="optradioD" value="1" ng-model="modTercioAlumno" disabled>NO
                                     </label>
                                 </div>
                             </div>
@@ -270,32 +327,24 @@
         <div class="form-row">
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleSelect1">Nivel Académico Referente(*)</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>A -</option>
-                        <option>A +</option>
-                        <option>B -</option>
-                        <option>B +</option>
-                        <option>AB -</option>
-                        <option>AB +</option>
-                        <option>O -</option>
-                        <option>O +</option>
+                    <label for="exampleSelect1">Nivel Académico Anterior(*)</label>
+                    <select class="form-control" id="exampleSelect1" ng-model="modNivelAnterior" disabled>
+                        <option value="Primaria">PRIMARIA</option>
+                        <option value="Secundaria">SECUNDARIA</option>
                     </select>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleSelect1">Grado Referente(*)</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>A -</option>
-                        <option>A +</option>
-                        <option>B -</option>
-                        <option>B +</option>
-                        <option>AB -</option>
-                        <option>AB +</option>
-                        <option>O -</option>
-                        <option>O +</option>
+                    <label for="exampleSelect1">Grado Anterior(*)</label>
+                    <select class="form-control" id="exampleSelect1" ng-model="modGradoAnterior" disabled>
+                        <option value="1">Primero</option>
+                        <option value="2">Segundo</option>
+                        <option value="3">Tercero</option>
+                        <option value="4">Cuarto</option>
+                        <option value="5">Quinto</option>
+                        <option value="6">Sexto</option>
                     </select>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
@@ -303,15 +352,11 @@
             <div class="col">
                 <div class="form-group">
                     <label for="exampleSelect1">Sección Referente(*)</label>
-                    <select class="form-control" id="exampleSelect1">
-                        <option>A -</option>
-                        <option>A +</option>
-                        <option>B -</option>
-                        <option>B +</option>
-                        <option>AB -</option>
-                        <option>AB +</option>
-                        <option>O -</option>
-                        <option>O +</option>
+                    <select class="form-control" id="exampleSelect1" ng-model="modSeccionReferente" disabled>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
                     </select>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
@@ -321,7 +366,7 @@
             <div class="col">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Institucion Educativa Anterior</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" min="0">
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modIEAlumno" readonly>
                 </div>
             </div>
         </div>
@@ -332,7 +377,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="exampleSelect1">Grupo Sanguineo (*)</label>
-                            <select class="form-control" id="exampleSelect1">
+                            <select class="form-control" id="exampleSelect1" ng-model="modSanguineoAlumno" disabled>
                                 <option>A -</option>
                                 <option>A +</option>
                                 <option>B -</option>

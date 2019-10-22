@@ -600,7 +600,7 @@
                     <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="tab_Antiguos1" data-toggle="tab" href="#tab_Antiguos" role="tab" aria-controls="antiguo-md"
-                               aria-selected="false">Antiguos</a>
+                               aria-selected="false">Vigentes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="tab_Repetidos1" data-toggle="tab" href="#tab_Repetidos" role="tab" aria-controls="repetido-md"
