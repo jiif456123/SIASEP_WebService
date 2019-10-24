@@ -213,7 +213,7 @@ app.controller("matriculaCtrl", function($scope, $http, $window) {
             }).then(function successCallback(response) {
                 alert("Se registro correctamente la matricula.");
 //                $window.location.href = '/SIASEP_TP/resources/views/vDirectiva_Matricula.jsp';
-                $window.location.href = '/SIASEP_TP/';
+                $window.location.href = '/SIASEP_TP/resources/views/vDirectiva_Matricula.jsp';
                 $scope.getInfoUsuario();
             }, function errorCallback(response) {
                 alert("insertarMatricula no funciona ERROOR");
@@ -224,9 +224,9 @@ app.controller("matriculaCtrl", function($scope, $http, $window) {
     };
     
     //LogOut
-    $scope.cerrarSesion = function() {
-        sessionStorage.clear();
-        $window.location.href = '/SIASEP_TP/';
-    };
+//    $scope.cerrarSesion = function() {
+//        sessionStorage.clear();
+//        $window.location.href = '/SIASEP_TP/';
+//    };
     
 });

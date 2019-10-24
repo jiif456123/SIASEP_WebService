@@ -44,7 +44,7 @@
                 <li class="header-menu">
                     <span>General</span>
                 </li>
-                <li><a id="pill_matricular_alumno" class="active" data-toggle="pill" href="#" onclick="window.location.href = 'http://localhost:8084/SIASEP_TP/'">
+                <li><a id="pill_matricular_alumno" class="active" data-toggle="pill" href="#" onclick="window.location.href = 'http://localhost:8084/SIASEP_TP/resources/views/vDirectiva_Matricula.jsp'">
                         <i class="fa fa-book"></i><span>Matricular Alumno</span></a>
                 </li>
                 <li><a id="pill_generar_horario" data-toggle="pill" href="#" onclick="window.location.href = 'http://localhost:8084/SIASEP_TP/resources/views/vDirectiva_Modifica_Alumno.jsp'">

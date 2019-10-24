@@ -537,7 +537,10 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark default-color">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto"></ul>
+                    <ul class="navbar-nav mr-auto" style="padding-left: 85px;">
+                        <a href="#" class="nav-item" style="font-weight: bold; color: #ffffff;"
+                           onclick="window.location.href = 'http://localhost:8084/SIASEP_TP/'">INICIO</a>
+                    </ul>
                     <ul class="navbar-nav nav-flex-icons">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuB" data-toggle="dropdown"
