@@ -37,45 +37,81 @@ app.controller("modificaMatrCtrl", function($scope, $http, $window) {
         var txtAlumnoSelected = document.getElementById("txtAlumnoSelected")
                                 .value.toString()
                                 .substring(0,6);
-        $http({
-            method: 'POST',
-            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listarDatosDelAlumno',
-            data: { codigo_alumno: txtAlumnoSelected}
-        }).then(function successCallback(response) {
-            //Datos Personales
-            $scope.modNombreAlumno = response.data.primer_nombre;
-            $scope.modApePaternoAlumno = response.data.apellido_paterno;
-            $scope.modApeMaternoAlumno = response.data.apellido_materno;
-            $scope.modTipoDocAlumno = ''+response.data.fkid_tipo_documento;
-            $scope.modNroDocAlumno = response.data.numero_documento;
-            $scope.modSexoAlumno = response.data.sexo;
-            $scope.modFecNacAlumno = response.data.fec_nacimiento;
-            $scope.modLugarNacAlumno = ''+response.data.fkid_lugar_nacimiento;
-            //Contacto
-            $scope.modDistritoAlumno = ''+response.data.fkid_distrito;
-            $scope.modTelefonoAlumno = response.data.telefono_casa;
-            $scope.modCelularAlumno = response.data.telefono_celular;
-            $scope.modDireccionAlumno = response.data.direccion;
-            $scope.modCorreoAlumno = (response.data.correo != undefined) ? response.data.correo : 'No tiene correo electronico.';
-            //Datos Generales
-            $scope.modLMaternaAlumno = response.data.lengua_materna;
-            $scope.modLSegundaAlumno = (response.data.segunda_lengua != undefined) ? response.data.segunda_lengua : 'No domina una segunda lengua.';
-            $scope.modNroHermAlumno = response.data.nro_hermanos;
-            $scope.modVivePadresAlumno = response.data.flg_vive_con_padres;
-            //Constancia
-            $scope.modCopiaDNIAlumno = response.data.flg_copia_dni;
-            $scope.modPonderadoAlumno = response.data.ref_ponderado_anterior;
-            $scope.modTercioAlumno = response.data.flg_tercio_superior;
-            $scope.modNivelAnterior = ''+response.data.ref_nivel;
-            $scope.modGradoAnterior = ''+response.data.ref_grado_anterior;
-            $scope.modSeccionReferente = ''+response.data.ref_seccion;
-            $scope.modIEAlumno = response.data.nombre_ie_anterior;
-            $scope.modSanguineoAlumno = response.data.grupo_sanguineo;
-        }, function errorCallback(response) {
-            alert("ERROR buscaAlumnoInfo");
-        });
-        
+        if(document.getElementById("txtAlumnoSelected").value === '') {
+            alert("Debe ingresar un codigo de alumno.");
+        } else {
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listarDatosDelAlumno',
+                data: { codigo_alumno: txtAlumnoSelected}
+            }).then(function successCallback(response) {
+                //Datos Personales
+                $scope.modNombreAlumno = response.data.primer_nombre;
+                $scope.modApePaternoAlumno = response.data.apellido_paterno;
+                $scope.modApeMaternoAlumno = response.data.apellido_materno;
+                $scope.modTipoDocAlumno = ''+response.data.fkid_tipo_documento;
+                $scope.modNroDocAlumno = response.data.numero_documento;
+                $scope.modSexoAlumno = response.data.sexo;
+                $scope.modFecNacAlumno = response.data.fec_nacimiento;
+                $scope.modLugarNacAlumno = ''+response.data.fkid_lugar_nacimiento;
+                //Contacto
+                $scope.modDistritoAlumno = ''+response.data.fkid_distrito;
+                $scope.modTelefonoAlumno = response.data.telefono_casa;
+                $scope.modCelularAlumno = response.data.telefono_celular;
+                $scope.modDireccionAlumno = response.data.direccion;
+                $scope.modCorreoAlumno = (response.data.correo != undefined) ? response.data.correo : 'No tiene correo electronico.';
+                //Datos Generales
+                $scope.modLMaternaAlumno = response.data.lengua_materna;
+                $scope.modLSegundaAlumno = (response.data.segunda_lengua != undefined) ? response.data.segunda_lengua : 'No domina una segunda lengua.';
+                $scope.modNroHermAlumno = response.data.nro_hermanos;
+                $scope.modVivePadresAlumno = response.data.flg_vive_con_padres;
+                //Constancia
+                $scope.modCopiaDNIAlumno = response.data.flg_copia_dni;
+                $scope.modPonderadoAlumno = response.data.ref_ponderado_anterior;
+                $scope.modTercioAlumno = response.data.flg_tercio_superior;
+                $scope.modNivelAnterior = ''+response.data.ref_nivel;
+                $scope.modGradoAnterior = ''+response.data.ref_grado_anterior;
+                $scope.modSeccionReferente = ''+response.data.ref_seccion;
+                $scope.modIEAlumno = response.data.nombre_ie_anterior;
+                $scope.modSanguineoAlumno = response.data.grupo_sanguineo; 
+            }, function errorCallback(response) {
+                alert("ERROR buscaAlumnoInfo");
+            });
+        }
     };
+    
+    $scope.realizarCambioInfo = function() {
+        alert("funcionaaa este abrirModalAgregaObs");
+//        var dataparaEstado = event.currentTarget.value.split('-');
+//        var idMatricula = parseInt(dataparaEstado[0]);
+//        var idEstadoMatricula = parseInt(dataparaEstado[1]);
+        
+        
+//        $scope.cambiaEstadoMatricula = function() {
+//            var txtObservacionAnterior = $scope.txtObservacionAnterior;
+//            if(txtObservacionAnterior != null) {
+//                $http({
+//                    method: 'POST',
+//                    url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/cambiaEstadoMatr',
+//                    data: { id_matricula : idMatricula,
+//                            fkid_estado_matricula : idEstadoMatricula,
+//                            dscrp_observacion : txtObservacionAnterior,
+//                            id_usuario : sesionCodigoUsuario
+//                    }
+//                }).then(function successCallback(response) {
+//                    alert("Se ejecuto dicho cambio.");
+//                    $scope.getInfoUsuario();
+//                    $scope.txtObservacionAnterior = "";
+//                }, function errorCallback(response) {
+//                    alert("cambiaEstadoMatricula no funciona ERROOR");
+//                });
+//            } else {
+//                console.log("Excepcion controlada (cambiaEstadoMatricula)");
+//            }
+//        };
+    };
+    
+    
     
     
     $scope.getListaMatHabilitado = function() {

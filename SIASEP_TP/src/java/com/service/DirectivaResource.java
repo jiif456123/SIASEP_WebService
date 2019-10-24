@@ -236,7 +236,7 @@ public class DirectivaResource {
         return respuesta;
     }
     
-    /*---------------------------------------- FIN DE MATRICULA -----------------------------------------------------*/
+    /*---------------------------------------- INICIO DE MODIFICAR ALUMNO -----------------------------------------------------*/
     
     @GET
     @Path("listarAlumnosBusqueda")

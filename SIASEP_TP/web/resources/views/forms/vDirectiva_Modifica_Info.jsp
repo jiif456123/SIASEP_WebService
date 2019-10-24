@@ -27,8 +27,8 @@
         <div class="form-row">
             <div class="col">
                 <div class="form-group">
-                    <label for="selTDAlumno">Tipo de Documento (*)</label>
-                    <select class="form-control" id="selTDAlumno" ng-model="modTipoDocAlumno" disabled>
+                    <label for="txtTipoDocAlumno">Tipo de Documento (*)</label>
+                    <select class="form-control" id="txtTipoDocAlumno" ng-model="modTipoDocAlumno" disabled>
                         <option value="1">DNI</option>
                         <option value="2">PASAPORTE</option>
                     </select>
@@ -118,8 +118,8 @@
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleSelect1">Distrito (*)</label>
-                            <select class="form-control" id="exampleSelect1" ng-model="modDistritoAlumno" disabled>
+                            <label for="txtDistritoAlumno">Distrito (*)</label>
+                            <select class="form-control" id="txtDistritoAlumno" ng-model="modDistritoAlumno" disabled>
                                 <option value="1">Callao</option>
                                 <option value="2">Bellavista</option>
                                 <option value="3">Carmen de la Legua</option>
@@ -180,15 +180,15 @@
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Telefono de Casa</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1"
+                            <label for="txtTelefonoAlumno">Telefono de Casa</label>
+                            <input type="text" class="form-control" id="txtTelefonoAlumno"
                                    aria-describedby="emailHelp" ng-model="modTelefonoAlumno" readonly>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Celular</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" 
+                            <label for="txtCelularAlumno">Celular</label>
+                            <input type="text" class="form-control" id="txtCelularAlumno" 
                                    aria-describedby="emailHelp" ng-model="modCelularAlumno" readonly>
                         </div>
                     </div>
@@ -199,15 +199,15 @@
         <div class="form-row" style="padding-top: 10px;">
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Dirección del hogar (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modDireccionAlumno" readonly>
+                    <label for="txtDireccionAlumno">Dirección del hogar (*)</label>
+                    <input type="text" class="form-control" id="txtDireccionAlumno" aria-describedby="emailHelp" ng-model="modDireccionAlumno" readonly>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Correo electrónico</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modCorreoAlumno" readonly>
+                    <label for="txtCorreoAlumno">Correo electrónico</label>
+                    <input type="email" class="form-control" id="txtCorreoAlumno" aria-describedby="emailHelp" ng-model="modCorreoAlumno" readonly>
                 </div>
             </div>
         </div> 
@@ -215,30 +215,22 @@
     
     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
         <h3 style="font-weight: lighter;">Datos Generales</h3>
-        <div class="form-row pt-3">
-            <div class="col">
+        <div class="row pt-3" style="padding-bottom: 15px;">
+            <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Lengua Materna que domine (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modLMaternaAlumno" readonly>
+                    <label for="txtLMaternaAlumno">Lengua Materna que domine (*)</label>
+                    <input type="text" class="form-control" id="txtLMaternaAlumno" aria-describedby="emailHelp" ng-model="modLMaternaAlumno" readonly>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
-            </div>
-            <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Segunda Lengua Materna</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modLSegundaAlumno" readonly>
+                    <label for="txtLSegundaAlumno">Segunda Lengua Materna</label>
+                    <input type="text" class="form-control" id="txtLSegundaAlumno" aria-describedby="emailHelp" ng-model="modLSegundaAlumno" readonly>
                 </div>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Cantidad de Hermanos (*)</label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" min="0" ng-model="modNroHermAlumno" disabled>
+                    <label for="txtNroHermAlumno">Cantidad de Hermanos (*)</label>
+                    <input type="number" class="form-control" id="txtNroHermAlumno" aria-describedby="emailHelp" min="0" ng-model="modNroHermAlumno" disabled>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
-            </div>
-            <div class="col">
                 <div class="form-group" style="text-align: left;">
                     <label for="relSexo">¿Vive con sus padres? (*)</label>
                     <div class="form-control" id="relSexo" style="padding: 0px 0px 7px 0px;">
@@ -262,11 +254,25 @@
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio marcar una de las opciones.</small>
                 </div>
             </div>
+            <div class="col-lg-1">&nbsp;</div>
+            <div class="col-lg-4">
+                <div class="card" style="margin-top: 15px;">
+                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title"><a>Perfil del Estudiante</a></h4>
+                        <p class="card-text">Se requiere una foto de perfil del matriculado para completar la autenticidad de la información y de sus datos personales.</p>
+                        <div class="form-group">
+                            <label for="txtImagenAlumno">Seleccionar la foto a subir</label>
+                            <input type="file" class="form-control-file" id="txtImagenAlumno" aria-describedby="fileHelp" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">&nbsp;</div>
         </div>
-
     </div>
     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-        <h3 style="font-weight: lighter;">Constancia</h3>
+        <h3 style="font-weight: lighter;">Record Academico</h3>
         <div class="form-row pt-3">
             <div class="col">
                 <div class="form-group" style="text-align: left;">
@@ -294,8 +300,8 @@
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Ponderado Referencial (*)</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modPonderadoAlumno" readonly>
+                    <label for="txtPonderadoAlumno">Ponderado Referencial (*)</label>
+                    <input type="text" class="form-control" id="txtPonderadoAlumno" aria-describedby="emailHelp" ng-model="modPonderadoAlumno" readonly>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
@@ -327,8 +333,8 @@
         <div class="form-row">
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleSelect1">Nivel Académico Anterior(*)</label>
-                    <select class="form-control" id="exampleSelect1" ng-model="modNivelAnterior" disabled>
+                    <label for="txtNivelAnterior">Nivel Académico Anterior(*)</label>
+                    <select class="form-control" id="txtNivelAnterior" ng-model="modNivelAnterior" disabled>
                         <option value="Primaria">PRIMARIA</option>
                         <option value="Secundaria">SECUNDARIA</option>
                     </select>
@@ -337,22 +343,22 @@
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleSelect1">Grado Anterior(*)</label>
-                    <select class="form-control" id="exampleSelect1" ng-model="modGradoAnterior" disabled>
-                        <option value="1">Primero</option>
-                        <option value="2">Segundo</option>
-                        <option value="3">Tercero</option>
-                        <option value="4">Cuarto</option>
-                        <option value="5">Quinto</option>
-                        <option value="6">Sexto</option>
+                    <label for="txtGradoAnterior">Grado Anterior(*)</label>
+                    <select class="form-control" id="txtGradoAnterior" ng-model="modGradoAnterior" disabled>
+                        <option value="1">PRIMERO</option>
+                        <option value="2">SEGUNDO</option>
+                        <option value="3">TERCERO</option>
+                        <option value="4">CUARTO</option>
+                        <option value="5">QUINTO</option>
+                        <option value="6">SEXTO</option>
                     </select>
                     <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleSelect1">Sección Referente(*)</label>
-                    <select class="form-control" id="exampleSelect1" ng-model="modSeccionReferente" disabled>
+                    <label for="txtSeccionReferente">Sección Referente(*)</label>
+                    <select class="form-control" id="txtSeccionReferente" ng-model="modSeccionReferente" disabled>
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="C">C</option>
@@ -365,27 +371,28 @@
         <div class="form-row">
             <div class="col">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Institucion Educativa Anterior</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="modIEAlumno" readonly>
+                    <label for="txtIEAlumno">Institucion Educativa Anterior</label>
+                    <input type="text" class="form-control" id="txtIEAlumno" aria-describedby="emailHelp" ng-model="modIEAlumno" readonly>
                 </div>
             </div>
         </div>
         <hr>
+        <h3 style="font-weight: lighter;">Constancia Médica</h3>
         <div class="row pt-2">
-            <div class="col-lg-5">
+            <div class="col-lg-12">
                 <div class="form-row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="exampleSelect1">Grupo Sanguineo (*)</label>
-                            <select class="form-control" id="exampleSelect1" ng-model="modSanguineoAlumno" disabled>
-                                <option>A -</option>
-                                <option>A +</option>
-                                <option>B -</option>
-                                <option>B +</option>
-                                <option>AB -</option>
-                                <option>AB +</option>
-                                <option>O -</option>
-                                <option>O +</option>
+                            <label for="txtSanguineoAlumno">Grupo Sanguineo (*)</label>
+                            <select class="form-control" id="txtSanguineoAlumno" ng-model="modSanguineoAlumno" disabled>
+                                <option value="A-">A -</option>
+                                <option value="A+">A +</option>
+                                <option value="B-">B -</option>
+                                <option value="B+">B +</option>
+                                <option value="AB-">AB -</option>
+                                <option value="AB+">AB +</option>
+                                <option value="O-">O -</option>
+                                <option value="O+">O +</option>
                             </select>
                             <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                         </div>
@@ -404,8 +411,6 @@
                             <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="col">
                         <div class="selectpicker form-group">
                             <label for="exampleSelect1">Enfermedad (*)</label>
@@ -418,8 +423,6 @@
                             <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="col">
                         <div class="selectpicker form-group">
                             <label for="exampleSelect1">Discapacidad (*)</label>
@@ -432,8 +435,6 @@
                             <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="col">
                         <div class="selectpicker form-group">
                             <label for="exampleSelect1">Religión (*)</label>
@@ -450,17 +451,8 @@
             </div>
             <div class="col-lg-1">&nbsp;</div>
             <div class="col-lg-5">
-                <div class="card" style="margin-top: 15px;">
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title"><a>Perfil del Estudiante</a></h4>
-                        <p class="card-text">Se requiere una foto de perfil del matriculado para completar la autenticidad de la información y de sus datos personales.</p>
-                        <div class="form-group">
-                            <label for="exampleInputFile">Seleccionar la foto a subir</label>
-                            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-                        </div>
-                    </div>
-                </div>
+                &nbsp;
+                
             </div>
             <div class="col-lg-1">&nbsp;</div>
         </div>
