@@ -2,32 +2,6 @@ create database BD_SIASEP;
 go
 use BD_SIASEP;
 GO
-create table estado_usuario(
-	id_estado_usuario int primary key identity(1,1),
-	nom_estado_usuario varchar(150)
-);
-go
-create table tipo_documento(
-	id_tipo_documento int primary key identity(1,1),
-	nom_tipo_documento varchar(150)
-);
-go
-create table distrito(
-	id_distrito int primary key identity(1,1),
-	nom_distrito varchar(255)
-);
-go
-create table lugar_nacimiento(
-	id_lugar_nacimiento int primary key identity(1,1),
-	nom_lugar_nacimiento varchar(150)
-);
-go
-create table tipo_usuario(
-	id_tipo_usuario int primary key identity(1,1),
-	nom_tipo_usuario varchar(150),
-	dscrp_tipo_usuario varchar(255)
-);
-go
 create table persona(
 	id_persona int primary key identity(1,1),
 	primer_nombre varchar(150) not null,
@@ -59,34 +33,6 @@ create table usuario(
 	FOREIGN KEY (fkid_estado_usuario) REFERENCES estado_usuario(id_estado_usuario)
 );
 go
-create table multi_role(
-	id_multi_role int primary key identity(1,1),
-	fkid_usuario int not null,
-	fkid_tipo_usuario int not null,
-	FOREIGN KEY (fkid_usuario) REFERENCES usuario(id_usuario),
-	FOREIGN KEY (fkid_tipo_usuario) REFERENCES tipo_usuario(id_tipo_usuario)
-);
-go
-create table alergia(
-	id_alergia int primary key identity(1,1),
-	nom_alergia varchar(150)
-);
-go
-create table discapacidad(
-	id_discapacidad int primary key identity(1,1),
-	nom_discapacidad varchar(45)
-);
-go
-create table enfermedad(
-	id_enfermedad int primary key identity(1,1),
-	nom_enfermedad varchar(45)
-);
-go
-create table religion(
-	id_religion int primary key identity(1,1),
-	nom_religion varchar(45)
-);
-go
 create table tipo_alumno(
 	id_tipo_alumno int primary key identity(1,1),
 	nom_tipo_alumno varchar(150)
@@ -112,92 +58,6 @@ create table per_alumno(
 	fkid_tipo_alumno int not null,
 	FOREIGN KEY (fkid_persona) REFERENCES persona(id_persona),
 	FOREIGN KEY (fkid_tipo_alumno) REFERENCES tipo_alumno(id_tipo_alumno)
-);
-go
-create table alumno_has_religion(
-	fkid_religion int not null,
-	fkid_per_alumno int not null,
-	primary key(fkid_religion, fkid_per_alumno),
-	FOREIGN KEY (fkid_religion) REFERENCES religion(id_religion),
-	FOREIGN KEY (fkid_per_alumno) REFERENCES per_alumno(id_per_alumno)
-);
-go
-create table alumno_has_discapacidad(
-	fkid_discapacidad int not null,
-	fkid_per_alumno int not null,
-	primary key(fkid_discapacidad, fkid_per_alumno),
-	FOREIGN KEY (fkid_discapacidad) REFERENCES discapacidad(id_discapacidad),
-	FOREIGN KEY (fkid_per_alumno) REFERENCES per_alumno(id_per_alumno)
-);
-go
-create table alumno_has_enfermedad(
-	fkid_enfermedad int not null,
-	fkid_per_alumno int not null,
-	primary key(fkid_enfermedad, fkid_per_alumno),
-	FOREIGN KEY (fkid_enfermedad) REFERENCES enfermedad(id_enfermedad),
-	FOREIGN KEY (fkid_per_alumno) REFERENCES per_alumno(id_per_alumno)
-);
-go
-create table alumno_has_alergia(
-	fkid_alergia int not null,
-	fkid_per_alumno int not null,
-	primary key(fkid_alergia, fkid_per_alumno),
-	FOREIGN KEY (fkid_alergia) REFERENCES alergia(id_alergia),
-	FOREIGN KEY (fkid_per_alumno) REFERENCES per_alumno(id_per_alumno)
-);
-go
-create table tipo_familiar(
-	id_tipo_familiar int primary key identity(1,1),
-	nom_tipo_familiar varchar(45)
-);
-go
-create table estado_civil(
-	id_estado_civil int primary key identity(1,1),
-	nom_estado_civil varchar(45)
-);
-go
-create table grado_instruccion(
-	id_grado_instruccion int primary key identity(1,1),
-	nom_grado_instruccion varchar(45)
-);
-go
-create table centro_labores(
-	id_centro_labores int primary key identity(1,1),
-	nom_centro_labores varchar(45)
-);
-go
-create table per_familiar(
-	id_per_familiar int primary key identity(1,1),
-	flg_copia_dni_apo bit not null,
-	dscrp_ocupacion varchar(255) null,
-	telefono_emergencia varchar(15) not null,
-	fkid_persona int unique not null,
-	fkid_tipo_familiar int not null,
-	fkid_estado_civil int not null,
-	fkid_grado_instruccion int not null,
-	FOREIGN KEY (fkid_persona) REFERENCES persona(id_persona),
-	FOREIGN KEY (fkid_tipo_familiar) REFERENCES tipo_familiar(id_tipo_familiar),
-	FOREIGN KEY (fkid_estado_civil) REFERENCES estado_civil(id_estado_civil),
-	FOREIGN KEY (fkid_grado_instruccion) REFERENCES grado_instruccion(id_grado_instruccion)
-);
-go
-create table familiar_has_centro_labores(
-	fkid_per_familiar int not null,
-	fkid_centro_labores int not null,
-	primary key(fkid_per_familiar, fkid_centro_labores),
-	FOREIGN KEY (fkid_per_familiar) REFERENCES per_familiar(id_per_familiar),
-	FOREIGN KEY (fkid_centro_labores) REFERENCES centro_labores(id_centro_labores)
-);
-go
-create table vinculo_familiar(
-	fkid_per_alumno int not null,
-	fkid_per_familiar int not null,
-	flg_ofi_apoderado bit not null,
-	fec_inicio_vinculo date not null,
-	fec_fin_vinculo date null
-	primary key(fkid_per_alumno, fkid_per_familiar),
-	FOREIGN KEY (fkid_per_alumno) REFERENCES per_alumno(id_per_alumno),
-	FOREIGN KEY (fkid_per_familiar) REFERENCES per_familiar(id_per_familiar)
 );
 go
 create table tipo_trabajador(
@@ -293,137 +153,28 @@ go
 go
 go
 ----------------------POPULATE------------------------------------------
-INSERT INTO tipo_documento VALUES ('DNI');
-INSERT INTO tipo_documento VALUES ('Pasaporte');
-go
-INSERT INTO distrito VALUES ('Callao');	
-INSERT INTO distrito VALUES ('Bellavista');
-INSERT INTO distrito VALUES ('Carmen de La Legua');	
-INSERT INTO distrito VALUES ('La Perla');	
-INSERT INTO distrito VALUES ('La Punta');	
-INSERT INTO distrito VALUES ('Mi Perú');	
-INSERT INTO distrito VALUES ('Ventanilla');	
-INSERT INTO distrito VALUES ('Lima');	
-INSERT INTO distrito VALUES ('Ancón');	
-INSERT INTO distrito VALUES ('Ate');	
-INSERT INTO distrito VALUES ('Barranco');	
-INSERT INTO distrito VALUES ('Breña');	
-INSERT INTO distrito VALUES ('Carabayllo');	
-INSERT INTO distrito VALUES ('Cieneguilla');	
-INSERT INTO distrito VALUES ('Chaclacayo');	
-INSERT INTO distrito VALUES ('Chorrillos');	
-INSERT INTO distrito VALUES ('Comas');	
-INSERT INTO distrito VALUES ('El Agustino');	
-INSERT INTO distrito VALUES ('Independencia');	
-INSERT INTO distrito VALUES ('Jesús María');	
-INSERT INTO distrito VALUES ('La Molina');	
-INSERT INTO distrito VALUES ('La Victoria');	
-INSERT INTO distrito VALUES ('Lince');	
-INSERT INTO distrito VALUES ('Los Olivos');	
-INSERT INTO distrito VALUES ('Lurigancho');	
-INSERT INTO distrito VALUES ('Lurín');	
-INSERT INTO distrito VALUES ('Magdalena del Mar');	
-INSERT INTO distrito VALUES ('Miraflores');	
-INSERT INTO distrito VALUES ('Pachacámac');	
-INSERT INTO distrito VALUES ('Pucusana');	
-INSERT INTO distrito VALUES ('Pueblo Libre');	
-INSERT INTO distrito VALUES ('Puente Piedra');	
-INSERT INTO distrito VALUES ('Punta Hermosa');	
-INSERT INTO distrito VALUES ('Punta Negra');	
-INSERT INTO distrito VALUES ('Rímac');	
-INSERT INTO distrito VALUES ('San Bartolo');	
-INSERT INTO distrito VALUES ('San Borja');	
-INSERT INTO distrito VALUES ('San Isidro');	
-INSERT INTO distrito VALUES ('San Juan de Lurigancho');	
-INSERT INTO distrito VALUES ('San Juan de Miraflores');	
-INSERT INTO distrito VALUES ('San Luis');	
-INSERT INTO distrito VALUES ('San Martín de Porres');	
-INSERT INTO distrito VALUES ('San Miguel');	
-INSERT INTO distrito VALUES ('Santa Anita');	
-INSERT INTO distrito VALUES ('Santa María del Mar');	
-INSERT INTO distrito VALUES ('Santa Rosa');	
-INSERT INTO distrito VALUES ('Santiago de Surco');	
-INSERT INTO distrito VALUES ('Surquillo');	
-INSERT INTO distrito VALUES ('Villa El Salvador');	
-INSERT INTO distrito VALUES ('Villa María del Triunfo');
+INSERT INTO periodo_anual VALUES ('2019-03-15', NULL);
 go
 INSERT INTO estado_matricula (nom_estado_matricula) VALUES ('Habilitado');
 INSERT INTO estado_matricula (nom_estado_matricula) VALUES ('Deshabilitado');
 go
-INSERT INTO estado_civil (nom_estado_civil) VALUES ('Casado');
-INSERT INTO estado_civil (nom_estado_civil) VALUES ('Divorciado');
-INSERT INTO estado_civil (nom_estado_civil) VALUES ('Soltero');
-INSERT INTO estado_civil (nom_estado_civil) VALUES ('Viudo');
-go
-INSERT INTO alergia (nom_alergia) VALUES ('Chocolate');
-INSERT INTO alergia (nom_alergia) VALUES ('Polvo');
-INSERT INTO alergia (nom_alergia) VALUES ('Frutas');
-INSERT INTO alergia (nom_alergia) VALUES ('Piscina diluida por clorox');
-INSERT INTO alergia (nom_alergia) VALUES ('Cuero');
-INSERT INTO alergia (nom_alergia) VALUES ('Gamusa');
-INSERT INTO alergia (nom_alergia) VALUES ('Animales');
-INSERT INTO alergia (nom_alergia) VALUES ('Metal');
-go
-INSERT INTO enfermedad (nom_enfermedad) VALUES ('Asma');
-INSERT INTO enfermedad (nom_enfermedad) VALUES ('Conjuntivitis');
-INSERT INTO enfermedad (nom_enfermedad) VALUES ('Catarro');
-INSERT INTO enfermedad (nom_enfermedad) VALUES ('Faringitis');
-INSERT INTO enfermedad (nom_enfermedad) VALUES ('Gripe');
-INSERT INTO enfermedad (nom_enfermedad) VALUES ('Hepatitis');
-INSERT INTO enfermedad (nom_enfermedad) VALUES ('Papera');
-go
-INSERT INTO religion (nom_religion) VALUES ('Catolico');
-INSERT INTO religion (nom_religion) VALUES ('Cristiano');
-INSERT INTO religion (nom_religion) VALUES ('Evangelica');
-INSERT INTO religion (nom_religion) VALUES ('Mormones');
-INSERT INTO religion (nom_religion) VALUES ('Judia');
-INSERT INTO religion (nom_religion) VALUES ('Agnóstico');
-INSERT INTO religion (nom_religion) VALUES ('Ateismo');
-go
-INSERT INTO discapacidad (nom_discapacidad) VALUES ('Ciego');
-INSERT INTO discapacidad (nom_discapacidad) VALUES ('Sordo');
-INSERT INTO discapacidad (nom_discapacidad) VALUES ('Sordo-Mudo');
-INSERT INTO discapacidad (nom_discapacidad) VALUES ('Mudo');
-INSERT INTO discapacidad (nom_discapacidad) VALUES ('Síndrome de Down');
-INSERT INTO discapacidad (nom_discapacidad) VALUES ('Hiperactividad');
-INSERT INTO discapacidad (nom_discapacidad) VALUES ('Autista');
-go
 INSERT INTO tipo_alumno (nom_tipo_alumno) VALUES ('Vigente');
 INSERT INTO tipo_alumno (nom_tipo_alumno) VALUES ('Repetido');
 go
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Amazonas');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Ancash');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Apurimac');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Arequipa');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Ayacucho');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Cajamarca');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Callao');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Cuzco');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Huancavelica');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Huanuco');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Ica');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Junin');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('La libertad');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Lambayeque');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Lima');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Loreto');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Madre de dios');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Moquegua');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Pasco');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Piura');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Puno');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('San Martin');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Tacna');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Tumbes');
-INSERT INTO lugar_nacimiento(nom_lugar_nacimiento) VALUES ('Ucayali');
+INSERT INTO tipo_trabajador VALUES ('Director(a)');
+INSERT INTO tipo_trabajador VALUES ('Sub-Director(a)');
+INSERT INTO tipo_trabajador VALUES ('Secretario(a)');
+INSERT INTO tipo_trabajador VALUES ('Coordinador');
+INSERT INTO tipo_trabajador VALUES ('Auxiliar');
 go
+--TRABAJADORES
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
 VALUES ('Ricardo','Villanueva','Ramirez','85984515','1975-05-15','M','5987622','943892138','Bellavista 1654','ricardo12@gmail.com',1,5,3);
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
 VALUES ('Cristina','Ruiz','Gonzales','55700412','1868-04-10','F','5287622','933892138','Ov.Naranjal 15','cristina14@gmail.com',1,29, 12);
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
 VALUES ('Felipe','Ruiz','Ramirez','34151545','1973-01-10','M','5587622','926892138','Ov.SanMartin','felin.ruiz@gmail.com',1,44, 10);
-
+--ALUMNOS
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
 VALUES ('Andre','Carpio','Guitierrez','74474515','2000-10-25','M','5087622','913892138','Jr Rivaguero','carpioAnd@gmail.com',1,11, 12);
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
@@ -438,76 +189,86 @@ INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_d
 VALUES ('Orlando','Torres','Navarro','9000005','2003-07-15','M','5287625','963892138','Ov.Guiterrez Cd 15','orlandoruiz3@gmail.com',1,50,15);
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
 VALUES ('Oliver','Ortiz','Bailon','40401212','2002-09-25','M','5287666','943892148','Mz D lt 15','oliveroka@gmail.com',1,2,15);
+
+--ALUMNOS RECIEN REGISTRADOS
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Martin','Lopez','Mello','445601212','2004-09-25','M','5287226','943894448','Mz F lt 05','Martintin@gmail.com',1,25,13);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Alejandra','Ramirez','Bailon','55401212','2005-09-25','F','5283366','943892148','Av Benavides 1447','alejandrina@gmail.com',2,35,1);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Molly','Melo','Mucha','471141212','2007-09-25','F','5287556','943855148','JoseGranda 4514','mollylin@gmail.com',1,15,10);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Alejandro','Galvan','Yañez','4040555','2002-09-25','M','5547666','9438924148','Ov Higuereta cdra 15','Alejo145@gmail.com',1,26,25);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Mario','Huamani','Solano','6660401212','2005-09-25','M','528459666','943442148','Mz F lt 15','Mariooo25@gmail.com',1,22,16);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Maria','Joyce','Martinez','4781212','2006-09-25','F','5497666','945592148','Urb Sagitario','JoyceMa@gmail.com',1,2,11);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Ricardo','Vilchez','Bailon','12310401212','2003-09-25','M','5687666','91452148','Caminos del Inca 541','ricarmemn@gmail.com',1,20,20);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Romina','Castillo','Castillo','40487','2004-09-25','F','5287614','943456148','Av Benavides 145','oliveroka@gmail.com',1,34,15);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Ruben','Maldonado','Melendez','45612','2005-09-25','M','5287896','978992148','Casuarinas 154','oliveroka@gmail.com',1,2,11);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Cristina','Ortiz','Bailon','45601212','2006-09-25','F','5287966','941542148','Surquillo 451','CrisoRbA@gmail.com',1,8,15);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Diana','Ortiz','Bailon','41234562','2003-09-25','F','5287156','9438456148','Jose Galvez 145','dianax@gmail.com',1,1,1);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Roxana','Franco','Bailon','40499212','2004-09-25','F','5294666','943845148','Av Los Frutales 145','Roxana541@gmail.com',1,1,15);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Oscar','Rodriguez','Rodriguez','4045628','2005-09-25','M','52154666','943892148','Domingo Orue 154','Oscar_xd@gmail.com',1,2,2);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Homero','Sanchez','Sanchez','47892','2006-09-26','M','5284566','943412148','Monterrico 546','HomeroS@gmail.com',1,2,20);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Lisa','Portillo','Mejia','401232','2004-09-25','F','5287666','941264148','Mz Z lt 15','LisaS@gmail.com',1,25,15);
+go
 go
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
-VALUES (100001,'Colegio Sanfrancisco del Oyola','Cuarto','3','A','16.5','1','AB-','Español',NULL,3,'1','0','1',4,1);
+VALUES (100001,'Colegio Sanfrancisco del Oyola','Secundaria','3','A','16.5','1','AB-','Español',NULL,3,'1','0','1',4,1);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
-VALUES (100002,'Colegio Pamer','Tercero','2','D','10.5','0','AB-','Español','Quechua',3,'1','0','1',5,2);
+VALUES (100002,'Colegio Pamer','Secundaria','2','D','10.5','0','AB-','Español','Quechua',3,'1','0','1',5,2);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
-VALUES (100003,'Colegio Maria y Jose','Segundo','1','B','12.5','0','B-','Español',NULL,2,'1','1','1',6,1);
+VALUES (100003,'Colegio Maria y Jose','Secundaria','1','B','12.5','0','B-','Español',NULL,2,'1','1','1',6,1);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
-VALUES (100004,'Colegio Pitagoras','Cuarto','3','A','15.5','1','AB+','Español',NULL,0,'1','1','1',7,1);
+VALUES (100004,'Colegio Pitagoras','Secundaria','3','A','15.5','1','AB+','Español',NULL,0,'1','1','1',7,1);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
-VALUES (100005,'Colegio San Andres','Cuarto','3','C','11.8','0','O+','Español',NULL,2,'1','0','1',8,2);
+VALUES (100005,'Colegio San Andres','Secundaria','3','C','11.8','0','O+','Español',NULL,2,'1','0','1',8,2);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
-VALUES (100006,'Colegio Americano','Tercero','3','B','14.5','0','A-','Español',NULL,1,'1','0','0',9,1);
+VALUES (100006,'Colegio Americano','Secundaria','3','B','14.5','0','A-','Español',NULL,1,'1','0','0',9,1);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
-VALUES (100007,'Colegio Sanfrancisco del Oyola','Cuarto','3','B','12.5','0','O-','Español','Ingles',0,'0','0','1',10,2);
-go
-INSERT INTO alumno_has_enfermedad(fkid_enfermedad,fkid_per_alumno) VALUES(1,1);
-INSERT INTO alumno_has_enfermedad(fkid_enfermedad,fkid_per_alumno) VALUES(1,2);
-INSERT INTO alumno_has_enfermedad(fkid_enfermedad,fkid_per_alumno) VALUES(6,6);
-INSERT INTO alumno_has_enfermedad(fkid_enfermedad,fkid_per_alumno) VALUES(2,2);
-go
-INSERT INTO alumno_has_alergia(fkid_alergia,fkid_per_alumno) VALUES(1,1);
-INSERT INTO alumno_has_alergia(fkid_alergia,fkid_per_alumno) VALUES(8,3);
-INSERT INTO alumno_has_alergia(fkid_alergia,fkid_per_alumno) VALUES(7,4);
-go
-INSERT INTO alumno_has_discapacidad(fkid_discapacidad,fkid_per_alumno) VALUES(6,2);
-go
-INSERT INTO alumno_has_religion VALUES(1,1);
-INSERT INTO alumno_has_religion VALUES(1,2);
-INSERT INTO alumno_has_religion VALUES(2,3);
-INSERT INTO alumno_has_religion VALUES(1,4);
-INSERT INTO alumno_has_religion VALUES(1,5);
-INSERT INTO alumno_has_religion VALUES(1,6);
-INSERT INTO alumno_has_religion VALUES(1,7);
-go
-INSERT INTO tipo_familiar (nom_tipo_familiar) VALUES ('Padre');
-INSERT INTO tipo_familiar (nom_tipo_familiar) VALUES ('Madre');
-INSERT INTO tipo_familiar (nom_tipo_familiar) VALUES ('Tio(a)');
-INSERT INTO tipo_familiar (nom_tipo_familiar) VALUES ('Padrino');
-INSERT INTO tipo_familiar (nom_tipo_familiar) VALUES ('Vecino(a)');
-INSERT INTO tipo_familiar (nom_tipo_familiar) VALUES ('Otros');
-go
-INSERT INTO grado_instruccion(nom_grado_instruccion) VALUES('Sin Estudios');
-INSERT INTO grado_instruccion(nom_grado_instruccion) VALUES('Primario');
-INSERT INTO grado_instruccion(nom_grado_instruccion) VALUES('Secundarios');
-INSERT INTO grado_instruccion(nom_grado_instruccion) VALUES('Medio-Superior');
-INSERT INTO grado_instruccion(nom_grado_instruccion) VALUES('Superior');
-go
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Banco Azteca');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Everest');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Molitalia');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Academia Pitagoras');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('okComputer');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Colegio Pamer');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Universidad Ricardo Palma ');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Financiera Confianza');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Empresa Multinacional Logistica');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Caja Huancayo');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Rimac Seguro');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Vivienda');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Federacion Peruana de Futbol');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Hospital Ricardo Palma');
-go
-INSERT INTO periodo_anual VALUES ('2019-03-15', NULL);
-go
-INSERT INTO tipo_trabajador VALUES ('Director(a)');
-INSERT INTO tipo_trabajador VALUES ('Sub-Director(a)');
-INSERT INTO tipo_trabajador VALUES ('Secretario(a)');
-INSERT INTO tipo_trabajador VALUES ('Coordinador');
-INSERT INTO tipo_trabajador VALUES ('Auxiliar');
+VALUES (100007,'Colegio Sanfrancisco del Oyola','Secundaria','3','B','12.5','0','O-','Español','Ingles',0,'0','0','1',10,2);
+
+--NUEVOS REGISTROS
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100008,'Colegio san juan','Secundaria','1','A','13.5',1,'A+','Español','Ingles',2,0,0,1,11,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100009,'Colegio santa rosa','Secundaria','1','A','14',1,'AB','Español','Frances',1,0,0,1,12,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100010,'Colegio joce chavez','Secundaria','3','B','12.5',1,'A+','Español','Ingles',0,0,0,1,13,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100011,'Alpamayo','Secundaria','2','A','16', 0,'B-','Español','Frances',1,0,0,1,14,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100012,'Antonio Raimondi','Secundaria','2','A','13',1,'A-','Español','Frances',1,0,0,1,15,2);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100013,'Cambridge College Lima','Secundaria','1','B','13.5',1,'O-','Español','Frances',0,0,0,1,16,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100014,'Franklin D. Roosevelt','Secundaria','4','B','14.5',1,'AB','Español','Ingles',0,0,0,1,17,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100015,'José Antonio Encinas','Secundaria','3','B','12',1,'AB','Español','Frances',2,0,0,1,18,2);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100016,'Markham College','Secundaria','1','A','12.5',1,'A-','Español','Aleman',1,0,0,1,19,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100017,'Martín Adán','Secundaria','3','B','14.5',1,'B+','Español','Frances',1,0,0,1,20,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100018,'Peruano Británico','Secundaria','2','A','15',0,'AB-','Español','Ingles',1,0,0,1,21,2);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100019,'San Silvestre School','Secundaria','1','B','11',1,'O+','Español','Aleman',1,0,0,1,22,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100020,'Santa Margarita','Secundaria','2','A','15',0,'A+','Español','Frances',0,0,0,1,23,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100021,'Trener','Secundaria','3','A','14.5',1,'A-','Español','Aleman',0,0,0,1,24,1);
+INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
+VALUES (100022,'Colegio san Sanfrancisco del Oyola','Secundaria','3','A','12.5',1,'O-','Español','Ingles',0,0,0,1,25,1);
 go
 INSERT INTO per_trabajador VALUES (0101010, 2, 1);
 INSERT INTO per_trabajador VALUES (0101022, 1, 3);
