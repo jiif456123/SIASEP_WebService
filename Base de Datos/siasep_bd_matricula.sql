@@ -238,7 +238,7 @@ VALUES (100006,'Colegio Americano','Secundaria','3','B','14.5','0','A-','Español
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
 VALUES (100007,'Colegio Sanfrancisco del Oyola','Secundaria','3','B','12.5','0','O-','Español','Ingles',0,'0','0','1',10,2);
 
---NUEVOS REGISTROS
+--NUEVOS REGISTROS..
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
 VALUES (100008,'Colegio san juan','Secundaria','1','A','13.5',1,'A+','Español','Ingles',2,0,0,1,11,1);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
