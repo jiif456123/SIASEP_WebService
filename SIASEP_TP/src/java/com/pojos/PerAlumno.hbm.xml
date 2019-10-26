@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 25, 2019 6:11:43 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.PerAlumno" table="per_alumno" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
+        <id name="idPerAlumno" type="int">
+            <column name="id_per_alumno" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="persona" class="com.pojos.Persona" fetch="select">
+            <column name="fkid_persona" not-null="true" unique="true" />
+        </many-to-one>
+        <many-to-one name="tipoAlumno" class="com.pojos.TipoAlumno" fetch="select">
+            <column name="fkid_tipo_alumno" not-null="true" />
+        </many-to-one>
+        <property name="codigoAlumno" type="int">
+            <column name="codigo_alumno" not-null="true" unique="true" />
+        </property>
+        <property name="nombreIeAnterior" type="string">
+            <column name="nombre_ie_anterior" />
+        </property>
+        <property name="refNivel" type="string">
+            <column name="ref_nivel" length="45" not-null="true" />
+        </property>
+        <property name="refGradoAnterior" type="char">
+            <column name="ref_grado_anterior" length="1" not-null="true" />
+        </property>
+        <property name="refSeccion" type="char">
+            <column name="ref_seccion" length="1" not-null="true" />
+        </property>
+        <property name="refPonderadoAnterior" type="java.lang.Double">
+            <column name="ref_ponderado_anterior" precision="53" scale="0" />
+        </property>
+        <property name="flgTercioSuperior" type="java.lang.Boolean">
+            <column name="flg_tercio_superior" />
+        </property>
+        <property name="grupoSanguineo" type="string">
+            <column name="grupo_sanguineo" length="45" not-null="true" />
+        </property>
+        <property name="lenguaMaterna" type="string">
+            <column name="lengua_materna" length="150" not-null="true" />
+        </property>
+        <property name="segundaLengua" type="string">
+            <column name="segunda_lengua" length="150" />
+        </property>
+        <property name="nroHermanos" type="int">
+            <column name="nro_hermanos" not-null="true" />
+        </property>
+        <property name="flgCopiaDni" type="boolean">
+            <column name="flg_copia_dni" not-null="true" />
+        </property>
+        <property name="flgViveConPadres" type="boolean">
+            <column name="flg_vive_con_padres" not-null="true" />
+        </property>
+        <property name="flgFotoAlumno" type="boolean">
+            <column name="flg_foto_alumno" not-null="true" />
+        </property>
+        <set name="matriculas" table="matricula" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="fkid_per_alumno" not-null="true" />
+            </key>
+            <one-to-many class="com.pojos.Matricula" />
+        </set>
+    </class>
+</hibernate-mapping>

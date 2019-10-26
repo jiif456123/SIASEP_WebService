@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 25, 2019 6:11:43 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pojos.HistorialMatricula" table="historial_matricula" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
+        <id name="idHistorialMatricula" type="int">
+            <column name="id_historial_matricula" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="matricula" class="com.pojos.Matricula" fetch="select">
+            <column name="fkid_matricula" not-null="true" />
+        </many-to-one>
+        <many-to-one name="perTrabajador" class="com.pojos.PerTrabajador" fetch="select">
+            <column name="fkid_per_trabajador" not-null="true" />
+        </many-to-one>
+        <property name="fecModificacion" type="date">
+            <column name="fec_modificacion" length="10" not-null="true" />
+        </property>
+        <property name="dscrpObservacion" type="string">
+            <column name="dscrp_observacion" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

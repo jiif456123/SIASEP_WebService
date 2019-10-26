@@ -14,12 +14,6 @@ create table persona(
 	telefono_celular varchar(45) null,
 	direccion varchar(255) not null,
 	correo varchar(255) null,
-	fkid_tipo_documento int not null,
-	fkid_distrito int not null,
-	fkid_lugar_nacimiento int not null,
-	FOREIGN KEY (fkid_tipo_documento) REFERENCES tipo_documento(id_tipo_documento),
-	FOREIGN KEY (fkid_distrito) REFERENCES distrito(id_distrito),
-	FOREIGN KEY (fkid_lugar_nacimiento) REFERENCES lugar_nacimiento(id_lugar_nacimiento)
 );
 go
 create table usuario(
@@ -27,10 +21,8 @@ create table usuario(
 	username varchar(150) not null,
 	password varchar(150) not null,
 	fec_creacion date null,
-	fkid_persona int unique not null,
-	fkid_estado_usuario int not null,
-	FOREIGN KEY (fkid_persona) REFERENCES persona(id_persona),
-	FOREIGN KEY (fkid_estado_usuario) REFERENCES estado_usuario(id_estado_usuario)
+	fkid_persona int unique not null,	
+	FOREIGN KEY (fkid_persona) REFERENCES persona(id_persona)
 );
 go
 create table tipo_alumno(
@@ -161,64 +153,64 @@ INSERT INTO tipo_alumno (nom_tipo_alumno) VALUES ('Vigente');
 INSERT INTO tipo_alumno (nom_tipo_alumno) VALUES ('Repetido');
 go
 --TRABAJADORES
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Ricardo','Villanueva','Ramirez','85984515','1975-05-15','M','5987622','943892138','Bellavista 1654','ricardo12@gmail.com',1,5,3);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Cristina','Ruiz','Gonzales','55700412','1868-04-10','F','5287622','933892138','Ov.Naranjal 15','cristina14@gmail.com',1,29, 12);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Felipe','Ruiz','Ramirez','34151545','1973-01-10','M','5587622','926892138','Ov.SanMartin','felin.ruiz@gmail.com',1,44, 10);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Ricardo','Villanueva','Ramirez','85984515','1975-05-15','M','5987622','943892138','Bellavista 1654','ricardo12@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Cristina','Ruiz','Gonzales','55700412','1868-04-10','F','5287622','933892138','Ov.Naranjal 15','cristina14@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Felipe','Ruiz','Ramirez','34151545','1973-01-10','M','5587622','926892138','Ov.SanMartin','felin.ruiz@gmail.com');
 --ALUMNOS
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Andre','Carpio','Guitierrez','74474515','2000-10-25','M','5087622','913892138','Jr Rivaguero','carpioAnd@gmail.com',1,11, 12);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Leonardo','Ruiz','Cordova','66231110','2002-11-16','M','5187622','922892138','Mz Z lt 14', NULL, 1,36, 15);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Jesus','Pinedo','Olivares','35511442','2004-05-01','M','5387622','966892138','Mz F lt 48','jesusin@gmail.com',1,6, 15);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Maria','Heredia','Cruz','48181843','2003-01-28','F','5257622','943845138','General Vidal 554',NULL,1,10, 15);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Melissa','Vilchez','Soto','77774412','2003-12-20','F','5184622','948892138','Jose Galvez 1157',NULL,1,15,15);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Orlando','Torres','Navarro','9000005','2003-07-15','M','5287625','963892138','Ov.Guiterrez Cd 15','orlandoruiz3@gmail.com',1,50,15);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Oliver','Ortiz','Bailon','40401212','2002-09-25','M','5287666','943892148','Mz D lt 15','oliveroka@gmail.com',1,2,15);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Andre','Carpio','Guitierrez','74474515','2000-10-25','M','5087622','913892138','Jr Rivaguero','carpioAnd@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Leonardo','Ruiz','Cordova','66231110','2002-11-16','M','5187622','922892138','Mz Z lt 14', NULL);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Jesus','Pinedo','Olivares','35511442','2004-05-01','M','5387622','966892138','Mz F lt 48','jesusin@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Maria','Heredia','Cruz','48181843','2003-01-28','F','5257622','943845138','General Vidal 554',NULL);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Melissa','Vilchez','Soto','77774412','2003-12-20','F','5184622','948892138','Jose Galvez 1157',NULL);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Orlando','Torres','Navarro','9000005','2003-07-15','M','5287625','963892138','Ov.Guiterrez Cd 15','orlandoruiz3@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Oliver','Ortiz','Bailon','40401212','2002-09-25','M','5287666','943892148','Mz D lt 15','oliveroka@gmail.com');
 
 --ALUMNOS RECIEN REGISTRADOS
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Martin','Lopez','Mello','445601212','2004-09-25','M','5287226','943894448','Mz F lt 05','Martintin@gmail.com',1,25,13);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Alejandra','Ramirez','Bailon','55401212','2005-09-25','F','5283366','943892148','Av Benavides 1447','alejandrina@gmail.com',2,35,1);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Molly','Melo','Mucha','471141212','2007-09-25','F','5287556','943855148','JoseGranda 4514','mollylin@gmail.com',1,15,10);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Alejandro','Galvan','Yañez','4040555','2002-09-25','M','5547666','9438924148','Ov Higuereta cdra 15','Alejo145@gmail.com',1,26,25);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Mario','Huamani','Solano','6660401212','2005-09-25','M','528459666','943442148','Mz F lt 15','Mariooo25@gmail.com',1,22,16);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Maria','Joyce','Martinez','4781212','2006-09-25','F','5497666','945592148','Urb Sagitario','JoyceMa@gmail.com',1,2,11);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Ricardo','Vilchez','Bailon','12310401212','2003-09-25','M','5687666','91452148','Caminos del Inca 541','ricarmemn@gmail.com',1,20,20);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Romina','Castillo','Castillo','40487','2004-09-25','F','5287614','943456148','Av Benavides 145','oliveroka@gmail.com',1,34,15);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Ruben','Maldonado','Melendez','45612','2005-09-25','M','5287896','978992148','Casuarinas 154','oliveroka@gmail.com',1,2,11);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Cristina','Ortiz','Bailon','45601212','2006-09-25','F','5287966','941542148','Surquillo 451','CrisoRbA@gmail.com',1,8,15);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Diana','Ortiz','Bailon','41234562','2003-09-25','F','5287156','9438456148','Jose Galvez 145','dianax@gmail.com',1,1,1);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Roxana','Franco','Bailon','40499212','2004-09-25','F','5294666','943845148','Av Los Frutales 145','Roxana541@gmail.com',1,1,15);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Oscar','Rodriguez','Rodriguez','4045628','2005-09-25','M','52154666','943892148','Domingo Orue 154','Oscar_xd@gmail.com',1,2,2);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Homero','Sanchez','Sanchez','47892','2006-09-26','M','5284566','943412148','Monterrico 546','HomeroS@gmail.com',1,2,20);
-INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
-VALUES ('Lisa','Portillo','Mejia','401232','2004-09-25','F','5287666','941264148','Mz Z lt 15','LisaS@gmail.com',1,25,15);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Martin','Lopez','Mello','445601212','2004-09-25','M','5287226','943894448','Mz F lt 05','Martintin@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Alejandra','Ramirez','Bailon','55401212','2005-09-25','F','5283366','943892148','Av Benavides 1447','alejandrina@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Molly','Melo','Mucha','471141212','2007-09-25','F','5287556','943855148','JoseGranda 4514','mollylin@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Alejandro','Galvan','Yañez','4040555','2002-09-25','M','5547666','9438924148','Ov Higuereta cdra 15','Alejo145@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Mario','Huamani','Solano','6660401212','2005-09-25','M','528459666','943442148','Mz F lt 15','Mariooo25@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Maria','Joyce','Martinez','4781212','2006-09-25','F','5497666','945592148','Urb Sagitario','JoyceMa@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Ricardo','Vilchez','Bailon','12310401212','2003-09-25','M','5687666','91452148','Caminos del Inca 541','ricarmemn@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Romina','Castillo','Castillo','40487','2004-09-25','F','5287614','943456148','Av Benavides 145','oliveroka@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Ruben','Maldonado','Melendez','45612','2005-09-25','M','5287896','978992148','Casuarinas 154','oliveroka@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Cristina','Ortiz','Bailon','45601212','2006-09-25','F','5287966','941542148','Surquillo 451','CrisoRbA@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Diana','Ortiz','Bailon','41234562','2003-09-25','F','5287156','9438456148','Jose Galvez 145','dianax@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Roxana','Franco','Bailon','40499212','2004-09-25','F','5294666','943845148','Av Los Frutales 145','Roxana541@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Oscar','Rodriguez','Rodriguez','4045628','2005-09-25','M','52154666','943892148','Domingo Orue 154','Oscar_xd@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Homero','Sanchez','Sanchez','47892','2006-09-26','M','5284566','943412148','Monterrico 546','HomeroS@gmail.com');
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo)
+VALUES ('Lisa','Portillo','Mejia','401232','2004-09-25','F','5287666','941264148','Mz Z lt 15','LisaS@gmail.com');
 
 go
-INSERT INTO usuario(username, password, fec_creacion, fkid_persona, fkid_estado_usuario) VALUES ('direccion001','siasep','2019-09-20',  2, 1);
-INSERT INTO usuario(username, password, fec_creacion, fkid_persona, fkid_estado_usuario) VALUES ('secretaria001','siasep','2019-09-20', 1 , 1);
-INSERT INTO usuario(username, password, fec_creacion, fkid_persona, fkid_estado_usuario) VALUES ('docente001','siasep','2019-09-20', 3, 1);
+INSERT INTO usuario(username, password, fec_creacion, fkid_persona) VALUES ('direccion001','siasep','2019-09-20',  2);
+INSERT INTO usuario(username, password, fec_creacion, fkid_persona) VALUES ('secretaria001','siasep','2019-09-20', 1 );
+INSERT INTO usuario(username, password, fec_creacion, fkid_persona) VALUES ('docente001','siasep','2019-09-20', 3);
 go
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_tercio_superior, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, flg_foto_alumno, fkid_persona, fkid_tipo_alumno) 
 VALUES (100001,'Colegio Sanfrancisco del Oyola','Secundaria','3','A','16.5','1','AB-','Español',NULL,3,'1','0','1',4,1);
