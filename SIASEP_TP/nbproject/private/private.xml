@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Repository/SIASEP_Trunk/SIASEP_TP/web/resources/js/direc_ModificarController.js</file>
+            <file>file:/D:/Repository/SIASEP_Trunk/SIASEP_TP/web/resources/views/vDirectiva_Modifica_Alumno.jsp</file>
+            <file>file:/D:/Repository/SIASEP_Trunk/SIASEP_TP/src/java/com/helper/ModificaAlumnoHelper.java</file>
+            <file>file:/D:/Repository/SIASEP_Trunk/SIASEP_TP/web/resources/views/forms/vDirectiva_Modifica_Info.jsp</file>
+            <file>file:/D:/Repository/SIASEP_Trunk/SIASEP_TP/src/java/com/service/DirectivaResource.java</file>
+        </group>
     </open-files>
 </project-private>

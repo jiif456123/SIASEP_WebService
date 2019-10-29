@@ -644,7 +644,7 @@
                                                     <tr class="even" dir-paginate="antiguo in listaAlumnosAntiguos | filter: searchKeywordA | itemsPerPage : 150">
                                                         <td tabindex="0" class="sorting_1">{{antiguo.codigo_alumno}}</td>
                                                         <td>{{antiguo.numero_documento}}</td>
-                                                        <td>{{antiguo.nombre_completo_alumno}}</td>
+                                                        <td>{{antiguo.nombre_alumno}}</td>
                                                         <td>{{antiguo.ref_grado_anterior}}</td>
                                                         <td>{{antiguo.ref_seccion}}</td>
                                                         <td>{{antiguo.ref_nivel}}</td>
@@ -698,7 +698,7 @@
                                                     <tr class="even" dir-paginate="repetido in listaAlumnosRepetidos | filter: searchKeywordA | itemsPerPage : 150">
                                                         <td tabindex="0" class="sorting_1">{{repetido.codigo_alumno}}</td>
                                                         <td>{{repetido.numero_documento}}</td>
-                                                        <td>{{repetido.nombre_completo_alumno}}</td>
+                                                        <td>{{repetido.nombre_alumno}}</td>
                                                         <td>{{repetido.ref_grado_anterior}}</td>
                                                         <td>{{repetido.ref_seccion}}</td>
                                                         <td>{{repetido.ref_nivel}}</td>

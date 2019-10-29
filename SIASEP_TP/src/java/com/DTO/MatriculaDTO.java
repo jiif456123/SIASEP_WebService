@@ -34,14 +34,13 @@ public class MatriculaDTO {
     char ref_grado_anterior;
     char ref_seccion;
     double ref_ponderado_anterior;
-    boolean flg_tercio_superior;
+    boolean flg_orden_merito;
     String grupo_sanguineo;
     String lengua_materna;
     String segunda_lengua;
     Integer nro_hermanos;
     boolean flg_copia_dni;
     boolean flg_vive_con_padres;
-    boolean flg_foto_alumno;
     Integer fkid_persona;
     Integer fkid_tipo_alumno;
     
@@ -274,12 +273,12 @@ public class MatriculaDTO {
         this.ref_ponderado_anterior = ref_ponderado_anterior;
     }
 
-    public boolean isFlg_tercio_superior() {
-        return flg_tercio_superior;
+    public boolean isFlg_orden_merito() {
+        return flg_orden_merito;
     }
 
-    public void setFlg_tercio_superior(boolean flg_tercio_superior) {
-        this.flg_tercio_superior = flg_tercio_superior;
+    public void setFlg_orden_merito(boolean flg_orden_merito) {
+        this.flg_orden_merito = flg_orden_merito;
     }
 
     public String getGrupo_sanguineo() {
@@ -328,14 +327,6 @@ public class MatriculaDTO {
 
     public void setFlg_vive_con_padres(boolean flg_vive_con_padres) {
         this.flg_vive_con_padres = flg_vive_con_padres;
-    }
-
-    public boolean isFlg_foto_alumno() {
-        return flg_foto_alumno;
-    }
-
-    public void setFlg_foto_alumno(boolean flg_foto_alumno) {
-        this.flg_foto_alumno = flg_foto_alumno;
     }
 
     public Integer getFkid_persona() {
@@ -500,8 +491,7 @@ public class MatriculaDTO {
 
     @Override
     public String toString() {
-        return "MatriculaDTO{" + "id_matricula=" + id_matricula + ", codigo_matricula=" + codigo_matricula + ", fec_realizada=" + fec_realizada + ", fkid_per_alumno=" + fkid_per_alumno + ", fkid_estado_matricula=" + fkid_estado_matricula + ", fkid_periodo_anual=" + fkid_periodo_anual + ", id_per_trabajador=" + id_per_trabajador + ", codigo_trabajador=" + codigo_trabajador + ", fkid_tipo_trabajador=" + fkid_tipo_trabajador + ", id_historial_matricula=" + id_historial_matricula + ", fec_modificacion=" + fec_modificacion + ", dscrp_observacion=" + dscrp_observacion + ", fkid_matricula=" + fkid_matricula + ", fkid_per_trabajador=" + fkid_per_trabajador + ", id_usuario=" + id_usuario + ", username=" + username + ", password=" + password + ", fec_creacion=" + fec_creacion + ", fkid_estado_usuario=" + fkid_estado_usuario + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", nombre_ie_anterior=" + nombre_ie_anterior + ", ref_nivel=" + ref_nivel + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion=" + ref_seccion + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", flg_tercio_superior=" + flg_tercio_superior + ", grupo_sanguineo=" + grupo_sanguineo + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", flg_foto_alumno=" + flg_foto_alumno + ", fkid_persona=" + fkid_persona + ", fkid_tipo_alumno=" + fkid_tipo_alumno + ", id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", id_estado_matricula=" + id_estado_matricula + ", nom_estado_matricula=" + nom_estado_matricula + ", id_periodo_anual=" + id_periodo_anual + ", fec_inicio_anual=" + fec_inicio_anual + ", fec_fin_anual=" + fec_fin_anual + '}';
+        return "MatriculaDTO{" + "id_matricula=" + id_matricula + ", codigo_matricula=" + codigo_matricula + ", fec_realizada=" + fec_realizada + ", fkid_per_alumno=" + fkid_per_alumno + ", fkid_estado_matricula=" + fkid_estado_matricula + ", fkid_periodo_anual=" + fkid_periodo_anual + ", id_per_trabajador=" + id_per_trabajador + ", codigo_trabajador=" + codigo_trabajador + ", fkid_tipo_trabajador=" + fkid_tipo_trabajador + ", id_historial_matricula=" + id_historial_matricula + ", fec_modificacion=" + fec_modificacion + ", dscrp_observacion=" + dscrp_observacion + ", fkid_matricula=" + fkid_matricula + ", fkid_per_trabajador=" + fkid_per_trabajador + ", id_usuario=" + id_usuario + ", username=" + username + ", password=" + password + ", fec_creacion=" + fec_creacion + ", fkid_estado_usuario=" + fkid_estado_usuario + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", nombre_ie_anterior=" + nombre_ie_anterior + ", ref_nivel=" + ref_nivel + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion=" + ref_seccion + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", flg_orden_merito=" + flg_orden_merito + ", grupo_sanguineo=" + grupo_sanguineo + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", fkid_persona=" + fkid_persona + ", fkid_tipo_alumno=" + fkid_tipo_alumno + ", id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", id_estado_matricula=" + id_estado_matricula + ", nom_estado_matricula=" + nom_estado_matricula + ", id_periodo_anual=" + id_periodo_anual + ", fec_inicio_anual=" + fec_inicio_anual + ", fec_fin_anual=" + fec_fin_anual + '}';
     }
 
-    
 }

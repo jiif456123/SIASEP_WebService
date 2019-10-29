@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 2, 2019 9:32:17 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Oct 28, 2019 1:09:52 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.pojos.PerAlumno" table="per_alumno" schema="dbo" catalog="BD_SIASEP" optimistic-lock="version">
         <id name="idPerAlumno" type="int">
@@ -18,7 +18,7 @@
             <column name="codigo_alumno" not-null="true" unique="true" />
         </property>
         <property name="nombreIeAnterior" type="string">
-            <column name="nombre_ie_anterior" />
+            <column name="nombre_ie_anterior" not-null="true" />
         </property>
         <property name="refNivel" type="string">
             <column name="ref_nivel" length="45" not-null="true" />
@@ -29,11 +29,11 @@
         <property name="refSeccion" type="char">
             <column name="ref_seccion" length="1" not-null="true" />
         </property>
-        <property name="refPonderadoAnterior" type="java.lang.Double">
-            <column name="ref_ponderado_anterior" precision="53" scale="0" />
+        <property name="refPonderadoAnterior" type="double">
+            <column name="ref_ponderado_anterior" precision="53" scale="0" not-null="true" />
         </property>
-        <property name="flgTercioSuperior" type="java.lang.Boolean">
-            <column name="flg_tercio_superior" />
+        <property name="flgOrdenMerito" type="java.lang.Boolean">
+            <column name="flg_orden_merito" />
         </property>
         <property name="grupoSanguineo" type="string">
             <column name="grupo_sanguineo" length="45" not-null="true" />
@@ -53,52 +53,17 @@
         <property name="flgViveConPadres" type="boolean">
             <column name="flg_vive_con_padres" not-null="true" />
         </property>
-        <property name="flgFotoAlumno" type="boolean">
-            <column name="flg_foto_alumno" not-null="true" />
-        </property>
-        <set name="religions" table="alumno_has_religion" inverse="false" lazy="true" fetch="select">
-            <key>
-                <column name="fkid_per_alumno" not-null="true" />
-            </key>
-            <many-to-many entity-name="com.pojos.Religion">
-                <column name="fkid_religion" not-null="true" />
-            </many-to-many>
-        </set>
-        <set name="enfermedads" table="alumno_has_enfermedad" inverse="false" lazy="true" fetch="select">
-            <key>
-                <column name="fkid_per_alumno" not-null="true" />
-            </key>
-            <many-to-many entity-name="com.pojos.Enfermedad">
-                <column name="fkid_enfermedad" not-null="true" />
-            </many-to-many>
-        </set>
-        <set name="matriculas" table="matricula" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="fkid_per_alumno" not-null="true" />
-            </key>
-            <one-to-many class="com.pojos.Matricula" />
-        </set>
         <set name="vinculoFamiliars" table="vinculo_familiar" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="fkid_per_alumno" not-null="true" />
             </key>
             <one-to-many class="com.pojos.VinculoFamiliar" />
         </set>
-        <set name="alergias" table="alumno_has_alergia" inverse="false" lazy="true" fetch="select">
+        <set name="matriculas" table="matricula" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="fkid_per_alumno" not-null="true" />
             </key>
-            <many-to-many entity-name="com.pojos.Alergia">
-                <column name="fkid_alergia" not-null="true" />
-            </many-to-many>
-        </set>
-        <set name="discapacidads" table="alumno_has_discapacidad" inverse="false" lazy="true" fetch="select">
-            <key>
-                <column name="fkid_per_alumno" not-null="true" />
-            </key>
-            <many-to-many entity-name="com.pojos.Discapacidad">
-                <column name="fkid_discapacidad" not-null="true" />
-            </many-to-many>
+            <one-to-many class="com.pojos.Matricula" />
         </set>
     </class>
 </hibernate-mapping>

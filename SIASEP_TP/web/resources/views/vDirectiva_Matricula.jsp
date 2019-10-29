@@ -565,7 +565,7 @@
                             <div class="col-lg-8" style="text-align: right;">
                                 <button class="btn btn-outline-green" ng-click="navegaPasoNro1()"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Crear Matricula</button>
                                 <button class="btn btn-outline-brown" data-toggle="modal" data-target="#modalHistorial"><i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;Historial</button>
-                                <button class="btn btn-outline-warning"><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp;Reportes Estadisticos</button>
+                                <button class="btn btn-outline-warning" disabled><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp;Reportes Estadisticos</button>
                             </div>
                         </div>
 
@@ -909,7 +909,7 @@
             }, false);
         });
         }, false);
-    })();            
+    })();
     
     jQuery(function ($) {
         $(".sidebar-dropdown > a").click(function () {

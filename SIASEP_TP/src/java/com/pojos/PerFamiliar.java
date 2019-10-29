@@ -1,5 +1,5 @@
 package com.pojos;
-// Generated Oct 2, 2019 9:32:16 AM by Hibernate Tools 4.3.1
+// Generated Oct 28, 2019 1:09:51 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -19,8 +19,8 @@ public class PerFamiliar  implements java.io.Serializable {
      private boolean flgCopiaDniApo;
      private String dscrpOcupacion;
      private String telefonoEmergencia;
-     private Set<CentroLabores> centroLaboreses = new HashSet<CentroLabores>(0);
      private Set<VinculoFamiliar> vinculoFamiliars = new HashSet<VinculoFamiliar>(0);
+     private Set<CentroLabores> centroLaboreses = new HashSet<CentroLabores>(0);
 
     public PerFamiliar() {
     }
@@ -35,7 +35,7 @@ public class PerFamiliar  implements java.io.Serializable {
         this.flgCopiaDniApo = flgCopiaDniApo;
         this.telefonoEmergencia = telefonoEmergencia;
     }
-    public PerFamiliar(int idPerFamiliar, EstadoCivil estadoCivil, GradoInstruccion gradoInstruccion, Persona persona, TipoFamiliar tipoFamiliar, boolean flgCopiaDniApo, String dscrpOcupacion, String telefonoEmergencia, Set<CentroLabores> centroLaboreses, Set<VinculoFamiliar> vinculoFamiliars) {
+    public PerFamiliar(int idPerFamiliar, EstadoCivil estadoCivil, GradoInstruccion gradoInstruccion, Persona persona, TipoFamiliar tipoFamiliar, boolean flgCopiaDniApo, String dscrpOcupacion, String telefonoEmergencia, Set<VinculoFamiliar> vinculoFamiliars, Set<CentroLabores> centroLaboreses) {
        this.idPerFamiliar = idPerFamiliar;
        this.estadoCivil = estadoCivil;
        this.gradoInstruccion = gradoInstruccion;
@@ -44,8 +44,8 @@ public class PerFamiliar  implements java.io.Serializable {
        this.flgCopiaDniApo = flgCopiaDniApo;
        this.dscrpOcupacion = dscrpOcupacion;
        this.telefonoEmergencia = telefonoEmergencia;
-       this.centroLaboreses = centroLaboreses;
        this.vinculoFamiliars = vinculoFamiliars;
+       this.centroLaboreses = centroLaboreses;
     }
    
     public int getIdPerFamiliar() {
@@ -104,19 +104,19 @@ public class PerFamiliar  implements java.io.Serializable {
     public void setTelefonoEmergencia(String telefonoEmergencia) {
         this.telefonoEmergencia = telefonoEmergencia;
     }
-    public Set<CentroLabores> getCentroLaboreses() {
-        return this.centroLaboreses;
-    }
-    
-    public void setCentroLaboreses(Set<CentroLabores> centroLaboreses) {
-        this.centroLaboreses = centroLaboreses;
-    }
     public Set<VinculoFamiliar> getVinculoFamiliars() {
         return this.vinculoFamiliars;
     }
     
     public void setVinculoFamiliars(Set<VinculoFamiliar> vinculoFamiliars) {
         this.vinculoFamiliars = vinculoFamiliars;
+    }
+    public Set<CentroLabores> getCentroLaboreses() {
+        return this.centroLaboreses;
+    }
+    
+    public void setCentroLaboreses(Set<CentroLabores> centroLaboreses) {
+        this.centroLaboreses = centroLaboreses;
     }
 
 

@@ -36,27 +36,16 @@ public class ListaAlumnoDTO {
     char ref_grado_anterior;
     char ref_seccion;
     double ref_ponderado_anterior;
-    boolean flg_tercio_superior;
+    boolean flg_orden_merito;
     String grupo_sanguineo;
     String lengua_materna;
     String segunda_lengua;
     Integer nro_hermanos;
     boolean flg_copia_dni;
     boolean flg_vive_con_padres;
-    boolean flg_foto_alumno;
     Integer fkid_persona;
     Integer fkid_tipo_alumno;
     
-    Integer id_alergia;
-    String nom_alegria;
-    Integer id_religion;
-    String nom_religion;
-    Integer id_discapacidad;
-    String nom_discapacidad;
-    Integer id_enfermedad;
-    String nom_enfermedad;
-    
-    Integer fkid_per_alumno;
     Integer fkid_per_familiar;
     boolean flg_ofi_apoderado;
     Date fec_inicio;
@@ -68,9 +57,6 @@ public class ListaAlumnoDTO {
     Integer fkid_tipo_familiar;
     Integer fkid_estado_civil;
     Integer fkid_grado_instruccion;
-    
-    Integer id_centro_labores;
-    String nom_centro_labores;
     
     Integer id_grado_instruccion;
     String nom_grado_instruccion;
@@ -305,12 +291,12 @@ public class ListaAlumnoDTO {
         this.ref_ponderado_anterior = ref_ponderado_anterior;
     }
 
-    public boolean isFlg_tercio_superior() {
-        return flg_tercio_superior;
+    public boolean isFlg_orden_merito() {
+        return flg_orden_merito;
     }
 
-    public void setFlg_tercio_superior(boolean flg_tercio_superior) {
-        this.flg_tercio_superior = flg_tercio_superior;
+    public void setFlg_orden_merito(boolean flg_orden_merito) {
+        this.flg_orden_merito = flg_orden_merito;
     }
 
     public String getGrupo_sanguineo() {
@@ -361,14 +347,6 @@ public class ListaAlumnoDTO {
         this.flg_vive_con_padres = flg_vive_con_padres;
     }
 
-    public boolean isFlg_foto_alumno() {
-        return flg_foto_alumno;
-    }
-
-    public void setFlg_foto_alumno(boolean flg_foto_alumno) {
-        this.flg_foto_alumno = flg_foto_alumno;
-    }
-
     public Integer getFkid_persona() {
         return fkid_persona;
     }
@@ -383,78 +361,6 @@ public class ListaAlumnoDTO {
 
     public void setFkid_tipo_alumno(Integer fkid_tipo_alumno) {
         this.fkid_tipo_alumno = fkid_tipo_alumno;
-    }
-
-    public Integer getId_alergia() {
-        return id_alergia;
-    }
-
-    public void setId_alergia(Integer id_alergia) {
-        this.id_alergia = id_alergia;
-    }
-
-    public String getNom_alegria() {
-        return nom_alegria;
-    }
-
-    public void setNom_alegria(String nom_alegria) {
-        this.nom_alegria = nom_alegria;
-    }
-
-    public Integer getId_religion() {
-        return id_religion;
-    }
-
-    public void setId_religion(Integer id_religion) {
-        this.id_religion = id_religion;
-    }
-
-    public String getNom_religion() {
-        return nom_religion;
-    }
-
-    public void setNom_religion(String nom_religion) {
-        this.nom_religion = nom_religion;
-    }
-
-    public Integer getId_discapacidad() {
-        return id_discapacidad;
-    }
-
-    public void setId_discapacidad(Integer id_discapacidad) {
-        this.id_discapacidad = id_discapacidad;
-    }
-
-    public String getNom_discapacidad() {
-        return nom_discapacidad;
-    }
-
-    public void setNom_discapacidad(String nom_discapacidad) {
-        this.nom_discapacidad = nom_discapacidad;
-    }
-
-    public Integer getId_enfermedad() {
-        return id_enfermedad;
-    }
-
-    public void setId_enfermedad(Integer id_enfermedad) {
-        this.id_enfermedad = id_enfermedad;
-    }
-
-    public String getNom_enfermedad() {
-        return nom_enfermedad;
-    }
-
-    public void setNom_enfermedad(String nom_enfermedad) {
-        this.nom_enfermedad = nom_enfermedad;
-    }
-
-    public Integer getFkid_per_alumno() {
-        return fkid_per_alumno;
-    }
-
-    public void setFkid_per_alumno(Integer fkid_per_alumno) {
-        this.fkid_per_alumno = fkid_per_alumno;
     }
 
     public Integer getFkid_per_familiar() {
@@ -537,22 +443,6 @@ public class ListaAlumnoDTO {
         this.fkid_grado_instruccion = fkid_grado_instruccion;
     }
 
-    public Integer getId_centro_labores() {
-        return id_centro_labores;
-    }
-
-    public void setId_centro_labores(Integer id_centro_labores) {
-        this.id_centro_labores = id_centro_labores;
-    }
-
-    public String getNom_centro_labores() {
-        return nom_centro_labores;
-    }
-
-    public void setNom_centro_labores(String nom_centro_labores) {
-        this.nom_centro_labores = nom_centro_labores;
-    }
-
     public Integer getId_grado_instruccion() {
         return id_grado_instruccion;
     }
@@ -603,8 +493,7 @@ public class ListaAlumnoDTO {
 
     @Override
     public String toString() {
-        return "ListaAlumnoDTO{" + "id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", fkid_lugar_nacimiento=" + fkid_lugar_nacimiento + ", nombre_completo_alumno=" + nombre_completo_alumno + ", id_distrito=" + id_distrito + ", nom_distrito=" + nom_distrito + ", id_lugar_nacimiento=" + id_lugar_nacimiento + ", nom_lugar_nacimiento=" + nom_lugar_nacimiento + ", id_tipo_documento=" + id_tipo_documento + ", nom_tipo_documento=" + nom_tipo_documento + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", nombre_ie_anterior=" + nombre_ie_anterior + ", ref_nivel=" + ref_nivel + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion=" + ref_seccion + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", flg_tercio_superior=" + flg_tercio_superior + ", grupo_sanguineo=" + grupo_sanguineo + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", flg_foto_alumno=" + flg_foto_alumno + ", fkid_persona=" + fkid_persona + ", fkid_tipo_alumno=" + fkid_tipo_alumno + ", id_alergia=" + id_alergia + ", nom_alegria=" + nom_alegria + ", id_religion=" + id_religion + ", nom_religion=" + nom_religion + ", id_discapacidad=" + id_discapacidad + ", nom_discapacidad=" + nom_discapacidad + ", id_enfermedad=" + id_enfermedad + ", nom_enfermedad=" + nom_enfermedad + ", fkid_per_alumno=" + fkid_per_alumno + ", fkid_per_familiar=" + fkid_per_familiar + ", flg_ofi_apoderado=" + flg_ofi_apoderado + ", fec_inicio=" + fec_inicio + ", id_per_familiar=" + id_per_familiar + ", flg_copia_dni_familiar=" + flg_copia_dni_familiar + ", dscrp_ocupacion=" + dscrp_ocupacion + ", telefono_emergencia=" + telefono_emergencia + ", fkid_tipo_familiar=" + fkid_tipo_familiar + ", fkid_estado_civil=" + fkid_estado_civil + ", fkid_grado_instruccion=" + fkid_grado_instruccion + ", id_centro_labores=" + id_centro_labores + ", nom_centro_labores=" + nom_centro_labores + ", id_grado_instruccion=" + id_grado_instruccion + ", nom_grado_instruccion=" + nom_grado_instruccion + ", id_estado_civil=" + id_estado_civil + ", nom_estado_civil=" + nom_estado_civil + ", id_tipo_familiar=" + id_tipo_familiar + ", nom_tipo_familiar=" + nom_tipo_familiar + '}';
+        return "ListaAlumnoDTO{" + "id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", fkid_lugar_nacimiento=" + fkid_lugar_nacimiento + ", nombre_completo_alumno=" + nombre_completo_alumno + ", id_distrito=" + id_distrito + ", nom_distrito=" + nom_distrito + ", id_lugar_nacimiento=" + id_lugar_nacimiento + ", nom_lugar_nacimiento=" + nom_lugar_nacimiento + ", id_tipo_documento=" + id_tipo_documento + ", nom_tipo_documento=" + nom_tipo_documento + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", nombre_ie_anterior=" + nombre_ie_anterior + ", ref_nivel=" + ref_nivel + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion=" + ref_seccion + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", flg_orden_merito=" + flg_orden_merito + ", grupo_sanguineo=" + grupo_sanguineo + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", fkid_persona=" + fkid_persona + ", fkid_tipo_alumno=" + fkid_tipo_alumno + ", fkid_per_familiar=" + fkid_per_familiar + ", flg_ofi_apoderado=" + flg_ofi_apoderado + ", fec_inicio=" + fec_inicio + ", id_per_familiar=" + id_per_familiar + ", flg_copia_dni_familiar=" + flg_copia_dni_familiar + ", dscrp_ocupacion=" + dscrp_ocupacion + ", telefono_emergencia=" + telefono_emergencia + ", fkid_tipo_familiar=" + fkid_tipo_familiar + ", fkid_estado_civil=" + fkid_estado_civil + ", fkid_grado_instruccion=" + fkid_grado_instruccion + ", id_grado_instruccion=" + id_grado_instruccion + ", nom_grado_instruccion=" + nom_grado_instruccion + ", id_estado_civil=" + id_estado_civil + ", nom_estado_civil=" + nom_estado_civil + ", id_tipo_familiar=" + id_tipo_familiar + ", nom_tipo_familiar=" + nom_tipo_familiar + '}';
     }
 
-    
 }
