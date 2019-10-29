@@ -4,6 +4,7 @@ import com.DTO.AlumnoDTO;
 import com.DTO.ListaAlumnoDTO;
 import com.DTO.ListaMatriculaDTO;
 import com.DTO.MatriculaDTO;
+import com.DTO.VinculoFamiliarDTO;
 import com.google.gson.Gson;
 import com.helper.MatriculaHelper;
 import com.helper.ModificaAlumnoHelper;
@@ -273,7 +274,6 @@ public class DirectivaResource {
     @Path("modificaDatosAlumno")
     @Produces("application/json")
     public Response modificaDatosAlumno(String data) {
-        System.out.println("cadena-> "+data);
         Response respuesta;
         Gson gson = new Gson();
         AlumnoDTO alumnoDTO = gson.fromJson(data, AlumnoDTO.class);
@@ -288,5 +288,36 @@ public class DirectivaResource {
         return respuesta;
     }
     
+    @POST
+    @Path("listarVinculosFamiliares")
+    @Produces("application/json")
+    public String listarVinculosFamiliares(String data) {
+        Gson gson =new Gson();
+        VinculoFamiliarDTO vinculoFamiliarDTO = gson.fromJson(data, VinculoFamiliarDTO.class);
+        List lista = null;
+        try{
+            lista = modificaAlumnoHelper.getListFamiliaresByAlumno(vinculoFamiliarDTO.getCodigo_alumno());
+        }
+        catch(Exception ex){
+            System.out.println("getListaPeriodoSelect: "+ex);
+        }
+        return gson.toJson(lista);
+    }
+    
+    @POST
+    @Path("listarDatosFamiliar")
+    @Produces("application/json")
+    public String listarDatosFamiliar(String data) {
+        Gson gson = new Gson();
+        VinculoFamiliarDTO vinculoFamiliarDTO = gson.fromJson(data, VinculoFamiliarDTO.class);
+        VinculoFamiliarDTO respuesta = new VinculoFamiliarDTO();
+        try {
+            respuesta = modificaAlumnoHelper.getListDatosFamiliarById(vinculoFamiliarDTO.getId_per_familiar());
+            System.out.println(""+respuesta.toString());
+        }catch(Exception e){
+            System.out.println("verObservacionMatricula: "+e.getMessage());
+        }
+        return gson.toJson(respuesta);
+    }
     
 }

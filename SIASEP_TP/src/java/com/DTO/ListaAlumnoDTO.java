@@ -18,7 +18,7 @@ public class ListaAlumnoDTO {
     Integer fkid_tipo_documento;
     Integer fkid_distrito;
     Integer fkid_lugar_nacimiento;
-    String nombre_completo_alumno;
+    String nombre_alumno;
     
     Integer id_distrito;
     String nom_distrito;
@@ -179,12 +179,12 @@ public class ListaAlumnoDTO {
         this.fkid_lugar_nacimiento = fkid_lugar_nacimiento;
     }
 
-    public String getNombre_completo_alumno() {
-        return nombre_completo_alumno;
+    public String getNombre_Alumno() {
+        return nombre_alumno;
     }
 
-    public void setNombre_completo_alumno(String nombre_completo_alumno) {
-        this.nombre_completo_alumno = nombre_completo_alumno;
+    public void setNombre_Alumno(String nombre_alumno) {
+        this.nombre_alumno = nombre_alumno;
     }
 
     public Integer getId_distrito() {
@@ -493,7 +493,7 @@ public class ListaAlumnoDTO {
 
     @Override
     public String toString() {
-        return "ListaAlumnoDTO{" + "id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", fkid_lugar_nacimiento=" + fkid_lugar_nacimiento + ", nombre_completo_alumno=" + nombre_completo_alumno + ", id_distrito=" + id_distrito + ", nom_distrito=" + nom_distrito + ", id_lugar_nacimiento=" + id_lugar_nacimiento + ", nom_lugar_nacimiento=" + nom_lugar_nacimiento + ", id_tipo_documento=" + id_tipo_documento + ", nom_tipo_documento=" + nom_tipo_documento + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", nombre_ie_anterior=" + nombre_ie_anterior + ", ref_nivel=" + ref_nivel + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion=" + ref_seccion + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", flg_orden_merito=" + flg_orden_merito + ", grupo_sanguineo=" + grupo_sanguineo + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", fkid_persona=" + fkid_persona + ", fkid_tipo_alumno=" + fkid_tipo_alumno + ", fkid_per_familiar=" + fkid_per_familiar + ", flg_ofi_apoderado=" + flg_ofi_apoderado + ", fec_inicio=" + fec_inicio + ", id_per_familiar=" + id_per_familiar + ", flg_copia_dni_familiar=" + flg_copia_dni_familiar + ", dscrp_ocupacion=" + dscrp_ocupacion + ", telefono_emergencia=" + telefono_emergencia + ", fkid_tipo_familiar=" + fkid_tipo_familiar + ", fkid_estado_civil=" + fkid_estado_civil + ", fkid_grado_instruccion=" + fkid_grado_instruccion + ", id_grado_instruccion=" + id_grado_instruccion + ", nom_grado_instruccion=" + nom_grado_instruccion + ", id_estado_civil=" + id_estado_civil + ", nom_estado_civil=" + nom_estado_civil + ", id_tipo_familiar=" + id_tipo_familiar + ", nom_tipo_familiar=" + nom_tipo_familiar + '}';
+        return "ListaAlumnoDTO{" + "id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", fkid_lugar_nacimiento=" + fkid_lugar_nacimiento + ", nombre_alumno=" + nombre_alumno + ", id_distrito=" + id_distrito + ", nom_distrito=" + nom_distrito + ", id_lugar_nacimiento=" + id_lugar_nacimiento + ", nom_lugar_nacimiento=" + nom_lugar_nacimiento + ", id_tipo_documento=" + id_tipo_documento + ", nom_tipo_documento=" + nom_tipo_documento + ", id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", nombre_ie_anterior=" + nombre_ie_anterior + ", ref_nivel=" + ref_nivel + ", ref_grado_anterior=" + ref_grado_anterior + ", ref_seccion=" + ref_seccion + ", ref_ponderado_anterior=" + ref_ponderado_anterior + ", flg_orden_merito=" + flg_orden_merito + ", grupo_sanguineo=" + grupo_sanguineo + ", lengua_materna=" + lengua_materna + ", segunda_lengua=" + segunda_lengua + ", nro_hermanos=" + nro_hermanos + ", flg_copia_dni=" + flg_copia_dni + ", flg_vive_con_padres=" + flg_vive_con_padres + ", fkid_persona=" + fkid_persona + ", fkid_tipo_alumno=" + fkid_tipo_alumno + ", fkid_per_familiar=" + fkid_per_familiar + ", flg_ofi_apoderado=" + flg_ofi_apoderado + ", fec_inicio=" + fec_inicio + ", id_per_familiar=" + id_per_familiar + ", flg_copia_dni_familiar=" + flg_copia_dni_familiar + ", dscrp_ocupacion=" + dscrp_ocupacion + ", telefono_emergencia=" + telefono_emergencia + ", fkid_tipo_familiar=" + fkid_tipo_familiar + ", fkid_estado_civil=" + fkid_estado_civil + ", fkid_grado_instruccion=" + fkid_grado_instruccion + ", id_grado_instruccion=" + id_grado_instruccion + ", nom_grado_instruccion=" + nom_grado_instruccion + ", id_estado_civil=" + id_estado_civil + ", nom_estado_civil=" + nom_estado_civil + ", id_tipo_familiar=" + id_tipo_familiar + ", nom_tipo_familiar=" + nom_tipo_familiar + '}';
     }
 
 }

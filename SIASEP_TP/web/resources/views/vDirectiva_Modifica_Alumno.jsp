@@ -578,7 +578,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="datos-familiar-md" data-toggle="tab" href="#datos-familiar" role="tab" aria-controls="datos-familiar"
-                                           aria-selected="false" style="font-weight: bold; color: #1e2229;">DATOS DEL FAMILIAR</a>
+                                           aria-selected="false" style="font-weight: bold; color: #1e2229;">VINCULO FAMILIAR</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content card pt-4" id="myTabContentMD" style="padding: 0px 10px 0px 10px;">
@@ -591,8 +591,7 @@
                                                             <div class="form-group" style="margin-top: 15px;">
                                                                 <label for="txtAlumnoBuscar">Buscar alumno por:&nbsp;&nbsp;&nbsp;</label>
                                                                 <select class="form-control" id="comboboxAlumno" ng-model="selAlumnoSeleccionado" 
-                                                                        ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_completo_alumno for labusq in listaAlumnosBusqueda"
-                                                                        ng-change="buscarAlumnoInfo()">
+                                                                        ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_alumno for labusq in listaAlumnosBusqueda">
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -634,17 +633,17 @@
                                                         <div class="form-group" style="margin-top: 15px;">
                                                             <label for="txtAlumnoBuscar">Buscar alumno por:&nbsp;&nbsp;&nbsp;</label>
                                                             <select class="form-control" id="comboboxVinculo" ng-model="selAlumnoSeleccionado" 
-                                                                    ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_completo_alumno for labusq in listaAlumnosBusqueda"
-                                                                    ng-change="buscarAlumnoInfo()">
+                                                                    ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_alumno for labusq in listaAlumnosBusqueda">
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-2" style="text-align: left; padding-top: 6px;">
-                                                    <button class="btn btn-info btn-md" ng-click="buscaAlumnoInfo()"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Buscar</button>
+                                                    <button class="btn btn-info btn-md" ng-click="obtenerListaFamiliares()"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Buscar</button>
                                                 </div>
                                                 <div class="col-lg-4" style="text-align: right; padding-top: 6px;">
-                                                    <button class="btn btn-outline-blue-grey btn-md" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Agregar un vinculo</button>
+                                                    <button class="btn btn-outline-blue-grey btn-md" data-toggle="modal" data-target=".modalAsignarApoderado" ng-click="abrirModalAsignar()">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Asignar nuevo apoderado</button>
                                                 </div>
                                             </div>
                                             <div class="row pt-3">
@@ -655,21 +654,22 @@
                                                                 <th scope="col">Nro. Documento</th>
                                                                 <th scope="col">Tipo de Familiar</th>
                                                                 <th scope="col">Nombre Completo</th>
-                                                                <th scope="col">Celular de Emergencia</th>
-                                                                <th scope="col">Ocupación</th>
+                                                                <th scope="col">Telefono de Emergencia</th>
                                                                 <th scope="col">¿Es Apoderado?</th>
                                                                 <th scope="col">Acciones</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                <td class="text-center"><button class="btn btn-mdb-color btn-sm"><span class="fa fa-pencil-square-o"></span></button> <button class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></button></td>
+                                                            <tr ng-repeat="fam in listaFamiliares">
+                                                                <td>{{fam.numero_documento}}</td>
+                                                                <td>{{fam.nom_tipo_familiar}}</td>
+                                                                <td>{{fam.nombre_familiar}}</td>
+                                                                <td>{{fam.telefono_emergencia}}</td>
+                                                                <td>{{fam.es_apoderado}}</td>
+                                                                <td class="text-center">
+                                                                    <button type="button" class="btn-floating btn-mdb-color btn-lg" value="{{fam.id_per_familiar}}" data-ng-click="mostrarInfoFamiliar($event)"
+                                                                        title="Ver información" data-toggle="modal" data-target=".modalViewFamiliar"><span class="fa fa-address-book"></span></button>
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -697,19 +697,10 @@
             </div>
         </main>
 
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade modalViewFamiliar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Ingrese:</label>
-                            <div class="col-sm-7">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Nro. Documento">
-                            </div>
-                            <div class="col-sm-3">
-                                <button type="submit" class="btn btn-outline-light-blue btn-sm">Buscar</button>
-                            </div>
-                        </div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -724,134 +715,124 @@
                                         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#datos_contacto" role="tab"
                                            aria-controls="v-pills-profile" aria-selected="false">Contacto</a>
                                         <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#datos_laborales" role="tab" 
-                                           aria-controls="v-pills-messages" aria-selected="false">Datos Laborales y Otros</a>
+                                           aria-controls="v-pills-messages" aria-selected="false">Datos Generales</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-10">
                                     <div class="tab-content" id="v-pills-tabContent">
                                         <div class="tab-pane fade show active" id="datos_personales" role="tabpanel" aria-labelledby="datos_personales-tab">
-                                            <div class="form-row">
+                                            <h3 style="font-weight: lighter;">Datos Personales</h3>
+                                            <div class="form-row pt-3">
                                                 <div class="col">
-                                                    <h3 style="font-weight: lighter;">Datos Personales</h3>
+                                                    <div class="form-group">
+                                                        <label for="txtNombreFamiliar">Primer Nombre</label>
+                                                        <input type="text" class="form-control" id="txtNombreFamiliar" aria-describedby="emailHelp" ng-model="modNombreFamiliar" disabled>
+                                                    </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">¿ES APODERADO? (*)</label>
-                                                        <input type="checkbox" checked data-toggle="toggle" data-style="ios" data-on="SI" data-off="NO">
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                        <label for="txtApePaternoFamiliar">Apellido Paterno</label>
+                                                        <input type="text" class="form-control" id="txtApePaternoFamiliar" aria-describedby="emailHelp" ng-model="modApePaternoFamiliar" disabled>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="txtApeMaternoFamiliar">Apellido Materno</label>
+                                                        <input type="text" class="form-control" id="txtApeMaternoFamiliar" aria-describedby="emailHelp" ng-model="modApeMaternoFamiliar" disabled>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleSelect1">Tipo de Documento (*)</label>
-                                                        <select class="md-form" id="exampleSelect1">
-                                                            <option>DNI</option>
-                                                            <option>PASAPORTE</option>
+                                                        <label for="txtTipoDocFamiliar">Tipo de Documento</label>
+                                                        <select class="form-control" id="txtTipoDocFamiliar" ng-model="modTipoDocFamiliar" disabled>
+                                                            <option value="1">DNI</option>
+                                                            <option value="2">PASAPORTE</option>
                                                         </select>
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Numero de Documento (*)</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                        <label for="txtNroDocFamiliar">Numero de Documento</label>
+                                                        <input type="text" class="form-control" id="txtNroDocFamiliar" aria-describedby="emailHelp" ng-model="modNroDocFamiliar" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleSelect1">Estado Civil (*)</label>
-                                                        <select class="form-control" id="exampleSelect1">
-                                                            <option>A -</option>
-                                                            <option>A +</option>
-                                                            <option>B -</option>
-                                                            <option>B +</option>
-                                                            <option>AB -</option>
-                                                            <option>AB +</option>
-                                                            <option>O -</option>
-                                                            <option>O +</option>
+                                                        <label for="txtEstadoCivil">Estado Civil</label>
+                                                        <select class="form-control" id="txtEstadoCivil" ng-model="modEstadoCivil" disabled>
+                                                            <option value="1">Casado(a)</option>
+                                                            <option value="2">Divorciado(a)</option>
+                                                            <option value="3">Soltero(a)</option>
+                                                            <option value="4">Viudo(a)</option>
                                                         </select>
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Primer Nombre (*)</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                        <label for="txtFecNacFamiliar">Fecha de Nacimiento</label>
+                                                        <input class="form-control" type="text" id="txtFecNacFamiliar" ng-model="modFecNacFamiliar" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Apellido Paterno (*)</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Apellido Materno (*)</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label for="example-date-input">Fecha de Nacimiento (*)</label>
-                                                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label for="exampleSelect1">Lugar de Nacimiento (*)</label>
-                                                        <select class="form-control" id="exampleSelect1">
-                                                            <option>A -</option>
-                                                            <option>A +</option>
-                                                            <option>B -</option>
-                                                            <option>B +</option>
-                                                            <option>AB -</option>
-                                                            <option>AB +</option>
-                                                            <option>O -</option>
-                                                            <option>O +</option>
+                                                        <label for="txtLugarNacFamiliar">Lugar de Nacimiento</label>
+                                                        <select class="form-control" id="txtLugarNacFamiliar" ng-model="modLugarNacFamiliar" disabled>
+                                                            <option value="1">Amazonas</option>
+                                                            <option value="2">Ancash</option>
+                                                            <option value="3">Apurimac</option>
+                                                            <option value="4">Arequipa</option>
+                                                            <option value="5">Ayacucho</option>
+                                                            <option value="6">Cajamarca</option>
+                                                            <option value="7">Callao</option>
+                                                            <option value="8">Cuzco</option>
+                                                            <option value="9">Huancavelica</option>
+                                                            <option value="10">Huanuco</option>
+                                                            <option value="11">Ica</option>
+                                                            <option value="12">Junin</option>
+                                                            <option value="13">La Libertad</option>
+                                                            <option value="14">Lambayeque</option>
+                                                            <option value="15">Lima</option>
+                                                            <option value="16">Loreto</option>
+                                                            <option value="17">Madre de Dios</option>
+                                                            <option value="18">Moquegua</option>
+                                                            <option value="19">Pasco</option>
+                                                            <option value="20">Piura</option>
+                                                            <option value="21">Puno</option>
+                                                            <option value="22">San Martin</option>
+                                                            <option value="23">Tacna</option>
+                                                            <option value="24">Tumbes</option>
+                                                            <option value="25">Ucayali</option>
                                                         </select>
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group" style="text-align: left;">
-                                                        <label for="relSexo">Sexo (*)</label>
+                                                        <label for="relSexo">Sexo</label>
                                                         <div class="form-control" id="relSexo" style="padding: 0px 0px 7px 0px;">
-                                                            <div class="row" style="padding-top: 8px;">
+                                                            <div class="row" style="padding-top: 8px; text-align: center;">
                                                                 <div class="col-lg-6" style="text-align: right;">
-                                                                    <div class="form-check-inline" style="text-align: right;">
+                                                                    <div class="form-check-inline">
                                                                         <label class="form-check-label" style="font-size: 13px;">
-                                                                            <input type="radio" class="form-check-input" name="optradio">Hombre
+                                                                            <input type="radio" class="form-check-input" name="optradioA" ng-model="modSexoFamiliar" value="M" disabled>Hombre
                                                                         </label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6" style="text-align: left;">
-                                                                    <div class="form-check-inline" style="text-align: left;">
+                                                                    <div class="form-check-inline">
                                                                         <label class="form-check-label" style="font-size: 13px;">
-                                                                            <input type="radio" class="form-check-input" name="optradio">Mujer
+                                                                            <input type="radio" class="form-check-input" name="optradioA" ng-model="modSexoFamiliar" value="F" disabled>Mujer
                                                                         </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
                                         </div>
                                         <div class="tab-pane fade" id="datos_contacto" role="tabpanel" aria-labelledby="datos_contacto-tab">
                                             <h3 style="font-weight: lighter;">Datos de Contacto</h3>
@@ -860,20 +841,59 @@
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label for="exampleSelect1">Distrito (*)</label>
-                                                                <select class="selectpicker form-control" data-live-search="true" 
-                                                                        id="exampleSelect1" data-width="96%" data-size="7">
-                                                                    <option>San Juan de Miraflores</option>
-                                                                    <option>San Juan de Miraflores</option>
-                                                                    <option>San Juan de Miraflores</option>
-                                                                    <option>San Juan de Miraflores</option>
-                                                                    <option>San Juan de Miraflores</option>
-                                                                    <option>San Juan de Miraflores</option>
-                                                                    <option>San Juan de Miraflores</option>
-                                                                    <option>San Juan de Miraflores</option>
-                                                                    <option>San Juan de Miraflores</option>
+                                                                <label for="txtDistritoFamiliar">Distrito</label>
+                                                                <select class="form-control" id="txtDistritoFamiliar" ng-model="modDistritoFamiliar" disabled>
+                                                                    <option value="1">Callao</option>
+                                                                    <option value="2">Bellavista</option>
+                                                                    <option value="3">Carmen de la Legua</option>
+                                                                    <option value="4">La Perla</option>
+                                                                    <option value="5">La Punta</option>
+                                                                    <option value="6">Mi Peru</option>   
+                                                                    <option value="7">Ventanilla</option>
+                                                                    <option value="8">Lima</option>
+                                                                    <option value="9">Ancon</option>
+                                                                    <option value="10">Ate</option>
+                                                                    <option value="11">Barranco</option>
+                                                                    <option value="12">Breña</option>     
+                                                                    <option value="13">Carabayllo</option>
+                                                                    <option value="14">Cieneguilla</option>
+                                                                    <option value="15">Chaclacayo</option>
+                                                                    <option value="16">Chomillos</option>
+                                                                    <option value="17">Comas</option>
+                                                                    <option value="18">El Agustino</option>
+                                                                    <option value="19">Indepenndencia</option>
+                                                                    <option value="20">Jesus Maria</option>
+                                                                    <option value="21">La Molina</option>
+                                                                    <option value="22">La Victoria</option>
+                                                                    <option value="23">Lince</option>   
+                                                                    <option value="24">Los Olivos</option>
+                                                                    <option value="25">Lurigancho</option>
+                                                                    <option value="26">Lurin</option>
+                                                                    <option value="27">Magdalena del Mar</option>
+                                                                    <option value="28">Miraflores</option>
+                                                                    <option value="29">Pachacamac</option>     
+                                                                    <option value="30">Pucusana</option>
+                                                                    <option value="31">Pueblo Libre</option>
+                                                                    <option value="32">Puente Piedra</option>
+                                                                    <option value="33">Punta Hermosa</option>
+                                                                    <option value="34">Punta Negra</option>
+                                                                    <option value="35">Rimac</option>
+                                                                    <option value="36">San Bartolo</option>
+                                                                    <option value="37">San Borja</option>
+                                                                    <option value="38">San Isidro</option>
+                                                                    <option value="39">San Juan de Lurigancho</option>
+                                                                    <option value="40">San Juan de Miraflores</option>   
+                                                                    <option value="41">San Luis</option>
+                                                                    <option value="42">San Martin de Porres</option>
+                                                                    <option value="43">San Miguel</option>
+                                                                    <option value="44">Santa Anita</option>
+                                                                    <option value="45">Santa Maria del Mar</option>
+                                                                    <option value="46">Santa Rosa</option>     
+                                                                    <option value="47">Santiago de Surco</option>
+                                                                    <option value="48">Surquillo</option>
+                                                                    <option value="49">Villa el Salvador</option>
+                                                                    <option value="50">Villa Maria del Triunfo </option>
                                                                 </select>
-                                                                <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -882,17 +902,16 @@
                                                     <div class="form-row">
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label for="exampleInputEmail1">Telefono de Casa</label>
-                                                                <input type="text" class="form-control" id="exampleInputEmail1" style="margin-top: 12px;"
-                                                                       aria-describedby="emailHelp" placeholder="Enter email">
+                                                                <label for="txtTelefonoFamiliar">Telefono de Casa</label>
+                                                                <input type="text" class="form-control" id="txtTelefonoFamiliar" aria-describedby="emailHelp" 
+                                                                       placeholder="No tiene telefono de casa" ng-model="modTelefonoFamiliar" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="col">
                                                             <div class="form-group">
-                                                                <label for="exampleInputEmail1">Celular de Emergencia (*)</label>
-                                                                <input type="text" class="form-control" id="exampleInputEmail1" style="margin-top: 12px;"
-                                                                       aria-describedby="emailHelp" placeholder="Enter email">
-                                                                <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                                <label for="txtCelularFamiliar">Telefono Celular</label>
+                                                                <input type="text" class="form-control" id="txtCelularFamiliar" aria-describedby="emailHelp" 
+                                                                       placeholder="No tiene celular" ng-model="modCelularFamiliar" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -902,103 +921,77 @@
                                             <div class="form-row" style="padding-top: 10px;">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Dirección del hogar (*)</label>
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                        <label for="txtDireccionFamiliar">Dirección del hogar</label>
+                                                        <input type="text" class="form-control" id="txtDireccionFamiliar" aria-describedby="emailHelp" ng-model="modDireccionFamiliar" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Correo electrónico</label>
-                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example123@gmail.com">
+                                                        <label for="txtCorreoFamiliar">Correo electrónico</label>
+                                                        <input type="email" class="form-control" id="txtCorreoFamiliar" aria-describedby="emailHelp" 
+                                                               placeholder="No tiene correo electronico" ng-model="modCorreoFamiliar" disabled>
                                                     </div>
                                                 </div>
                                             </div> 
                                         </div>
                                         <div class="tab-pane fade" id="datos_laborales" role="tabpanel" aria-labelledby="datos_laborales-tab">
-                                            <h3 style="font-weight: lighter;">Datos Laborales</h3>
-                                            <div class="form-row">
+                                            <h3 style="font-weight: lighter;">Datos Generales y Laborales</h3>
+                                            <div class="form-row pt-3">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleSelect1">Tipo de Familiar (*)</label>
-                                                        <select class="form-control" id="exampleSelect1">
-                                                            <option>A -</option>
-                                                            <option>A +</option>
-                                                            <option>B -</option>
-                                                            <option>B +</option>
-                                                            <option>AB -</option>
-                                                            <option>AB +</option>
-                                                            <option>O -</option>
-                                                            <option>O +</option>
+                                                        <label for="txtTipoFamiliar">Tipo de Familiar </label>
+                                                        <select class="form-control" id="txtTipoFamiliar" ng-model="modTipoFamiliar" disabled>
+                                                            <option value="1">Padre</option>
+                                                            <option value="2">Madre</option>
+                                                            <option value="3">Tio(a)</option>
+                                                            <option value="4">Padrino</option>
+                                                            <option value="5">Vecino(o)</option>
+                                                            <option value="6">Otros</option>
                                                         </select>
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group" style="text-align: left;">
-                                                        <label for="relSexo">¿Entregó Copia de DNI? (*)</label>
+                                                        <label for="relSexo">¿Entregó Copia de DNI?</label>
                                                         <div class="form-control" id="relSexo" style="padding: 0px 0px 7px 0px;">
                                                             <div class="row" style="padding-top: 8px;">
                                                                 <div class="col-lg-6" style="text-align: right;">
                                                                     <div class="form-check-inline" style="text-align: right;">
                                                                         <label class="form-check-label" style="font-size: 14px;">
-                                                                            <input type="radio" class="form-check-input" name="optradio">SI
+                                                                            <input type="radio" class="form-check-input" name="optradioB" value="true" ng-model="modCopiaDNIFamiliar" disabled>SI
                                                                         </label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6" style="text-align: left;">
                                                                     <div class="form-check-inline" style="text-align: left;">
                                                                         <label class="form-check-label" style="font-size: 14px;">
-                                                                            <input type="radio" class="form-check-input" name="optradio">NO
+                                                                            <input type="radio" class="form-check-input" name="optradioB" value="false" ng-model="modCopiaDNIFamiliar" disabled>NO
                                                                         </label>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio marcar una de las opciones.</small>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleSelect1">Grado de instruccion (*)</label>
-                                                        <select class="form-control" id="exampleSelect1" style="margin-top: 12px;">
-                                                            <option>A -</option>
-                                                            <option>A +</option>
-                                                            <option>B -</option>
-                                                            <option>B +</option>
-                                                            <option>AB -</option>
-                                                            <option>AB +</option>
-                                                            <option>O -</option>
-                                                            <option>O +</option>
+                                                        <label for="txtGradoInstruccion">Grado de instruccion</label>
+                                                        <select class="form-control" id="txtGradoInstruccion" ng-model="modGradoInstruccion" disabled>
+                                                            <option value="1">Sin Estudios</option>
+                                                            <option value="2">Primario</option>
+                                                            <option value="3">Secundarios</option>
+                                                            <option value="4">Medio-Superior</option>
+                                                            <option value="5">Superior</option>
                                                         </select>
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Ocupación</label>
-                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-                                                               placeholder="example123@gmail.com" style="margin-top: 12px;">
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label for="exampleSelect1">Centro de Labores (*)</label>
-                                                        <select class="selectpicker form-control" data-live-search="true" 
-                                                                id="exampleSelect1" data-width="96%" data-size="7">
-                                                            <option>San Juan de Miraflores</option>
-                                                            <option>San Juan de Miraflores</option>
-                                                            <option>San Juan de Miraflores</option>
-                                                            <option>San Juan de Miraflores</option>
-                                                            <option>San Juan de Miraflores</option>
-                                                            <option>San Juan de Miraflores</option>
-                                                            <option>San Juan de Miraflores</option>
-                                                            <option>San Juan de Miraflores</option>
-                                                            <option>San Juan de Miraflores</option>
-                                                        </select>
-                                                        <small id="emailHelp" class="form-text text-muted">Es requisitorio rellenar este casillero.</small>
+                                                        <label for="txtOcupacionFamiliar">Ocupación</label>
+                                                        <input type="text" class="form-control" id="txtOcupacionFamiliar" aria-describedby="emailHelp" 
+                                                               ng-model="modOcupacionFamiliar" placeholder="Sin ocupación" disabled>
                                                     </div>
                                                 </div>
                                             </div> 
@@ -1009,18 +1002,65 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Vincular existente</button>
-                        <button type="button" class="btn btn-primary">Registrar nuevo</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="modal fade modalAsignarApoderado" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <h3 style="font-weight: lighter; margin-bottom: 25px;">Asigne un apoderado a uno de los familiares del alumno</h3>
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nro. Documento</th>
+                                        <th scope="col">Nombre Completo</th>
+                                        <th scope="col">Apoderado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="fam in listaFamiliaresAsignar">
+                                        <td>{{fam.numero_documento}}</td>
+                                        <td>{{fam.nombre_familiar}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-default active">
+                                                    <input type="radio" name="options" id="option1" autocomplete="off" value="{{fam.flg_orden_merito}}" checked> SI
+                                                </label>
+                                                <label class="btn btn-default">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off" value="{{fam.flg_orden_merito}}"> NO
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Vincular existente</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                                    
+                                                    
     </div>
     <!--Modal: Login / Register Form-->
     <%@include file="foot.jspf" %>
     <script>
+        $('.toggle-one').bootstrapToggle();
+    
         function desbloqueaFormulario() {
             $('.datepicker').attr("style","background-color: white");
             $("#txtNombreAlumno").removeAttr("readonly");
@@ -1236,6 +1276,135 @@
               }
             });
             $( "#comboboxAlumno" ).combobox();
+        } );
+
+        $( function() {
+            $.widget( "custom.combobox", {
+              _create: function() {
+                this.wrapper = $( "<span>" )
+                  .addClass( "custom-combobox" )
+                  .insertAfter( this.element );
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+              },
+              _createAutocomplete: function() {
+                var selected = this.element.children( ":selected" ),
+                  value = selected.val() ? selected.text() : "";
+                
+                this.input = $( "<input>" )
+                  .appendTo( this.wrapper )
+                  .attr("id", "txtAlumnoForFamiliar")
+                  .val( value )
+                  .attr( "title", "" )
+                  .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state ui-corner-left" )
+                  .autocomplete({
+                    delay: 0,
+                    minLength: 0,
+                    source: $.proxy( this, "_source" )
+                  })
+                  .tooltip({
+                    classes: {
+                      "ui-tooltip": "ui-state-highlight"
+                    }
+                  });
+
+                this._on( this.input, {
+                  autocompleteselect: function( event, ui ) {
+                    ui.item.option.selected = true;
+                    this._trigger( "select", event, {
+                      item: ui.item.option
+                    });
+                  },
+
+                  autocompletechange: "_removeIfInvalid"
+                });
+              },
+
+              _createShowAllButton: function() {
+                var input = this.input,
+                  wasOpen = false;
+
+                $( "<a>" )
+                  .attr( "tabIndex", -1 )
+                  .attr( "title", "Mostrar Todo" )
+                  .attr( "id", "hptFormAlumno" )
+                  .tooltip()
+                  .appendTo( this.wrapper )
+                  .button({
+                    icons: {
+                      primary: "ui-icon-triangle-1-s"
+                    },
+                    text: false
+                  })
+                  .removeClass( "ui-corner-all" )
+                  .addClass( "custom-combobox-toggle ui-corner-right" )
+                  .on( "mousedown", function() {
+                    wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+                  })
+                  .on( "click", function() {
+                    input.trigger( "focus" );
+
+                    // Close if already visible
+                    if ( wasOpen ) {
+                      return;
+                    }
+
+                    // Pass empty string as value to search for, displaying all results
+                    input.autocomplete( "search", "" );
+                  });
+              },
+
+              _source: function( request, response ) {
+                var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+                response( this.element.children( "option" ).map(function() {
+                  var text = $( this ).text();
+                  if ( this.value && ( !request.term || matcher.test(text) ) )
+                    return {
+                      label: text,
+                      value: text,
+                      option: this
+                    };
+                }) );
+              },
+
+              _removeIfInvalid: function( event, ui ) {
+
+                // Selected an item, nothing to do
+                if ( ui.item ) {
+                  return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children( "option" ).each(function() {
+                  if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+                    this.selected = valid = true;
+                    return false;
+                  }
+                });
+                // Found a match, nothing to do
+                if ( valid ) {
+                  return;
+                }
+                // Remove invalid value
+                this.input
+                  .val( "" )
+                  .attr( "title", "No se encontro la busqueda \""+value+"\"." )
+                  .tooltip( "open" );
+                this.element.val( "" );
+                this._delay(function() {
+                  this.input.tooltip( "close" ).attr( "title", "" );
+                }, 2500 );
+                this.input.autocomplete( "instance" ).term = "";
+              },
+              _destroy: function() {
+                this.wrapper.remove();
+                this.element.show();
+              }
+            });
             $( "#comboboxVinculo" ).combobox();
         } );
 

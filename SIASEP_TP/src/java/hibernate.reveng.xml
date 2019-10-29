@@ -55,7 +55,6 @@ Contributor(s):
   <table-filter match-name="persona"/>
   <table-filter match-name="distrito"/>
   <table-filter match-name="tipo_familiar"/>
-  <table-filter match-name="familiar_has_centro_labores"/>
   <table-filter match-name="per_alumno"/>
   <table-filter match-name="tipo_alumno"/>
   <table-filter match-name="centro_labores"/>

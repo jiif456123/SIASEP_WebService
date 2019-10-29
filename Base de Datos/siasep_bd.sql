@@ -108,11 +108,6 @@ create table grado_instruccion(
 	nom_grado_instruccion varchar(45)
 );
 go
-create table centro_labores(
-	id_centro_labores int primary key identity(1,1),
-	nom_centro_labores varchar(45)
-);
-go
 create table per_familiar(
 	id_per_familiar int primary key identity(1,1),
 	flg_copia_dni_apo bit not null,
@@ -126,14 +121,6 @@ create table per_familiar(
 	FOREIGN KEY (fkid_tipo_familiar) REFERENCES tipo_familiar(id_tipo_familiar),
 	FOREIGN KEY (fkid_estado_civil) REFERENCES estado_civil(id_estado_civil),
 	FOREIGN KEY (fkid_grado_instruccion) REFERENCES grado_instruccion(id_grado_instruccion)
-);
-go
-create table familiar_has_centro_labores(
-	fkid_per_familiar int not null,
-	fkid_centro_labores int not null,
-	primary key(fkid_per_familiar, fkid_centro_labores),
-	FOREIGN KEY (fkid_per_familiar) REFERENCES per_familiar(id_per_familiar),
-	FOREIGN KEY (fkid_centro_labores) REFERENCES centro_labores(id_centro_labores)
 );
 go
 create table vinculo_familiar(
@@ -238,6 +225,58 @@ go
 --exec sp_eliminar_matricula 9;
 go
 go
+CREATE PROCEDURE sp_modifica_datos_alumno
+@codigo_alumno int, @primer_nombre varchar(150), @apellido_materno varchar(150), @apellido_paterno varchar(150),
+@numero_documento varchar(20), @fec_nacimiento date, @sexo char(1), @telefono_casa varchar(45),
+@telefono_celular varchar(45), @direccion varchar(255), @correo varchar(255),
+@fkid_tipo_documento int, @fkid_distrito int, @fkid_lugar_nacimiento int,
+@nombre_ie_anterior varchar(255), @ref_nivel varchar(45), @ref_grado_anterior char(1), @ref_seccion char(1),
+@ref_ponderado_anterior float, @flg_orden_merito bit, @grupo_sanguineo varchar(45), @lengua_materna varchar(150),
+@segunda_lengua varchar(150), @nro_hermanos int, @flg_copia_dni bit, @flg_vive_con_padres bit
+AS
+BEGIN
+DECLARE @id_persona_by_codigo int, @id_per_alumno_by_codigo int;
+SET @id_persona_by_codigo = (SELECT per.id_persona FROM persona as per INNER JOIN per_alumno as peralu 
+							 ON (per.id_persona = peralu.fkid_persona)
+							 WHERE (codigo_alumno = @codigo_alumno));
+SET @id_per_alumno_by_codigo = (SELECT id_per_alumno FROM per_alumno WHERE (codigo_alumno = @codigo_alumno));
+
+--Actualizando a tabla persona
+UPDATE persona
+   SET primer_nombre = @primer_nombre
+      ,apellido_materno = @apellido_materno
+      ,apellido_paterno = @apellido_paterno
+      ,numero_documento = @numero_documento
+      ,fec_nacimiento = @fec_nacimiento
+      ,sexo = @sexo
+      ,telefono_casa = @telefono_casa
+      ,telefono_celular = @telefono_celular
+      ,direccion = @direccion
+      ,correo = @correo
+      ,fkid_tipo_documento = @fkid_tipo_documento
+      ,fkid_distrito = @fkid_distrito
+      ,fkid_lugar_nacimiento = @fkid_lugar_nacimiento
+ WHERE (id_persona = @id_persona_by_codigo);
+--Actualizando a tabla per_alumno
+UPDATE per_alumno
+   SET nombre_ie_anterior = @nombre_ie_anterior
+      ,ref_nivel = @ref_nivel
+      ,ref_grado_anterior = @ref_grado_anterior
+      ,ref_seccion = @ref_seccion
+      ,ref_ponderado_anterior = @ref_ponderado_anterior
+      ,flg_orden_merito = @flg_orden_merito
+      ,grupo_sanguineo = @grupo_sanguineo
+      ,lengua_materna = @lengua_materna
+      ,segunda_lengua = @segunda_lengua
+      ,nro_hermanos = @nro_hermanos
+      ,flg_copia_dni = @flg_copia_dni
+      ,flg_vive_con_padres = @flg_vive_con_padres
+ WHERE (id_per_alumno = @id_per_alumno_by_codigo);
+
+END
+go
+--exec sp_modifica_datos_alumno --,--,--,--,--...;
+go
 go
 ----------------------POPULATE------------------------------------------
 go
@@ -307,11 +346,6 @@ go
 INSERT INTO estado_matricula (nom_estado_matricula) VALUES ('Habilitado');
 INSERT INTO estado_matricula (nom_estado_matricula) VALUES ('Deshabilitado');
 go
-INSERT INTO estado_civil (nom_estado_civil) VALUES ('Casado');
-INSERT INTO estado_civil (nom_estado_civil) VALUES ('Divorciado');
-INSERT INTO estado_civil (nom_estado_civil) VALUES ('Soltero');
-INSERT INTO estado_civil (nom_estado_civil) VALUES ('Viudo');
-go
 INSERT INTO tipo_alumno (nom_tipo_alumno) VALUES ('Vigente');
 INSERT INTO tipo_alumno (nom_tipo_alumno) VALUES ('Repetido');
 go
@@ -363,8 +397,6 @@ INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_d
 VALUES ('Orlando','Torres','Navarro','9000005','2003-07-15','M','5287625','963892138','Ov.Guiterrez Cd 15','orlandoruiz3@gmail.com',1,50,15);
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
 VALUES ('Oliver','Ortiz','Bailon','40401212','2002-09-25','M','5287666','943892148','Mz D lt 15','oliveroka@gmail.com',1,2,15);
-
---ALUMNOS RECIEN REGISTRADOS
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
 VALUES ('Martin','Lopez','Mello','445601212','2004-09-25','M','5287226','943894448','Mz F lt 05','Martintin@gmail.com',1,25,13);
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
@@ -395,11 +427,18 @@ INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_d
 VALUES ('Homero','Sanchez','Sanchez','47892','2006-09-26','M','5284566','943412148','Monterrico 546','HomeroS@gmail.com',1,2,20);
 INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
 VALUES ('Lisa','Portillo','Mejia','401232','2004-09-25','F','5287666','941264148','Mz Z lt 15','LisaS@gmail.com',1,25,15);
-
+--FAMILIARES
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Pablo','Sanchez','Guitierrez','488232','1984-06-06','M','5668454','941264140','Jr Rivaguero','aaaS@gmail.com',1,14,6);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Pedro','Delgado','Yañez','502132','1972-09-15','M','5286622','941264142','Mz Z lt 14','bbbS@gmail.com',1,12,5);
+INSERT INTO persona (primer_nombre, apellido_materno, apellido_paterno, numero_documento, fec_nacimiento, sexo, telefono_casa, telefono_celular, direccion, correo, fkid_tipo_documento, fkid_distrito, fkid_lugar_nacimiento)
+VALUES ('Lisa','Salcedo','Bailon','151232','1990-01-13','F','6548592','941264144','Caminos del Inca 541','cccS@gmail.com',1,10,4);
+go
 go
 INSERT INTO usuario(username, password, fec_creacion, fkid_persona, fkid_estado_usuario) VALUES ('direccion001','siasep','2019-09-20',  2, 1);
 INSERT INTO usuario(username, password, fec_creacion, fkid_persona, fkid_estado_usuario) VALUES ('secretaria001','siasep','2019-09-20', 1 , 1);
-INSERT INTO usuario(username, password, fec_creacion, fkid_persona, fkid_estado_usuario) VALUES ('docente001','siasep','2019-09-20', 3, 1);
+INSERT INTO usuario(username, password, fec_creacion, fkid_persona, fkid_estado_usuario) VALUES ('subdirector001','siasep','2019-09-20', 3, 1);
 go
 INSERT INTO multi_role (fkid_usuario, fkid_tipo_usuario) VALUES (1, 1);
 INSERT INTO multi_role (fkid_Usuario, fkid_tipo_usuario) VALUES (2, 1);
@@ -419,8 +458,6 @@ INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_
 VALUES (100006,'Colegio Americano','Secundaria','3','B','14.5',0,'A-','Español',NULL,1,1,0,9,1);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_orden_merito, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, fkid_persona, fkid_tipo_alumno) 
 VALUES (100007,'Colegio Sanfrancisco del Oyola','Secundaria','3','B','12.5',0,'O-','Español','Ingles',0,0,0,10,2);
-
---NUEVOS REGISTROS
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_orden_merito, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, fkid_persona, fkid_tipo_alumno) 
 VALUES (100008,'Colegio san juan','Secundaria','1','A','13.5',1,'A+','Español','Ingles',2,0,0,11,1);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_orden_merito, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, fkid_persona, fkid_tipo_alumno) 
@@ -451,7 +488,6 @@ INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_
 VALUES (100021,'Trener','Secundaria','3','A','14.5',1,'A-','Español','Aleman',0,0,0,24,1);
 INSERT INTO per_alumno (codigo_alumno, nombre_ie_anterior, ref_nivel, ref_grado_anterior, ref_seccion, ref_ponderado_anterior, flg_orden_merito, grupo_sanguineo, lengua_materna, segunda_lengua, nro_hermanos, flg_copia_dni, flg_vive_con_padres, fkid_persona, fkid_tipo_alumno) 
 VALUES (100022,'Colegio san Sanfrancisco del Oyola','Secundaria','3','A','12.5',1,'O-','Español','Ingles',0,0,0,25,1);
-
 go
 go
 INSERT INTO tipo_familiar (nom_tipo_familiar) VALUES ('Padre');
@@ -467,28 +503,18 @@ INSERT INTO grado_instruccion(nom_grado_instruccion) VALUES('Secundarios');
 INSERT INTO grado_instruccion(nom_grado_instruccion) VALUES('Medio-Superior');
 INSERT INTO grado_instruccion(nom_grado_instruccion) VALUES('Superior');
 go
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Banco Azteca');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Everest');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Molitalia');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Academia Pitagoras');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('okComputer');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Colegio Pamer');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Universidad Ricardo Palma ');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Financiera Confianza');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Empresa Multinacional Logistica');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Caja Huancayo');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Rimac Seguro');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Vivienda');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Federacion Peruana de Futbol');
-INSERT INTO centro_labores(nom_centro_labores) VALUES('Hospital Ricardo Palma');
+INSERT INTO estado_civil (nom_estado_civil) VALUES ('Casado');
+INSERT INTO estado_civil (nom_estado_civil) VALUES ('Divorciado');
+INSERT INTO estado_civil (nom_estado_civil) VALUES ('Soltero');
+INSERT INTO estado_civil (nom_estado_civil) VALUES ('Viudo');
 go
+INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,fkid_persona,fkid_tipo_familiar,fkid_estado_civil,fkid_grado_instruccion)
+VALUES(1,'Gerente Financiero','5272338',26,1,1,5);
+INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,fkid_persona,fkid_tipo_familiar,fkid_estado_civil,fkid_grado_instruccion)
+VALUES(0,'Programador','5212288',27,4,3,5);
+INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,fkid_persona,fkid_tipo_familiar,fkid_estado_civil,fkid_grado_instruccion)
+VALUES(1,'Tendera del local','4226288',28,2,1,4);
 /*
-INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,fkid_persona,fkid_tipo_familiar,fkid_estado_civil,fkid_grado_instruccion)
-VALUES(1,'Gerente','5272288',10,1,1,5);
-INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,fkid_persona,fkid_tipo_familiar,fkid_estado_civil,fkid_grado_instruccion)
-VALUES(0,'Programador','5255288',9,2,3,5);
-INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,fkid_persona,fkid_tipo_familiar,fkid_estado_civil,fkid_grado_instruccion)
-VALUES(1,'Gerente','5226288',9,6,3,4);
 INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,fkid_persona,fkid_tipo_familiar,fkid_estado_civil,fkid_grado_instruccion)
 VALUES(1,'Profesor','5276448',8,2,1,5);
 INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,fkid_persona,fkid_tipo_familiar,fkid_estado_civil,fkid_grado_instruccion)
@@ -503,43 +529,21 @@ INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,
 VALUES(0,'Director','527558',6,6,4);
 INSERT INTO per_familiar(flg_copia_dni_apo,dscrp_ocupacion ,telefono_emergencia,fkid_persona,fkid_tipo_familiar,fkid_estado_civil,fkid_grado_instruccion)
 VALUES(0,'Ama De casa','5276123',4,5,4,1,3);
-go
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(1,1);
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(2,2);
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(3,3);
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(4,4);
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(5,6);
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(6,6);
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(7,7);
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(8,8);
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(9,7);
-INSERT INTO familiar_has_centro_labores(fkid_per_familiar, fkid_centro_labores) VALUES(10,12);
-go
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES (1,1,'0','2019-10-20', NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 1,2,'1', '2019-10-20' ,NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 2,3,'0', ' 2019-10-20' ,NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo))
-VALUES ( 3, 4,'1' , ' 2019-10-20' ,NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 4, 5, '1' , '2019-10-20' , NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 5, 6, '1' , '2019-10-20' , NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 6, 7,'1' , '2019-10-20' , NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 7, 8, '1' , '2019-10-20' , NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 7, 9, '0' , '2017-01-05' , '2019-10-20');
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 1, 11,'1' , '2019-10-20 ' ,NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 2, 12,'1', '2019-10-20 ' , NULL);
-INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES ( 5, 13, '0' , '2018-05-20' , '2019-10-20');
 go*/
+go
+INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
+VALUES (1,1,0,'2010-03-15',NULL);
+INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
+VALUES (1,2,1,'2010-03-16',NULL);
+INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
+VALUES (7,3,1,'2010-03-16',NULL);
+INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
+VALUES (9,3,1,'2011-03-16',NULL);
+INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
+VALUES (14,3,1,'2011-03-17',NULL);
+INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
+VALUES (17,3,1,'2012-03-17',NULL);
+go
 INSERT INTO periodo_anual VALUES ('2019-03-15', NULL);
 go
 INSERT INTO tipo_trabajador VALUES ('Director(a)');
@@ -548,6 +552,7 @@ INSERT INTO tipo_trabajador VALUES ('Secretario(a)');
 INSERT INTO tipo_trabajador VALUES ('Coordinador');
 INSERT INTO tipo_trabajador VALUES ('Auxiliar');
 go
-INSERT INTO per_trabajador VALUES (0101010, 2, 1);
 INSERT INTO per_trabajador VALUES (0101022, 1, 3);
+INSERT INTO per_trabajador VALUES (0101010, 2, 1);
+INSERT INTO per_trabajador VALUES (0101033, 3, 2);
 go
