@@ -1,5 +1,6 @@
 package com.service;
 
+import com.DTO.AlumnoDTO;
 import com.DTO.ListaAlumnoDTO;
 import com.DTO.ListaMatriculaDTO;
 import com.DTO.MatriculaDTO;
@@ -236,7 +237,7 @@ public class DirectivaResource {
         return respuesta;
     }
     
-    /*---------------------------------------- FIN DE MATRICULA -----------------------------------------------------*/
+    /*---------------------------------------- INICIO DE MODIFICAR ALUMNO -----------------------------------------------------*/
     
     @GET
     @Path("listarAlumnosBusqueda")
@@ -257,7 +258,6 @@ public class DirectivaResource {
     @Path("listarDatosDelAlumno")
     @Produces("application/json")
     public String listarDatosDelAlumno(String data) {
-        System.out.println("-->"+data);
         Gson gson = new Gson();
         ListaAlumnoDTO listaAlumnoDTO = gson.fromJson(data, ListaAlumnoDTO.class);
         ListaAlumnoDTO respuesta = new ListaAlumnoDTO();
@@ -267,6 +267,25 @@ public class DirectivaResource {
             System.out.println("verObservacionMatricula: "+e.getMessage());
         }
         return gson.toJson(respuesta);
+    }
+    
+    @POST
+    @Path("modificaDatosAlumno")
+    @Produces("application/json")
+    public Response modificaDatosAlumno(String data) {
+        System.out.println("cadena-> "+data);
+        Response respuesta;
+        Gson gson = new Gson();
+        AlumnoDTO alumnoDTO = gson.fromJson(data, AlumnoDTO.class);
+        try{
+            modificaAlumnoHelper.updateAlumnoByDNI(alumnoDTO);
+            respuesta = Response.status(200).entity(alumnoDTO).build();
+        }
+        catch(Exception ex){
+            System.out.println("eliminarMatriculaAlumno: " + ex);
+            respuesta = Response.status(500).entity(alumnoDTO).build();
+        }
+        return respuesta;
     }
     
     

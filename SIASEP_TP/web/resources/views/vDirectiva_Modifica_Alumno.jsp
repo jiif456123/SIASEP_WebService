@@ -510,7 +510,10 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark default-color">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto"></ul>
+                    <ul class="navbar-nav mr-auto" style="padding-left: 85px;">
+                        <a href="#" class="nav-item" style="font-weight: bold; color: #ffffff;"
+                           onclick="window.location.href = 'http://localhost:8084/SIASEP_TP/'">INICIO</a>
+                    </ul>
                     <ul class="navbar-nav nav-flex-icons">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuB" data-toggle="dropdown"
@@ -566,8 +569,8 @@
                                     <h2><strong>MODIFICAR INFORMACIÓN DEL ALUMNO</strong></h2>
                                     <h6>Consulte la informacion personal del alumno y si desee realizar algun cambio</h6>
                                 </div>
-                                
-                                
+
+
                                 <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="datos-alumno-md" data-toggle="tab" href="#datos-alumno" role="tab" aria-controls="datos-alumno"
@@ -581,45 +584,48 @@
                                 <div class="tab-content card pt-4" id="myTabContentMD" style="padding: 0px 10px 0px 10px;">
                                     <div class="tab-pane fade show active" id="datos-alumno" role="tabpanel" aria-labelledby="datos-alumno-md" style="padding-bottom: 30px;">
                                         <div class="container-fluid">
-                                            <div class="row pt-2" style="padding-bottom: 22px;">
-                                                <div class="col-lg-6">
-                                                    <div class=" ui-widget">
-                                                        <div class="form-group" style="margin-top: 15px;">
-                                                            <label for="txtAlumnoBuscar">Buscar alumno por:&nbsp;&nbsp;&nbsp;</label>
-                                                            <select class="form-control" id="comboboxAlumno" ng-model="selAlumnoSeleccionado" 
-                                                                    ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_completo_alumno for labusq in listaAlumnosBusqueda"
-                                                                    ng-change="buscarAlumnoInfo()">
-                                                            </select>
+                                            <form class="formModificarAlumno" novalidate>
+                                                <div class="row pt-2" style="padding-bottom: 22px;">
+                                                    <div class="col-lg-6">
+                                                        <div class=" ui-widget">
+                                                            <div class="form-group" style="margin-top: 15px;">
+                                                                <label for="txtAlumnoBuscar">Buscar alumno por:&nbsp;&nbsp;&nbsp;</label>
+                                                                <select class="form-control" id="comboboxAlumno" ng-model="selAlumnoSeleccionado" 
+                                                                        ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_completo_alumno for labusq in listaAlumnosBusqueda"
+                                                                        ng-change="buscarAlumnoInfo()">
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-2" style="text-align: left; padding-top: 6px;">
-                                                    <button class="btn btn-info btn-md" ng-click="buscaAlumnoInfo()"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Buscar</button>
-                                                </div>
-                                                <div class="col-lg-4" style="text-align: right; padding-top: 2px;">
-                                                    <button class="btn btn-success"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;&nbsp;Realizar Cambios</button>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="row" style="padding-top: 12px;">
-                                                <div class="col-lg-2">
-                                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" 
-                                                           aria-controls="v-pills-home" aria-selected="true">Datos Personales</a>
-                                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                                                           aria-controls="v-pills-profile" aria-selected="false">Contacto</a>
-                                                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" 
-                                                           aria-controls="v-pills-messages" aria-selected="false">Datos Generales</a>
-                                                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" 
-                                                           aria-controls="v-pills-settings" aria-selected="false">Constancia</a>
+                                                    <div class="col-lg-2" style="text-align: left; padding-top: 6px;">
+                                                        <button id="btnBuscarInfoAlumno" class="btn btn-info btn-md" ng-click="buscaAlumnoInfo()"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Buscar</button>
+                                                    </div>
+                                                    <div class="col-lg-4" style="text-align: right; padding-top: 2px;">
+                                                        <button type="submit" id="btnRealizaCambio" class="btn btn-amber" onclick="desbloqueaFormulario()" ng-click="realizarCambioInfo()" disabled>
+                                                            <i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;&nbsp;Realizar Cambios</button>
+                                                    </div>
+                                                </div> 
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" 
+                                                               aria-controls="v-pills-home" aria-selected="true">Datos Personales</a>
+                                                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+                                                               aria-controls="v-pills-profile" aria-selected="false">Contacto</a>
+                                                            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" 
+                                                               aria-controls="v-pills-messages" aria-selected="false">Datos Generales</a>
+                                                            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" 
+                                                               aria-controls="v-pills-settings" aria-selected="false">Constancia</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-10">
+                                                        <%@include file="forms/vDirectiva_Modifica_Info.jsp"%>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-10">
-                                                    <%@include file="forms/vDirectiva_Modifica_Info.jsp"%>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
+
                                     <div class="tab-pane fade" id="datos-familiar" role="tabpanel" aria-labelledby="datos-familiar-md">
                                         <div class="container-fluid">
                                             <div class="row pt-2" style="padding-bottom: 22px;">
@@ -1015,10 +1021,91 @@
     <!--Modal: Login / Register Form-->
     <%@include file="foot.jspf" %>
     <script>
+        function desbloqueaFormulario() {
+            $('.datepicker').attr("style","background-color: white");
+            $("#txtNombreAlumno").removeAttr("readonly");
+            $("#txtApePaternoAlumno").removeAttr("readonly");
+            $("#txtApeMaternoAlumno").removeAttr("readonly");
+            $("#txtTipoDocAlumno").removeAttr("disabled");
+            $("#txtNroDocAlumno").removeAttr("readonly");
+            $("#txtFechaNacAlumno").removeAttr("readonly");
+            $("#txtFechaNacAlumno").removeAttr("disabled");
+            $("#txtLugarNacAlumno").removeAttr("disabled");
+            $("#txtDistritoAlumno").removeAttr("disabled");
+            $("#txtTelefonoAlumno").removeAttr("readonly");
+            $("#txtCelularAlumno").removeAttr("readonly");
+            $("#txtDireccionAlumno").removeAttr("readonly");
+            $("#txtCorreoAlumno").removeAttr("readonly");
+            $("#txtLMaternaAlumno").removeAttr("readonly");
+            $("#txtLSegundaAlumno").removeAttr("readonly");
+            $("#txtNroHermAlumno").removeAttr("disabled");
+            $("#txtPonderadoAlumno").removeAttr("readonly");
+            $("#txtNivelAnterior").removeAttr("disabled");
+            $("#txtGradoAnterior").removeAttr("disabled");
+            $("#txtSeccionReferente").removeAttr("disabled");
+            $("#txtIEAlumno").removeAttr("readonly");
+            $("#txtSanguineoAlumno").removeAttr("disabled");
+            $("input[name='optradioA']").removeAttr("disabled");
+            $("input[name='optradioB']").removeAttr("disabled");
+            $("input[name='optradioC']").removeAttr("disabled");
+            $("input[name='optradioD']").removeAttr("disabled");
+            
+            $("#btnBuscarInfoAlumno").attr("disabled", "disabled");
+            $("#txtAlumnoSelected").attr("readonly", "readonly");
+            $("#hptFormAlumno").addClass("disabled");
+            
+            $("#btnRealizaCambio").removeClass("btn-success");
+            $("#btnRealizaCambio").addClass("btn-outline-orange");
+            $("#btnRealizaCambio").html("<i class=\"fa fa-check\"></i>&nbsp;&nbsp;&nbsp;ACEPTAR");
+            $("#btnRealizaCambio").removeAttr("onclick");
+            $("#btnRealizaCambio").attr("ng-click","realizarCambioInfo()");
+            $("#btnBuscarInfoAlumno").trigger("click");
+        }
+        
+        function terminarCambios() {
+            $('.datepicker').removeAttr("style");
+            $("#txtNombreAlumno").attr("readonly", "readonly");
+            $("#txtApePaternoAlumno").attr("readonly", "readonly");
+            $("#txtApeMaternoAlumno").attr("readonly", "readonly");
+            $("#txtTipoDocAlumno").attr("disabled", "disabled");
+            $("#txtNroDocAlumno").attr("readonly", "readonly");
+            $("#txtFechaNacAlumno").attr("readonly", "readonly");
+            $("#txtFechaNacAlumno").attr("disabled", "disabled");
+            $("#txtLugarNacAlumno").attr("disabled", "disabled");
+            $("#txtDistritoAlumno").attr("disabled", "disabled");
+            $("#txtTelefonoAlumno").attr("readonly", "readonly");
+            $("#txtCelularAlumno").attr("readonly", "readonly");
+            $("#txtDireccionAlumno").attr("readonly", "readonly");
+            $("#txtCorreoAlumno").attr("readonly", "readonly");
+            $("#txtLMaternaAlumno").attr("readonly", "readonly");
+            $("#txtLSegundaAlumno").attr("readonly", "readonly");
+            $("#txtNroHermAlumno").attr("disabled", "disabled");
+            $("#txtPonderadoAlumno").attr("readonly", "readonly");
+            $("#txtNivelAnterior").attr("disabled", "disabled");
+            $("#txtGradoAnterior").attr("disabled", "disabled");
+            $("#txtSeccionReferente").attr("disabled", "disabled");
+            $("#txtIEAlumno").attr("readonly", "readonly");
+            $("#txtSanguineoAlumno").attr("disabled", "disabled");
+            $("input[name='optradioA']").attr("disabled", "disabled");
+            $("input[name='optradioB']").attr("disabled", "disabled");
+            $("input[name='optradioC']").attr("disabled", "disabled");
+            $("input[name='optradioD']").attr("disabled", "disabled");
+
+            $("#btnBuscarInfoAlumno").removeAttr("disabled");
+            $("#txtAlumnoSelected").removeAttr("readonly");
+            $("#hptFormAlumno").removeClass("disabled");
+
+            $("#btnRealizaCambio").removeClass("btn-outline-orange");
+            $("#btnRealizaCambio").addClass("btn-amber");
+            $("#btnRealizaCambio").html("<i class=\"fa fa-pencil-square-o\"></i>&nbsp;&nbsp;&nbsp;REALIZAR CAMBIOS");
+            $("#btnRealizaCambio").attr("onclick","desbloqueaFormulario()");
+        }
         
         $('.datepicker').pickadate({
             format: 'mmmm d, yyyy',
-            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            selectYears: 50,
+            selectMonths: true
         });
         
         $( function() {
@@ -1040,7 +1127,7 @@
                   .attr("id", "txtAlumnoSelected")
                   .val( value )
                   .attr( "title", "" )
-                  .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+                  .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state ui-corner-left" )
                   .autocomplete({
                     delay: 0,
                     minLength: 0,
@@ -1071,6 +1158,7 @@
                 $( "<a>" )
                   .attr( "tabIndex", -1 )
                   .attr( "title", "Mostrar Todo" )
+                  .attr( "id", "hptFormAlumno" )
                   .tooltip()
                   .appendTo( this.wrapper )
                   .button({
@@ -1155,7 +1243,7 @@
             'use strict';
             window.addEventListener('load', function() {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('formularioMatricula');
+            var forms = document.getElementsByClassName('formModificarAlumno');
             // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener('submit', function(event) {
