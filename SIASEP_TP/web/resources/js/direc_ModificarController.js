@@ -18,7 +18,6 @@ app.controller("modificaMatrCtrl", function($scope, $http, $window) {
 //        $scope.apellido = sessionStorage.getItem('apellidoUsuario');
         $scope.tipousuario = sesionNombreTipo;
         $scope.obtenerListaAlumno();
-
     };
 
     $scope.obtenerListaAlumno = function() {
@@ -81,10 +80,6 @@ app.controller("modificaMatrCtrl", function($scope, $http, $window) {
             });
         }
     };
-    
-    //        var dataparaEstado = event.currentTarget.value.split('-');
-//        var idMatricula = parseInt(dataparaEstado[0]);
-//        var idEstadoMatricula = parseInt(dataparaEstado[1]);
     
     $scope.realizarCambioInfo = function() {
         //Datos Personales
@@ -157,8 +152,96 @@ app.controller("modificaMatrCtrl", function($scope, $http, $window) {
         }
     };
     
+    $scope.obtenerListaFamiliares = function() {
+        var txtAlumnoForFamiliar = document.getElementById("txtAlumnoForFamiliar").value.toString().substring(0,6);
+        if(document.getElementById("txtAlumnoForFamiliar").value === '') {
+            alert("Debe ingresar un codigo de alumno.");
+        } else {
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listarVinculosFamiliares',
+                data: { codigo_alumno : txtAlumnoForFamiliar }
+            }).then(function successCallback(response) {
+                $scope.listaFamiliares = response.data;
+                desbloqueaBtnAsignarApo();
+            }, function errorCallback(response) {
+                alert("ERROR getListaAlumnosAntiguos");
+            });
+        }
+    };
     
+    $scope.mostrarInfoFamiliar = function() {
+        var id_familiar = event.currentTarget.value;
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listarDatosFamiliar',
+            data: { id_per_familiar : id_familiar }
+        }).then(function successCallback(response) {
+            $scope.modNombreFamiliar = response.data.primer_nombre;
+            $scope.modApePaternoFamiliar = response.data.apellido_materno;
+            $scope.modApeMaternoFamiliar = response.data.apellido_paterno;
+            $scope.modTipoDocFamiliar = ''+response.data.fkid_tipo_documento;
+            $scope.modNroDocFamiliar = response.data.numero_documento;
+            $scope.modEstadoCivil = ''+response.data.fkid_estado_civil;
+            $scope.modFecNacFamiliar = response.data.fec_nacimiento;
+            $scope.modLugarNacFamiliar = ''+response.data.fkid_lugar_nacimiento;
+            $scope.modSexoFamiliar = response.data.sexo;
+            $scope.modDistritoFamiliar = ''+response.data.fkid_distrito;
+            $scope.modTelefonoFamiliar = (response.data.telefono_casa != undefined) ? response.data.telefono_casa : '';
+            $scope.modCelularFamiliar = (response.data.telefono_celular != undefined) ? response.data.telefono_celular : '';
+            $scope.modDireccionFamiliar = response.data.direccion;
+            $scope.modCorreoFamiliar = (response.data.correo != undefined) ? response.data.correo : '';
+            $scope.modTipoFamiliar = ''+response.data.fkid_tipo_familiar;
+            $scope.modCopiaDNIFamiliar = ''+response.data.flg_copia_dni_apo;
+            $scope.modGradoInstruccion = ''+response.data.fkid_grado_instruccion;
+            $scope.modOcupacionFamiliar = (response.data.dscrp_ocupacion != undefined) ? response.data.dscrp_ocupacion : '';
+            $scope.obtenerListaFamiliares();
+        }, function errorCallback(response) {
+            alert("ERROR getListaAlumnosAntiguos");
+        });
+    };
     
+    $scope.mostrarVinculosFamiliares = function() {
+        var separa_cadena_apo = document.getElementById("txtAlumnoForFamiliar").value.toString().split(' - ');
+        var codigo_alumno = parseInt(separa_cadena_apo[0]);
+        var nomAlumno = separa_cadena_apo[1];
+        $scope.modNomAlumnoApo = ''+nomAlumno;
+        $http({
+            method: 'POST',
+            url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/listarFamiliarApoderado',
+            data: { codigo_alumno : codigo_alumno }
+        }).then(function successCallback(response) {
+            $scope.listaFamiliaresAsignar = response.data;
+        }, function errorCallback(response) {
+            alert("ERROR getListaAlumnosAntiguos");
+        });
+    };
+    
+    $scope.seleccionaApoderado = function() {
+        var separa_cadena_apo = document.getElementById("txtAlumnoForFamiliar").value.toString().split(' - ');
+        var codigo_alumno = parseInt(separa_cadena_apo[0]);
+        var cadena_familiar = event.currentTarget.value.split('-');
+        var id_familiar = parseInt(cadena_familiar[0]);
+        var flag_apoderado = cadena_familiar[1];
+        
+        if(flag_apoderado === 'ASIGNADO') {
+            alert("Ya se considera apoderado el familiar seleccionado");
+        } else {
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8084/SIASEP_TP/webresources/directiva/asignaApoderadoAlAlumno',
+                data: { codigo_alumno : codigo_alumno, 
+                        id_per_familiar : id_familiar }
+            }).then(function successCallback(response) {
+                alert("Se asigno al apoderado con exito");
+                $scope.obtenerListaFamiliares();
+                $scope.mostrarVinculosFamiliares();
+            }, function errorCallback(response) {
+                alert("ERROR getListaAlumnosAntiguos");
+            });
+        }
+    };
+
     
     //LogOut
     $scope.cerrarSesion = function() {

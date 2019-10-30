@@ -20,7 +20,6 @@ public class PerFamiliar  implements java.io.Serializable {
      private String dscrpOcupacion;
      private String telefonoEmergencia;
      private Set<VinculoFamiliar> vinculoFamiliars = new HashSet<VinculoFamiliar>(0);
-     private Set<CentroLabores> centroLaboreses = new HashSet<CentroLabores>(0);
 
     public PerFamiliar() {
     }
@@ -35,7 +34,7 @@ public class PerFamiliar  implements java.io.Serializable {
         this.flgCopiaDniApo = flgCopiaDniApo;
         this.telefonoEmergencia = telefonoEmergencia;
     }
-    public PerFamiliar(int idPerFamiliar, EstadoCivil estadoCivil, GradoInstruccion gradoInstruccion, Persona persona, TipoFamiliar tipoFamiliar, boolean flgCopiaDniApo, String dscrpOcupacion, String telefonoEmergencia, Set<VinculoFamiliar> vinculoFamiliars, Set<CentroLabores> centroLaboreses) {
+    public PerFamiliar(int idPerFamiliar, EstadoCivil estadoCivil, GradoInstruccion gradoInstruccion, Persona persona, TipoFamiliar tipoFamiliar, boolean flgCopiaDniApo, String dscrpOcupacion, String telefonoEmergencia, Set<VinculoFamiliar> vinculoFamiliars) {
        this.idPerFamiliar = idPerFamiliar;
        this.estadoCivil = estadoCivil;
        this.gradoInstruccion = gradoInstruccion;
@@ -45,7 +44,6 @@ public class PerFamiliar  implements java.io.Serializable {
        this.dscrpOcupacion = dscrpOcupacion;
        this.telefonoEmergencia = telefonoEmergencia;
        this.vinculoFamiliars = vinculoFamiliars;
-       this.centroLaboreses = centroLaboreses;
     }
    
     public int getIdPerFamiliar() {
@@ -111,17 +109,5 @@ public class PerFamiliar  implements java.io.Serializable {
     public void setVinculoFamiliars(Set<VinculoFamiliar> vinculoFamiliars) {
         this.vinculoFamiliars = vinculoFamiliars;
     }
-    public Set<CentroLabores> getCentroLaboreses() {
-        return this.centroLaboreses;
-    }
-    
-    public void setCentroLaboreses(Set<CentroLabores> centroLaboreses) {
-        this.centroLaboreses = centroLaboreses;
-    }
-
-
-
 
 }
-
-

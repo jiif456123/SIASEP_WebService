@@ -4,6 +4,7 @@ import com.DTO.AlumnoDTO;
 import com.DTO.ListaAlumnoDTO;
 import com.DTO.ListaMatriculaDTO;
 import com.DTO.MatriculaDTO;
+import com.DTO.VinculoFamiliarDTO;
 import com.google.gson.Gson;
 import com.helper.MatriculaHelper;
 import com.helper.ModificaAlumnoHelper;
@@ -249,7 +250,7 @@ public class DirectivaResource {
             lista = modificaAlumnoHelper.getListAlumnosBusqueda();
         }
         catch(Exception ex){
-            System.out.println("getListaPeriodoSelect: "+ex);
+            System.out.println("listarAlumnosBusqueda: "+ex);
         }
         return gson.toJson(lista);
     }
@@ -264,7 +265,7 @@ public class DirectivaResource {
         try {
             respuesta = modificaAlumnoHelper.getListDatosByAlumno(listaAlumnoDTO.getCodigo_alumno());
         }catch(Exception e){
-            System.out.println("verObservacionMatricula: "+e.getMessage());
+            System.out.println("listarDatosDelAlumno: "+e.getMessage());
         }
         return gson.toJson(respuesta);
     }
@@ -273,7 +274,6 @@ public class DirectivaResource {
     @Path("modificaDatosAlumno")
     @Produces("application/json")
     public Response modificaDatosAlumno(String data) {
-        System.out.println("cadena-> "+data);
         Response respuesta;
         Gson gson = new Gson();
         AlumnoDTO alumnoDTO = gson.fromJson(data, AlumnoDTO.class);
@@ -282,11 +282,77 @@ public class DirectivaResource {
             respuesta = Response.status(200).entity(alumnoDTO).build();
         }
         catch(Exception ex){
-            System.out.println("eliminarMatriculaAlumno: " + ex);
+            System.out.println("modificaDatosAlumno: " + ex);
             respuesta = Response.status(500).entity(alumnoDTO).build();
         }
         return respuesta;
     }
     
+    @POST
+    @Path("listarVinculosFamiliares")
+    @Produces("application/json")
+    public String listarVinculosFamiliares(String data) {
+        Gson gson =new Gson();
+        VinculoFamiliarDTO vinculoFamiliarDTO = gson.fromJson(data, VinculoFamiliarDTO.class);
+        List lista = null;
+        try{
+            lista = modificaAlumnoHelper.getListFamiliaresByAlumno(vinculoFamiliarDTO.getCodigo_alumno());
+        }
+        catch(Exception ex){
+            System.out.println("listarVinculosFamiliares: "+ex);
+        }
+        return gson.toJson(lista);
+    }
+    
+    @POST
+    @Path("listarFamiliarApoderado")
+    @Produces("application/json")
+    public String listarFamiliarApoderado(String data) {
+        Gson gson =new Gson();
+        VinculoFamiliarDTO vinculoFamiliarDTO = gson.fromJson(data, VinculoFamiliarDTO.class);
+        List lista = null;
+        try{
+            lista = modificaAlumnoHelper.getListFamiliarApoderadoByAlumno(vinculoFamiliarDTO.getCodigo_alumno());
+        }
+        catch(Exception ex){
+            System.out.println("listarVinculosFamiliares: "+ex);
+        }
+        return gson.toJson(lista);
+    }
+    
+    @POST
+    @Path("listarDatosFamiliar")
+    @Produces("application/json")
+    public String listarDatosFamiliar(String data) {
+        Gson gson = new Gson();
+        VinculoFamiliarDTO vinculoFamiliarDTO = gson.fromJson(data, VinculoFamiliarDTO.class);
+        VinculoFamiliarDTO respuesta = new VinculoFamiliarDTO();
+        try {
+            respuesta = modificaAlumnoHelper.getListDatosFamiliarById(vinculoFamiliarDTO.getId_per_familiar());
+            System.out.println(""+respuesta.toString());
+        }catch(Exception e){
+            System.out.println("listarDatosFamiliar: "+e.getMessage());
+        }
+        return gson.toJson(respuesta);
+    }
+    
+    @POST
+    @Path("asignaApoderadoAlAlumno")
+    @Produces("application/json")
+    public Response asignaApoderadoAlAlumno(String data) {
+        System.out.println("-->" +data);
+        Response respuesta;
+        Gson gson = new Gson();
+        VinculoFamiliarDTO vinculoFamiliarDTO = gson.fromJson(data, VinculoFamiliarDTO.class);
+        try{
+            modificaAlumnoHelper.updateApoderadoByIdFamiliar(vinculoFamiliarDTO.getCodigo_alumno(), vinculoFamiliarDTO.getId_per_familiar());
+            respuesta = Response.status(200).entity(vinculoFamiliarDTO).build();
+        }
+        catch(Exception ex){
+            System.out.println("asignaApoderadoAlAlumno: " + ex);
+            respuesta = Response.status(500).entity(vinculoFamiliarDTO).build();
+        }
+        return respuesta;
+    }
     
 }

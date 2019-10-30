@@ -51,7 +51,6 @@ Contributor(s):
     <mapping resource="com/pojos/PerFamiliar.hbm.xml"/>
     <mapping resource="com/pojos/Distrito.hbm.xml"/>
     <mapping resource="com/pojos/EstadoUsuario.hbm.xml"/>
-    <mapping resource="com/pojos/CentroLabores.hbm.xml"/>
     <mapping resource="com/pojos/HistorialMatricula.hbm.xml"/>
     <mapping resource="com/pojos/TipoDocumento.hbm.xml"/>
     <mapping resource="com/pojos/GradoInstruccion.hbm.xml"/>
