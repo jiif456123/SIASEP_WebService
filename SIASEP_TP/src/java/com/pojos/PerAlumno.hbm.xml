@@ -33,7 +33,7 @@
             <column name="ref_ponderado_anterior" precision="53" scale="0" not-null="true" />
         </property>
         <property name="flgOrdenMerito" type="java.lang.Boolean">
-            <column name="flg_orden_merito" />
+            <column name="flg_orden_merito" not-null="true" />
         </property>
         <property name="grupoSanguineo" type="string">
             <column name="grupo_sanguineo" length="45" not-null="true" />

@@ -80,7 +80,7 @@ create table per_alumno(
 	ref_grado_anterior char(1) not null,
 	ref_seccion char(1) not null,
 	ref_ponderado_anterior float not null,
-	flg_orden_merito bit null,
+	flg_orden_merito bit not null,
 	grupo_sanguineo varchar(45) not null,
 	lengua_materna varchar(150) not null,
 	segunda_lengua varchar(150) null,
@@ -127,7 +127,7 @@ create table vinculo_familiar(
 	fkid_per_alumno int not null,
 	fkid_per_familiar int not null,
 	flg_ofi_apoderado bit not null,
-	fec_inicio_vinculo date not null,
+	fec_inicio_vinculo date null,
 	fec_fin_vinculo date null
 	primary key(fkid_per_alumno, fkid_per_familiar),
 	FOREIGN KEY (fkid_per_alumno) REFERENCES per_alumno(id_per_alumno),
@@ -277,6 +277,31 @@ END
 go
 --exec sp_modifica_datos_alumno --,--,--,--,--...;
 go
+go
+CREATE PROCEDURE sp_asignar_apoderado_by_alumno
+@codigo_alumno int, @id_per_familiar int
+AS
+BEGIN
+DECLARE @id_alumno int, @fecha_actual DATE, @old_apo_anterior int;
+SET @id_alumno = (SELECT id_per_alumno FROM per_alumno WHERE (codigo_alumno = @codigo_alumno));
+SET @fecha_actual = ((SELECT CONVERT(DATE, GETDATE()) [Current Date]));
+SET @old_apo_anterior = (SELECT fkid_per_familiar FROM vinculo_familiar
+						 WHERE (flg_ofi_apoderado = 1 AND fkid_per_alumno = @id_alumno));
+
+IF(@id_per_familiar != @old_apo_anterior)
+BEGIN
+	UPDATE vinculo_familiar SET flg_ofi_apoderado = 0, fec_fin_vinculo = @fecha_actual
+	WHERE(fkid_per_familiar = @old_apo_anterior AND fkid_per_alumno = @id_alumno);
+	
+	UPDATE vinculo_familiar SET flg_ofi_apoderado = 1, 
+								fec_inicio_vinculo = @fecha_actual,
+								fec_fin_vinculo = NULL
+	WHERE(fkid_per_familiar = @id_per_familiar AND fkid_per_alumno = @id_alumno);
+END
+
+END
+go
+--exec sp_asignar_apoderado_by_alumno a,b;
 go
 ----------------------POPULATE------------------------------------------
 go
@@ -532,17 +557,17 @@ VALUES(0,'Ama De casa','5276123',4,5,4,1,3);
 go*/
 go
 INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES (1,1,0,'2010-03-15',NULL);
+VALUES (1,1,0,NULL,NULL);
 INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES (1,2,1,'2010-03-16',NULL);
+VALUES (1,2,1,'2010-03-15',NULL);
 INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES (7,3,1,'2010-03-16',NULL);
+VALUES (7,3,1,NULL,NULL);
 INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES (9,3,1,'2011-03-16',NULL);
+VALUES (9,3,1,NULL,NULL);
 INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES (14,3,1,'2011-03-17',NULL);
+VALUES (14,3,1,NULL,NULL);
 INSERT INTO vinculo_familiar(fkid_per_alumno,fkid_per_familiar,flg_ofi_apoderado,fec_inicio_vinculo,fec_fin_vinculo)
-VALUES (17,3,1,'2012-03-17',NULL);
+VALUES (17,3,1,NULL,NULL);
 go
 INSERT INTO periodo_anual VALUES ('2019-03-15', NULL);
 go

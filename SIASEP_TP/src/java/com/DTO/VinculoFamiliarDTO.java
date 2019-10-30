@@ -56,6 +56,8 @@ public class VinculoFamiliarDTO {
     Date fec_inicio_vinculo;
     Date fec_fin_vinculo;
     String es_apoderado;
+    String fec_inicio_new;
+    String fec_fin_new;
 
     public Integer getId_per_alumno() {
         return id_per_alumno;
@@ -401,9 +403,25 @@ public class VinculoFamiliarDTO {
         this.es_apoderado = es_apoderado;
     }
 
+    public String getFec_inicio_new() {
+        return fec_inicio_new;
+    }
+
+    public void setFec_inicio_new(String fec_inicio_new) {
+        this.fec_inicio_new = fec_inicio_new;
+    }
+
+    public String getFec_fin_new() {
+        return fec_fin_new;
+    }
+
+    public void setFec_fin_new(String fec_fin_new) {
+        this.fec_fin_new = fec_fin_new;
+    }
+
     @Override
     public String toString() {
-        return "VinculoFamiliarDTO{" + "id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", id_per_familiar=" + id_per_familiar + ", flg_copia_dni_apo=" + flg_copia_dni_apo + ", dscrp_ocupacion=" + dscrp_ocupacion + ", telefono_emergencia=" + telefono_emergencia + ", fkid_persona=" + fkid_persona + ", fkid_tipo_familiar=" + fkid_tipo_familiar + ", fkid_estado_civil=" + fkid_estado_civil + ", fkid_grado_instruccion=" + fkid_grado_instruccion + ", nombre_familiar=" + nombre_familiar + ", id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", fkid_lugar_nacimiento=" + fkid_lugar_nacimiento + ", id_distrito=" + id_distrito + ", nom_distrito=" + nom_distrito + ", id_lugar_nacimiento=" + id_lugar_nacimiento + ", nom_lugar_nacimiento=" + nom_lugar_nacimiento + ", id_tipo_documento=" + id_tipo_documento + ", nom_tipo_documento=" + nom_tipo_documento + ", id_tipo_familiar=" + id_tipo_familiar + ", nom_tipo_familiar=" + nom_tipo_familiar + ", id_estado_civil=" + id_estado_civil + ", nom_estado_civil=" + nom_estado_civil + ", id_grado_instruccion=" + id_grado_instruccion + ", nom_grado_instruccion=" + nom_grado_instruccion + ", fkid_per_alumno=" + fkid_per_alumno + ", fkid_per_familiar=" + fkid_per_familiar + ", flg_ofi_apoderado=" + flg_ofi_apoderado + ", fec_inicio_vinculo=" + fec_inicio_vinculo + ", fec_fin_vinculo=" + fec_fin_vinculo + ", es_apoderado=" + es_apoderado + '}';
+        return "VinculoFamiliarDTO{" + "id_per_alumno=" + id_per_alumno + ", codigo_alumno=" + codigo_alumno + ", id_per_familiar=" + id_per_familiar + ", flg_copia_dni_apo=" + flg_copia_dni_apo + ", dscrp_ocupacion=" + dscrp_ocupacion + ", telefono_emergencia=" + telefono_emergencia + ", fkid_persona=" + fkid_persona + ", fkid_tipo_familiar=" + fkid_tipo_familiar + ", fkid_estado_civil=" + fkid_estado_civil + ", fkid_grado_instruccion=" + fkid_grado_instruccion + ", nombre_familiar=" + nombre_familiar + ", id_persona=" + id_persona + ", primer_nombre=" + primer_nombre + ", apellido_materno=" + apellido_materno + ", apellido_paterno=" + apellido_paterno + ", numero_documento=" + numero_documento + ", fec_nacimiento=" + fec_nacimiento + ", sexo=" + sexo + ", telefono_casa=" + telefono_casa + ", telefono_celular=" + telefono_celular + ", direccion=" + direccion + ", correo=" + correo + ", fkid_tipo_documento=" + fkid_tipo_documento + ", fkid_distrito=" + fkid_distrito + ", fkid_lugar_nacimiento=" + fkid_lugar_nacimiento + ", id_distrito=" + id_distrito + ", nom_distrito=" + nom_distrito + ", id_lugar_nacimiento=" + id_lugar_nacimiento + ", nom_lugar_nacimiento=" + nom_lugar_nacimiento + ", id_tipo_documento=" + id_tipo_documento + ", nom_tipo_documento=" + nom_tipo_documento + ", id_tipo_familiar=" + id_tipo_familiar + ", nom_tipo_familiar=" + nom_tipo_familiar + ", id_estado_civil=" + id_estado_civil + ", nom_estado_civil=" + nom_estado_civil + ", id_grado_instruccion=" + id_grado_instruccion + ", nom_grado_instruccion=" + nom_grado_instruccion + ", fkid_per_alumno=" + fkid_per_alumno + ", fkid_per_familiar=" + fkid_per_familiar + ", flg_ofi_apoderado=" + flg_ofi_apoderado + ", fec_inicio_vinculo=" + fec_inicio_vinculo + ", fec_fin_vinculo=" + fec_fin_vinculo + ", es_apoderado=" + es_apoderado + ", fec_inicio_new=" + fec_inicio_new + ", fec_fin_new=" + fec_fin_new + '}';
     }
 
 }

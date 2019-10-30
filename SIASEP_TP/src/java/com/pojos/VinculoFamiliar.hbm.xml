@@ -22,7 +22,7 @@
             <column name="flg_ofi_apoderado" not-null="true" />
         </property>
         <property name="fecInicioVinculo" type="date">
-            <column name="fec_inicio_vinculo" length="10" not-null="true" />
+            <column name="fec_inicio_vinculo" length="10" />
         </property>
         <property name="fecFinVinculo" type="date">
             <column name="fec_fin_vinculo" length="10" />

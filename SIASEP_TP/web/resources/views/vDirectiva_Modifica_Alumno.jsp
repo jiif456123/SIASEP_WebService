@@ -565,9 +565,9 @@
                     <div class="tab-pane fade show active" id="Administrar_matricula" role="tabpanel" aria-labelledby="pill_administrar_matricula">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <div class="pt-4" style="padding-bottom: 35px; text-align: left;">
+                                <div class="pt-4" style="padding-bottom: 35px; text-align: center;">
                                     <h2><strong>MODIFICAR INFORMACIÓN DEL ALUMNO</strong></h2>
-                                    <h6>Consulte la informacion personal del alumno y si desee realizar algun cambio</h6>
+                                    <h6>Modulo de información detallado del alumno y sus vinculos familiares</h6>
                                 </div>
 
 
@@ -585,11 +585,13 @@
                                     <div class="tab-pane fade show active" id="datos-alumno" role="tabpanel" aria-labelledby="datos-alumno-md" style="padding-bottom: 30px;">
                                         <div class="container-fluid">
                                             <form class="formModificarAlumno" novalidate>
-                                                <div class="row pt-2" style="padding-bottom: 22px;">
+                                                <p style="font-weight: lighter; font-size: 15px;">Seleccione un alumno en especifico para consultar o modificar su información en detalle.<br>
+                                                                                                  Recomendación: No olvide ACEPTAR despues de realizar tantos cambios.</p>
+                                                <div class="row" style="padding-bottom: 22px;">
                                                     <div class="col-lg-6">
                                                         <div class=" ui-widget">
                                                             <div class="form-group" style="margin-top: 15px;">
-                                                                <label for="txtAlumnoBuscar">Buscar alumno por:&nbsp;&nbsp;&nbsp;</label>
+                                                                <label for="txtAlumnoBuscar">Buscar al alumno:&nbsp;&nbsp;&nbsp;</label>
                                                                 <select class="form-control" id="comboboxAlumno" ng-model="selAlumnoSeleccionado" 
                                                                         ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_alumno for labusq in listaAlumnosBusqueda">
                                                                 </select>
@@ -627,11 +629,14 @@
 
                                     <div class="tab-pane fade" id="datos-familiar" role="tabpanel" aria-labelledby="datos-familiar-md">
                                         <div class="container-fluid">
+                                            <p style="font-weight: lighter; font-size: 15px;">Seleccione un alumno en especifico para consultar la información mas relevante de sus relaciones familiares; así mismo, 
+                                                                                              poder asignarle a un apoderado entre sus familiares para el resto del año escolar. <br>
+                                                                                              </p>
                                             <div class="row pt-2" style="padding-bottom: 22px;">
                                                 <div class="col-lg-6">
                                                     <div class=" ui-widget">
                                                         <div class="form-group" style="margin-top: 15px;">
-                                                            <label for="txtAlumnoBuscar">Buscar alumno por:&nbsp;&nbsp;&nbsp;</label>
+                                                            <label for="txtAlumnoBuscar">Buscar al alumno:&nbsp;&nbsp;&nbsp;</label>
                                                             <select class="form-control" id="comboboxVinculo" ng-model="selAlumnoSeleccionado" 
                                                                     ng-options="labusq.id_per_alumno as labusq.codigo_alumno+' - '+labusq.nombre_alumno for labusq in listaAlumnosBusqueda">
                                                             </select>
@@ -642,8 +647,8 @@
                                                     <button class="btn btn-info btn-md" ng-click="obtenerListaFamiliares()"><i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Buscar</button>
                                                 </div>
                                                 <div class="col-lg-4" style="text-align: right; padding-top: 6px;">
-                                                    <button class="btn btn-outline-blue-grey btn-md" data-toggle="modal" data-target=".modalAsignarApoderado" ng-click="abrirModalAsignar()">
-                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Asignar nuevo apoderado</button>
+                                                    <button id="btnAsignarApoderado" class="btn btn-outline-blue-grey btn-md" data-toggle="modal" data-target=".modalAsignarApoderado"
+                                                            ng-click="mostrarVinculosFamiliares()" disabled><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Asignar nuevo apoderado</button>
                                                 </div>
                                             </div>
                                             <div class="row pt-3">
@@ -673,7 +678,7 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <p style="font-weight: lighter;">*Nota: Solo se considera un apoderado por alumno matriculado</p>
+                                                    <p style="font-weight: lighter;">*Nota: Solo se considera la relación de un apoderado para el alumno matriculado</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1018,28 +1023,28 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <h3 style="font-weight: lighter; margin-bottom: 25px;">Asigne un apoderado a uno de los familiares del alumno</h3>
+                            <h3 style="font-weight: lighter; margin-bottom: 15px;">Asigne un apoderado a uno de los familiares del alumno</h3>
+                            <br>
+                            <h5 style="margin-bottom: 20px; margin-left: 11px;">Nombre del Alumno:&nbsp;&nbsp;&nbsp;<label ng-bind="modNomAlumnoApo"></label></h5>
                             <table class="table table-borderless">
                                 <thead>
-                                    <tr>
-                                        <th scope="col">Nro. Documento</th>
-                                        <th scope="col">Nombre Completo</th>
-                                        <th scope="col">Apoderado</th>
+                                    <tr class="text-center">
+                                        <th scope="col" style="font-size: 13px;">Nro. Documento</th>
+                                        <th scope="col" style="font-size: 13px;">Nombre Completo</th>
+                                        <th scope="col" style="font-size: 13px;">Fecha Inicial</th>
+                                        <th scope="col" style="font-size: 13px;">Fecha Fin</th>
+                                        <th scope="col" style="font-size: 13px;">Establecer relación como apoderado</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
                                     <tr ng-repeat="fam in listaFamiliaresAsignar">
-                                        <td>{{fam.numero_documento}}</td>
-                                        <td>{{fam.nombre_familiar}}</td>
+                                        <td style="font-size: 13px;">{{fam.numero_documento}}</td>
+                                        <td style="font-size: 13px;">{{fam.nombre_familiar}}</td>
+                                        <td style="font-size: 13px;">{{fam.fec_inicio_new}}</td>
+                                        <td style="font-size: 13px;">{{fam.fec_fin_new}}</td>
                                         <td>
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-default active">
-                                                    <input type="radio" name="options" id="option1" autocomplete="off" value="{{fam.flg_orden_merito}}" checked> SI
-                                                </label>
-                                                <label class="btn btn-default">
-                                                    <input type="radio" name="options" id="option2" autocomplete="off" value="{{fam.flg_orden_merito}}"> NO
-                                                </label>
-                                            </div>
+                                            <button type="button" class="btn btn-floating btn-mdb-color btn-md" value="{{fam.id_per_familiar}}-{{fam.es_apoderado}}" 
+                                                    data-ng-click="seleccionaApoderado($event)"><span class="fa fa-address-book"></span>&nbsp;&nbsp;&nbsp;Asignar</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -1047,8 +1052,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Vincular existente</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -1059,7 +1063,9 @@
     <!--Modal: Login / Register Form-->
     <%@include file="foot.jspf" %>
     <script>
-        $('.toggle-one').bootstrapToggle();
+        function desbloqueaBtnAsignarApo() {
+            $("#btnAsignarApoderado").removeAttr("disabled");
+        }
     
         function desbloqueaFormulario() {
             $('.datepicker').attr("style","background-color: white");
