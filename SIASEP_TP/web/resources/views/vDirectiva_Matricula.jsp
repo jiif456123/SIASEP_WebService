@@ -572,11 +572,11 @@
                         <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="tab_habi" data-toggle="tab" href="#tab_md_habi" role="tab" aria-controls="habilitado-md"
-                                   aria-selected="false">Habilitado</a>
+                                   aria-selected="false">Matriculas Habilitadas</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="tab_desha" data-toggle="tab" href="#tab_md_desha" role="tab" aria-controls="deshabilitado-md"
-                                   aria-selected="false">Deshabilitado</a>
+                                   aria-selected="false">Matriculas Deshabilitadas</a>
                             </li>
 
                         </ul>
@@ -656,7 +656,10 @@
                             </div>
                             <div class="tab-pane fade" id="tab_md_desha" role="tabpanel" aria-labelledby="tab-deshabilitado">
                                 <div class="container-fluid" style="padding-bottom: 30px;">
-                                    <div class="row">
+                                    <p style="font-weight: lighter; font-size: 15px; color: #1e2229;">
+                                        Recomendación: No se olvide anotar una observación que resalte la disolución de la ocurrencia de la matricula.
+                                    </p>
+                                    <div class="row pt-2">
                                         <div class="col-lg-12">
                                             <div class="form-row" style="margin-bottom: 5px;">
                                                 <div class="col-lg-9">

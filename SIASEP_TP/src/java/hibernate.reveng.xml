@@ -57,7 +57,6 @@ Contributor(s):
   <table-filter match-name="tipo_familiar"/>
   <table-filter match-name="per_alumno"/>
   <table-filter match-name="tipo_alumno"/>
-  <table-filter match-name="centro_labores"/>
   <table-filter match-name="tipo_trabajador"/>
   <table-filter match-name="matricula"/>
   <table-filter match-name="tipo_usuario"/>

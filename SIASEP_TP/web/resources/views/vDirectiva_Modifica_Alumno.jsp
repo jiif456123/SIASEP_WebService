@@ -629,10 +629,11 @@
 
                                     <div class="tab-pane fade" id="datos-familiar" role="tabpanel" aria-labelledby="datos-familiar-md">
                                         <div class="container-fluid">
-                                            <p style="font-weight: lighter; font-size: 15px;">Seleccione un alumno en especifico para consultar la información mas relevante de sus relaciones familiares; así mismo, 
-                                                                                              poder asignarle a un apoderado entre sus familiares para el resto del año escolar. <br>
-                                                                                              </p>
-                                            <div class="row pt-2" style="padding-bottom: 22px;">
+                                            <p style="font-weight: lighter; font-size: 15px;">
+                                                Seleccione un alumno en especifico para consultar la información mas relevante de sus relaciones familiares; así mismo, 
+                                                poder asignarle a un apoderado entre sus familiares para el resto del año escolar.
+                                            </p>
+                                            <div class="row pt-3" style="padding-bottom: 22px;">
                                                 <div class="col-lg-6">
                                                     <div class=" ui-widget">
                                                         <div class="form-group" style="margin-top: 15px;">
